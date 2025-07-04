@@ -12,13 +12,13 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Install and Build 🔧
+      - name: Install Dependencies & Build 🔧
         run: |
           npm install
           npm run build
           npm run postBuild
 
-      - name: Deploy 🚀
+      - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
