@@ -16,8 +16,6 @@ jobs:
         run: |
           npm install
           npm run build
-          npm run postbuild
-          npm run searchBuild
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
