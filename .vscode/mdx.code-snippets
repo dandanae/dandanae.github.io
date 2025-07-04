@@ -1,0 +1,24 @@
+{
+  "MDX Metadata + MdxTitle": {
+    "prefix": ["mdxmeta", "mdxmetadata"],
+    "description": "Insert metadata object + MdxTitle component for MDX page",
+    "body": [
+      "import { MdxTitle } from '@/components'",
+      "",
+      "export const metadata = {",
+      "  title: '$1',",
+      "  description: '$2',",
+      "  publishDate: \"$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE\\T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND\\Z\",",
+      "  image: '$3',",
+      "  categories: [",
+      "    '$4'",
+      "  ],",
+      "};",
+      "",
+      "<MdxTitle title={metadata.title} />",
+      "",
+      "$0"
+    ],
+    "scope": "mdx"
+  }
+}
