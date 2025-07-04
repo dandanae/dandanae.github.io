@@ -1,5 +1,3 @@
-.github/workflow/main.yml
-
 name: GitHub Pages Deploy
 
 on:
@@ -24,6 +22,3 @@ jobs:
         with:
           branch: gh-pages
           folder: out
-
-
-이렇게 했는데 나는 저 build가 없어 ㅜㅜ 심지어 저건 actions/checkout@v4로 되어 있는데 나는 v3 쓴다고..
