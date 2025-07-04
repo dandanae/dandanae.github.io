@@ -1,0 +1,29 @@
+.github/workflow/main.yml
+
+name: GitHub Pages Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run build && touch ./out/.nojekyll
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: out
+
+
+이렇게 했는데 나는 저 build가 없어 ㅜㅜ 심지어 저건 actions/checkout@v4로 되어 있는데 나는 v3 쓴다고..
