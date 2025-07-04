@@ -16,16 +16,6 @@ const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: true,
 
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        fs: false,
-      }
-    }
-
-    return config
-  },
-
   images: {
     // unoptimized: true
     remotePatterns: [

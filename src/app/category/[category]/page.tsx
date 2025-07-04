@@ -8,7 +8,7 @@ export const generateStaticParams = async () => {
   return categories.map((category) => ({ category }))
 }
 
-const page = async ({ params }: { params: { category: string } }) => {
+const page = async ({ params }: { params: any }) => {
   const category = params.category
   const posts = await getPostsByCategory(category)
 
