@@ -16,7 +16,7 @@ jobs:
         run: |
           npm install
           npm run build
-          echo '' > out/.nojekyll
+          npm run postBuild
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
