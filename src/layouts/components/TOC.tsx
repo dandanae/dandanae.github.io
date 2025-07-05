@@ -8,17 +8,18 @@ const TOC = ({ slug }: { slug: string }) => {
 
   useEffect(() => {
     if (!slug) return
-
-    const url = `https://raw.githubusercontent.com/dandanae/dandanae/main/src/posts/${slug}.md`
+    const url = `https://raw.githubusercontent.com/dandanae/dandanae.github.io/main/src/posts/${slug}.mdx`
 
     window
       .fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch')
-        window.console.log(res)
+
         return res.text()
       })
-      .then((text) => setContent(text))
+      .then((text) => {
+        setContent(text)
+      })
     // .catch(console.error)
   }, [slug])
 

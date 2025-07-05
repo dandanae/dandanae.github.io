@@ -12,4 +12,69 @@ export const metadata = {
 
 <MdxTitle title={metadata.title} />
 
-아하하하
+---
+
+# H1 제목
+
+## H2 제목
+
+### H3 제목
+
+---
+
+**굵은 글씨**, *기울임*, ~~취소선~~, `인라인 코드`
+
+[링크](https://example.com)
+
+![이미지](https://via.placeholder.com/150)
+
+---
+
+> 인용문 테스트
+
+---
+
+### 목록 테스트
+
+- 순서 없는 항목
+- 또 하나
+  - 중첩 항목
+
+1. 첫 번째
+2. 두 번째
+3. 세 번째
+
+---
+
+### 코드 블록
+
+```js
+function hello(name) {
+  return `Hello, ${name}!`
+}
+```
+
+---
+
+### 테이블
+
+| 이름     | 설명         | 비고       |
+|----------|--------------|------------|
+| Apple    | 과일         | 맛있음     |
+| Carrot   | 채소         | 건강함     |
+| Kimchi   | 발효 음식    | 한국 전통  |
+
+---
+
+### HTML 태그 테스트
+
+<details>
+  <summary>더보기</summary>
+  여기에 숨겨진 내용을 넣을 수 있습니다.
+</details>
+
+---
+
+### JSX 컴포넌트 테스트
+
+<MdxTitle title="컴포넌트로 추가한 제목입니다" />
