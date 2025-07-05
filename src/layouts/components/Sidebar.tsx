@@ -9,11 +9,6 @@ import { SidebarProps } from '../layout.types'
 import TOC from './TOC'
 
 const Sidebar = ({ categories, isMenuOpen, toggleMenu, goTo }: SidebarProps) => {
-  const pathname = usePathname()
-  const slug = pathname.startsWith('/blog/')
-    ? pathname.split('/')[2] // "/blog/post1" => "post1"
-    : null
-
   return (
     <aside
       className={cn(
@@ -53,7 +48,7 @@ const Sidebar = ({ categories, isMenuOpen, toggleMenu, goTo }: SidebarProps) => 
           </li>
         ))}
       </ul>
-      {slug && <TOC slug={slug ?? ''} />}
+      <TOC />
     </aside>
   )
 }

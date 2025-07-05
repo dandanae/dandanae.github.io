@@ -2,8 +2,15 @@
 import React, { useEffect, useState } from 'react'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-const TOC = ({ slug }: { slug: string }) => {
+const TOC = () => {
+  const pathname = usePathname()
+  const slug = pathname.startsWith('/blog/')
+    ? pathname.split('/')[2] // "/blog/post1" => "post1"
+    : null
+  // useEffect(() => console.log(pathname), [])
+
   const [content, setContent] = useState('')
 
   useEffect(() => {
@@ -43,11 +50,13 @@ const TOC = ({ slug }: { slug: string }) => {
 
   const HeadingArr = getHeadings(content)
 
+  if (!slug) return null
+
   return (
     <div>
       {HeadingArr?.map((heading, index) => (
         <div key={index}>
-          <Link href={heading.link}>{heading.text}</Link>
+          <Link href={`/blog/${slug}#${heading.link}`}>{heading.text}</Link>
         </div>
       ))}
     </div>

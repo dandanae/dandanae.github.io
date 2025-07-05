@@ -21,6 +21,7 @@
 }
 
 * {
+  scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
@@ -36,12 +37,20 @@ body {
   letter-spacing: -1px;
 }
 
+.prose h1, h2, h3 {
+  scroll-margin-top: 60px;
+}
+
+.prose a {
+  @apply no-underline text-violet-600  hover:bg-violet-600 hover:text-white px-1
+}
+
 .prose .anchor {
   @apply no-underline inline-block text-inherit cursor-pointer;
   scroll-margin-top: 80px;
 }
 
-.prose .anchor:before {
+.prose a:before {
   @apply text-violet-300;
   content: '#';
 }
