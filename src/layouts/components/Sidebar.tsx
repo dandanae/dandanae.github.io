@@ -1,15 +1,23 @@
 'use clinet'
 import React from 'react'
 
+import { usePathname } from 'next/navigation'
+
 import { cn } from '@/libs/client'
 
 import { SidebarProps } from '../layout.types'
+import TOC from './TOC'
 
 const Sidebar = ({ categories, isMenuOpen, toggleMenu, goTo }: SidebarProps) => {
+  const pathname = usePathname()
+  const slug = pathname.startsWith('/blog/')
+    ? pathname.split('/')[2] // "/blog/post1" => "post1"
+    : null
+
   return (
     <aside
       className={cn(
-        'z-40 h-full w-full bg-gradient-to-r from-zinc-100 to-zinc-50 transition-all duration-300 md:w-1/4 lg:w-1/5',
+        'z-40 h-full w-full bg-gradient-to-r from-violet-50 to-violet-100 transition-all duration-300 md:w-1/4 lg:w-1/5',
         isMenuOpen ? 'translate-x-0' : '-translate-x-full',
       )}
     >
@@ -23,6 +31,7 @@ const Sidebar = ({ categories, isMenuOpen, toggleMenu, goTo }: SidebarProps) => 
       </button>
       {/* 리스트 */}
       <ul className="flex flex-col p-4 pt-16">
+        <span className="text-sm font-semibold text-violet-600 opacity-30">CATEGORY</span>
         {/* 홈 */}
         <li
           onClick={() => goTo('/')}
@@ -44,6 +53,7 @@ const Sidebar = ({ categories, isMenuOpen, toggleMenu, goTo }: SidebarProps) => 
           </li>
         ))}
       </ul>
+      {slug && <TOC slug={slug ?? ''} />}
     </aside>
   )
 }

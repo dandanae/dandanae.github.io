@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -31,9 +31,8 @@ const Finder = ({ title, posts }: { title: string; posts: any[] }) => {
       >
         {posts.map((post) => {
           const route = '/blog/' + post.slug
-          const imageSrc = post.image || defaultImage
-          const title = post.title || 'No Title'
-
+          const imageSrc = post.metadata.image || defaultImage
+          const title = post.metadata.title || 'No Title'
           return (
             <div
               key={route}
@@ -42,7 +41,7 @@ const Finder = ({ title, posts }: { title: string; posts: any[] }) => {
             >
               <div className="aspect-square w-full rounded-xl bg-white/70 p-2 shadow">
                 <Image
-                  src={imageSrc}
+                  src={imageSrc || '/placeholder.svg'}
                   alt={title}
                   width={500}
                   height={500}
@@ -56,15 +55,19 @@ const Finder = ({ title, posts }: { title: string; posts: any[] }) => {
       </div>
     )
   }
+
   return (
     <div data-pagefind-ignore="all" className="flex flex-col">
       {posts.map((post, index) => {
         const route = '/blog/' + post.slug
-        const imageSrc = post.image || defaultImage
-        const title = post.title || 'No Title'
-        const date = post.publishDate ? dayjs(post.publishDate).fromNow() : ''
+        const imageSrc = post.metadata.image || defaultImage
+        const title = post.metadata.title || 'No Title'
+        // 타임존 문제 해결: 로컬 타임존으로 변환 후 fromNow() 사용
+        const date = post.metadata.publishDate
+          ? dayjs.tz(post.metadata.publishDate, 'Asia/Seoul').fromNow()
+          : ''
         const reading = Math.ceil(post.readingTime)
-        // {index % 2 === 0 && ' 2'}
+
         return (
           <div
             key={route}
@@ -76,7 +79,7 @@ const Finder = ({ title, posts }: { title: string; posts: any[] }) => {
           >
             <div className="aspect-square w-6 rounded-xl shadow">
               <Image
-                src={imageSrc}
+                src={imageSrc || defaultImage}
                 alt={title}
                 width={500}
                 height={500}
@@ -86,7 +89,7 @@ const Finder = ({ title, posts }: { title: string; posts: any[] }) => {
             <div className="w-full flex-1 truncate font-medium">{title}</div>
             <div className="flex w-fit min-w-20 items-center gap-1 truncate text-sm font-medium opacity-30">
               <span className="material-symbols-rounded !text-[18px]">calendar_today</span>
-              {date}
+              <time dateTime={post.metadata.publishDate}>{date}</time>
             </div>
             <div className="flex w-fit min-w-20 items-center gap-1 truncate text-sm font-medium opacity-30">
               <span className="material-symbols-rounded !text-[18px]">avg_pace</span>

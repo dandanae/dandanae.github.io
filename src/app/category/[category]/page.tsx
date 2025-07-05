@@ -9,7 +9,7 @@ export const generateStaticParams = async () => {
 }
 
 const page = async ({ params }: { params: any }) => {
-  const category = params.category
+  const category = decodeURIComponent(params.category)
   const posts = await getPostsByCategory(category)
 
   return <Finder title={category} posts={posts} />

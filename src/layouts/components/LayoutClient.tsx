@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
 
+import { usePathname } from 'next/navigation'
+
 import { useLayout } from '../hooks'
 import { LayoutClientProps } from '../layout.types'
 import Background from './Background'
@@ -8,7 +10,7 @@ import Content from './Content'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
-const LayoutClient = ({ categories, children }: LayoutClientProps) => {
+const LayoutClient = ({ categories, children, content }: LayoutClientProps) => {
   const {
     title,
     viewMode,
@@ -38,6 +40,7 @@ const LayoutClient = ({ categories, children }: LayoutClientProps) => {
         toggleMenu={toggleMenu}
         goTo={goTo}
         categories={categories}
+        content={content}
       />
       <Content isMenuOpen={isMenuOpen}>{children}</Content>
     </Background>

@@ -7,6 +7,7 @@ export interface LayoutProps {
 export interface LayoutClientProps {
   categories: any[]
   children: React.ReactNode
+  content?: string
 }
 
 export interface BackgroundProps {
@@ -28,6 +29,7 @@ export interface SidebarProps {
   isMenuOpen: boolean
   toggleMenu: () => void
   goTo: (route: string) => void
+  content?: string
 }
 
 export interface ContentProps {

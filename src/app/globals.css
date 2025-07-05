@@ -35,3 +35,13 @@ body {
   font-family: 'Pretendard Variable', sans-serif;
   letter-spacing: -1px;
 }
+
+.prose .anchor {
+  @apply no-underline inline-block text-inherit cursor-pointer;
+  scroll-margin-top: 80px;
+}
+
+.prose .anchor:before {
+  @apply text-violet-300;
+  content: '#';
+}
