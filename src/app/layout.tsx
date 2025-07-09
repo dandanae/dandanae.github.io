@@ -10,6 +10,9 @@ import Providers from './providers'
 export const metadata: Metadata = {
   title: "DANAE's Blog",
   description: "DANAE's Blog",
+  authors: [{ name: 'DANAE' }],
+  creator: 'DANAE',
+  icons: 'https://example.com/icon.png',
 }
 
 export default function RootLayout({
