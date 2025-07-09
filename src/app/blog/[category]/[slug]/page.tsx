@@ -10,14 +10,13 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: any }) {
-  const { slug } = await params
-  const { metadata } = await getPost(slug)
+export async function generateMetadata({ params }: { params: { category: string; slug: string } }) {
+  const { category, slug } = params
+  const fullSlug = `${category}/${slug}`
+  const { metadata } = await getPost(fullSlug)
 
   if (!metadata) {
-    return {
-      title: 'Post Not Found',
-    }
+    return { title: 'Post Not Found' }
   }
 
   return {
@@ -26,19 +25,24 @@ export async function generateMetadata({ params }: { params: any }) {
   }
 }
 
-const Blog = async ({ params }: { params: any }) => {
-  const { slug } = await params
+const Blog = async ({ params }: { params: { category: string; slug: string } }) => {
+  const { category, slug } = await params
+  const fullSlug = `${category}/${slug}`
 
-  if (!slug) {
+  if (!fullSlug) {
     return <div>포스트를 찾을 수 없습니다.</div>
   }
 
-  const tocs = await getTocBySlug(slug)
+  const tocs = await getTocBySlug(fullSlug)
 
   return (
     <>
       <div className="lg:col-span-1">
         <TableOfContents tocs={tocs || []} />
+      </div>
+      <div className="prose dark:prose-invert mt-4 max-w-none">
+        {slug}
+        {/* <Component /> */}
       </div>
     </>
     // <div className="container m-auto flex justify-center px-5 py-8">
