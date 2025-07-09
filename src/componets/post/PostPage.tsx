@@ -7,25 +7,9 @@ import type { Category } from '@/libs/posts'
 
 import PostCard from './PostCard'
 import { Card } from '../common'
-
-const PAGE_SIZE = 8
+import PostList from './PostList'
 
 const PostPage = ({ posts, categories }: { posts: any; categories: any }) => {
-  const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE)
-  const [loading, setLoading] = useState<boolean>(false)
-
-  const { scrollYProgress } = useScroll()
-
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    if (latest > 0.9 && !loading && visibleCount < posts.length) {
-      setLoading(true)
-      window.setTimeout(() => {
-        setVisibleCount((count) => Math.min(count + PAGE_SIZE, posts.length))
-        setLoading(false)
-      }, 500)
-    }
-  })
-
   return (
     <>
       <Card variant="primary" classname="ml-auto lg:w-2/3">
@@ -46,17 +30,7 @@ const PostPage = ({ posts, categories }: { posts: any; categories: any }) => {
           ))}
         </div>
       </Card>
-      <div className="w-full lg:col-span-3">
-        <h2 className="mb-8 text-3xl font-bold">최근 포스트</h2>
-
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {posts.slice(0, visibleCount).map((post: any) => {
-            return <PostCard key={post.slug} post={post} />
-          })}
-
-          <div className="mt-12 text-center">{loading && <p>로딩 중...</p>}</div>
-        </div>
-      </div>
+      <PostList title="최근 게시 글" posts={posts} />
     </>
   )
 }
