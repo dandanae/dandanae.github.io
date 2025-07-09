@@ -1,11 +1,19 @@
-import { PostPage } from '@/componets'
-import { getAllPosts, getCategories, getSlugs, testteste } from '@/libs/posts'
+import { PostCategory, PostList } from '@/componets'
+import { getAllPosts, getCategories, getPinnedPosts } from '@/libs/posts'
 
 const Home = async () => {
   const posts = await getAllPosts()
   const categories = await getCategories()
 
-  return <PostPage posts={posts} categories={categories} />
+  // const pinned = await getPinnedPosts()
+
+  return (
+    <>
+      <PostCategory categories={categories} />
+      {/* <PostList title="고정 게시 글" posts={pinned} isPinned /> */}
+      <PostList title="최근 게시 글" posts={posts} />
+    </>
+  )
 }
 
 export default Home

@@ -90,3 +90,7 @@ export const getPostsByDateRange = async (start: string, end: string) => {
     return publishTime >= startTime && publishTime <= endTime
   })
 }
+
+export const getPinnedPosts = async (): Promise<PostSummary[]> => {
+  return filterPosts((post) => post.metadata.pinned === true)
+}

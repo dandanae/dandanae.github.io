@@ -1,4 +1,5 @@
 export interface MdxMetadata {
+  pinned: boolean
   title: string
   description: string
   publishDate: string
