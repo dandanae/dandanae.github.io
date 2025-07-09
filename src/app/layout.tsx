@@ -7,6 +7,8 @@ import { Header } from '@/layouts'
 import './globals.css'
 import Providers from './providers'
 
+import Script from 'next/script'
+
 export const metadata: Metadata = {
   title: "DANAE's Blog",
   description: "DANAE's Blog",
@@ -20,6 +22,22 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-GYK5G4L4WZ`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GYK5G4L4WZ');
+          `,
+          }}
+        />
         <meta
           name="google-site-verification"
           content="QXc1oDCUaPnOPuGAxg8qpOyC_GnWZag6jVtHPzQDkwo"
