@@ -24,6 +24,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="QXc1oDCUaPnOPuGAxg8qpOyC_GnWZag6jVtHPzQDkwo"
         />
+        <meta name="naver-site-verification" content="9c5c6606147b72ead338b3c4d676ff58d879a660" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
