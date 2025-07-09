@@ -8,7 +8,7 @@ import type { Category } from '@/libs/posts'
 import PostCard from './PostCard'
 import { Card } from '../common'
 
-const PAGE_SIZE = 5
+const PAGE_SIZE = 8
 
 const PostPage = ({ posts, categories }: { posts: any; categories: any }) => {
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE)
@@ -28,22 +28,13 @@ const PostPage = ({ posts, categories }: { posts: any; categories: any }) => {
 
   return (
     <>
-      <div className="w-full lg:col-span-3 lg:col-start-2">
-        <h2 className="mb-10 text-3xl font-bold lg:px-0">최근 포스트</h2>
-
-        <div className="space-y-6">
-          {posts.slice(0, visibleCount).map((post: any) => {
-            return <PostCard key={post.slug} post={post} />
-          })}
-
-          <div className="mt-12 text-center">{loading && <p>로딩 중...</p>}</div>
-        </div>
-      </div>
-      <Card variant="primary">
-        <div className="flex flex-col gap-3">
-          <span className="text-lg font-semibold">카테고리</span>
+      <Card variant="primary" classname="ml-auto lg:w-2/3">
+        <div className="flex flex-col gap-5">
+          <div className="text-primary dark:bg-primary/40 text-center text-lg font-semibold">
+            CATEGORY
+          </div>
           {categories.map((category: Category) => (
-            <div key={category.name} className="group flex items-center gap-3">
+            <div key={category.name} className="group flex cursor-pointer items-center gap-3">
               <span className="group-hover:text-secondary transition-all duration-300 group-hover:text-lg group-hover:font-medium">
                 {category.name}
               </span>
@@ -55,6 +46,17 @@ const PostPage = ({ posts, categories }: { posts: any; categories: any }) => {
           ))}
         </div>
       </Card>
+      <div className="w-full lg:col-span-3">
+        <h2 className="mb-8 text-3xl font-bold">최근 포스트</h2>
+
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {posts.slice(0, visibleCount).map((post: any) => {
+            return <PostCard key={post.slug} post={post} />
+          })}
+
+          <div className="mt-12 text-center">{loading && <p>로딩 중...</p>}</div>
+        </div>
+      </div>
     </>
   )
 }

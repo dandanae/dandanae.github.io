@@ -47,9 +47,9 @@ export default function TableOfContents({ tocs }: { tocs: TocItem[] }) {
               className={cn(
                 'hover:text-primary text-sm transition-all',
                 item.depth === 1 && 'font-semibold',
-                item.depth === 2 && 'ml-4 opacity-70',
-                item.depth === 3 && 'ml-8 opacity-70',
-                activeId === item.id && 'text-secondary text-lg font-bold opacity-100',
+                item.depth === 2 && 'text-foreground/70 ml-4',
+                item.depth === 3 && 'text-foreground/70 ml-8',
+                activeId === item.id && 'text-secondary text-lg font-bold',
               )}
             >
               {item.value}

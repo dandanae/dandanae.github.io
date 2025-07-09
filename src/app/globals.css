@@ -24,6 +24,8 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --font-bubble: var(--font-bubble);
 }
 
 @custom-variant dark (&:where([class=dark], [class=dark] *));

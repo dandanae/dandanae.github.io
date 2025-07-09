@@ -31,7 +31,7 @@ const PostCard = ({ post }: { post: PostSummary }) => {
           alt={title}
           width={500}
           height={500}
-          className="h-30 w-30 rounded-lg object-cover object-center transition-all duration-300 group-hover:scale-110"
+          className="h-32 w-32 rounded-lg object-cover object-center transition-all duration-300 group-hover:scale-110"
         />
 
         {/* 날짜 + 읽는 시간 */}
@@ -48,7 +48,10 @@ const PostCard = ({ post }: { post: PostSummary }) => {
         <div className="flex w-full flex-col justify-between">
           <div className="w-full">
             {/* 카테고리 */}
-            <span key={category} className="bg-primary/50 rounded-full px-3 py-1 text-xs">
+            <span
+              key={category}
+              className="bg-primary/20 text-primary rounded-full px-3 py-1 text-xs font-bold"
+            >
               {category}
             </span>
 
@@ -58,13 +61,18 @@ const PostCard = ({ post }: { post: PostSummary }) => {
             </div>
 
             {/* 설명 */}
-            <div className="w-3/5 truncate text-sm leading-relaxed opacity-60">{description}</div>
+            <div className="text-foreground/50 w-3/5 truncate text-sm leading-relaxed">
+              {description}
+            </div>
           </div>
 
           {/* 태그 */}
           <div className="space-x-2">
             {tags.map((tag) => (
-              <span key={tag} className="ring-primary/50 rounded-full px-3 py-0.5 text-xs ring">
+              <span
+                key={tag}
+                className="ring-primary/50 text-foreground/70 rounded-full px-3 py-0.5 text-xs ring"
+              >
                 {tag}
               </span>
             ))}
