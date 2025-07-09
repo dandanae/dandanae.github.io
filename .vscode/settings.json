@@ -1,0 +1,11 @@
+{
+  "eslint.useFlatConfig": true,
+  "eslint.validate": ["typescript", "typescriptreact"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnSave": false,
+  "tailwindCSS.experimental.classRegex": [
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
+}

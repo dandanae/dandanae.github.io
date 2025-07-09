@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+dist
+public
+coverage
+package-lock.json
+yarn.lock
+*.config.js
