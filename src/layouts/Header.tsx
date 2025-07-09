@@ -33,7 +33,7 @@ const Header = () => {
       <div className="relative container m-auto flex h-16 items-center justify-center">
         <Link
           href="/"
-          className="text-primary hover:text-secondary click absolute left-4 flex cursor-pointer items-center text-3xl font-black transition-colors duration-300"
+          className="font-bubble text-primary hover:text-secondary click absolute left-4 flex cursor-pointer items-center text-3xl font-black transition-colors duration-300"
         >
           DANAE
         </Link>

@@ -1,11 +1,11 @@
 import React from 'react'
 
 import type { Metadata } from 'next'
-import { Rubik_Bubbles } from 'next/font/google'
-
-import { Header } from '@/layouts'
 
 import './globals.css'
+import { Header } from '@/layouts'
+import { bubble } from '@/libs/fonts'
+
 import Providers from './providers'
 
 export const metadata: Metadata = {
@@ -16,15 +16,13 @@ export const metadata: Metadata = {
   icons: 'https://example.com/icon.png',
 }
 
-const bubble = Rubik_Bubbles({ subsets: ['latin'], weight: '400' })
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={bubble.className}>
+    <html lang="ko" className={`${bubble.variable}`}>
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYK5G4L4WZ"></script>
         <script
