@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TableOfContents } from '@/componets'
+import { PostToc, TableOfContents } from '@/componets'
 import { getPost, getSlugs, getTocBySlug } from '@/libs/posts'
 
 export async function generateStaticParams() {
@@ -38,7 +38,7 @@ const Blog = async ({ params }: { params: { category: string; slug: string } }) 
   return (
     <>
       <div className="lg:col-span-1">
-        <TableOfContents tocs={tocs || []} />
+        <PostToc tocs={tocs || []} />
       </div>
       <div className="prose dark:prose-invert mt-4 max-w-none">
         {slug}
