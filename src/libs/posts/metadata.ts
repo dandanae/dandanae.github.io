@@ -1,5 +1,5 @@
 import { getAllPosts } from './posts'
-import type { PostSummary, Category, Tag } from './types'
+import type { Category, Tag } from './types'
 import { sortByCountDesc } from './utils'
 
 const countOccurrences = <T>(

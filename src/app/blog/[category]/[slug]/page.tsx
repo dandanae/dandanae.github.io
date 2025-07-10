@@ -8,10 +8,12 @@ interface ParamsProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = await getSlugs()
-  return slugs.map((slug: any) => ({
-    slug,
-  }))
+  const rawSlugs = await getSlugs()
+
+  return rawSlugs.map((fullSlug) => {
+    const [category, slug] = fullSlug.split('/')
+    return { category, slug }
+  })
 }
 
 export async function generateMetadata({ params }: ParamsProps) {
