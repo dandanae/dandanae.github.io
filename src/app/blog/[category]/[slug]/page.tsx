@@ -25,7 +25,9 @@ export async function generateMetadata({ params }: { params: { category: string;
   }
 }
 
-const Blog = async ({ params }: { params: { category: string; slug: string } }) => {
+type PageParams = Promise<{ category: string; slug: string }>
+
+const Blog = async ({ params }: { params: PageParams }) => {
   const { category, slug } = await params
   const fullSlug = `${category}/${slug}`
 

@@ -35,7 +35,9 @@ const PostToc = ({ tocs }: { tocs: Toc[] }) => {
   return (
     <Card variant="primary" classname="ml-auto lg:w-2/3 max-h-fit">
       <div className="flex flex-col gap-3">
-        <div className="text-lg font-extrabold">목차</div>
+        <div className="text-primary dark:bg-primary/40 text-center text-lg font-semibold">
+          목차
+        </div>
         <nav className="flex flex-col space-y-2">
           {tocs.map((item) => (
             <Link

@@ -11,8 +11,10 @@ export async function generateStaticParams() {
   }))
 }
 
-const CategoryPage = async ({ params }: { params: { category: string } }) => {
-  const { category } = params
+type PageParams = Promise<{ category: string }>
+
+const CategoryPage = async ({ params }: { params: PageParams }) => {
+  const { category } = await params
   const categories = await getCategories()
   const posts = await getPostsByCategory(category)
 
