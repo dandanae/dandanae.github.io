@@ -19,7 +19,7 @@ const PostCategory = ({ categories }: { categories: Category[] }) => {
             key={category.name}
             className="group flex cursor-pointer items-center gap-3"
           >
-            <span className="group-hover:text-secondary text-foreground/70 max-w-2/3 py-2 text-sm transition-all duration-300 group-hover:scale-120 group-hover:font-medium">
+            <span className="group-hover:text-secondary text-foreground/70 max-w-2/3 py-2 text-sm transition-all duration-300 group-hover:scale-120 group-hover:font-medium group-active:scale-90">
               {category.name}
             </span>
             <div className="border-b-primary group-hover:border-b-secondary h-0 w-full border-b border-dashed transition-colors duration-300" />

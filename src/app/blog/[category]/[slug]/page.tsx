@@ -4,27 +4,29 @@ import { PostToc } from '@/componets'
 import { getPost, getSlugs, getTocBySlug } from '@/libs/posts'
 
 interface ParamsProps {
-  params: Promise<{ category: string; slug: string }>
+  params: { category: string; slug: string }
 }
 
 export async function generateStaticParams() {
   const rawSlugs = await getSlugs()
-
-  return rawSlugs.map((fullSlug) => {
-    const [category, slug] = fullSlug.split('/')
-    return { category, slug }
-  })
+  return rawSlugs
+    .map((fullSlug) => {
+      const parts = fullSlug.split('/')
+      if (parts.length !== 2) return null
+      const [category, slug] = parts
+      return { category, slug }
+    })
+    .filter((p): p is { category: string; slug: string } => p !== null)
 }
 
 export async function generateMetadata({ params }: ParamsProps) {
-  const { category, slug } = await params
+  const { category, slug } = params
   const fullSlug = `${category}/${slug}`
   const { metadata } = await getPost(fullSlug)
 
   if (!metadata) {
     return { title: 'Post Not Found' }
   }
-
   return {
     title: metadata.title,
     description: metadata.description,
@@ -32,7 +34,7 @@ export async function generateMetadata({ params }: ParamsProps) {
 }
 
 const Blog = async ({ params }: ParamsProps) => {
-  const { category, slug } = await params
+  const { category, slug } = params
   const fullSlug = `${category}/${slug}`
 
   if (!fullSlug) {
