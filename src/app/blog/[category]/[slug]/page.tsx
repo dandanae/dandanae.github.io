@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { category: string; slug: string } }) {
-  const { category, slug } = params
+  const { category, slug } = await params
   const fullSlug = `${category}/${slug}`
   const { metadata } = await getPost(fullSlug)
 
