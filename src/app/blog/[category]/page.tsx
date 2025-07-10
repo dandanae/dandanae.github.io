@@ -4,6 +4,10 @@ import { PostCategory, PostList } from '@/componets'
 import { getCategories, getPostsByCategory } from '@/libs/posts'
 import type { Category } from '@/libs/posts'
 
+interface ParamsProps {
+  params: Promise<{ category: string }>
+}
+
 export async function generateStaticParams() {
   const categories = await getCategories()
   return categories.map((categoryObj: Category) => ({
@@ -11,8 +15,8 @@ export async function generateStaticParams() {
   }))
 }
 
-const CategoryPage = async ({ params }: { params: { category: string } }) => {
-  const { category } = params
+const CategoryPage = async ({ params }: ParamsProps) => {
+  const { category } = await params
   const categories = await getCategories()
   const posts = await getPostsByCategory(category)
 

@@ -3,6 +3,10 @@ import React from 'react'
 import { PostToc } from '@/componets'
 import { getPost, getSlugs, getTocBySlug } from '@/libs/posts'
 
+interface ParamsProps {
+  params: Promise<{ category: string; slug: string }>
+}
+
 export async function generateStaticParams() {
   const slugs = await getSlugs()
   return slugs.map((slug: any) => ({
@@ -10,8 +14,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: { category: string; slug: string } }) {
-  const { category, slug } = params
+export async function generateMetadata({ params }: ParamsProps) {
+  const { category, slug } = await params
   const fullSlug = `${category}/${slug}`
   const { metadata } = await getPost(fullSlug)
 
@@ -25,8 +29,8 @@ export async function generateMetadata({ params }: { params: { category: string;
   }
 }
 
-const Blog = async ({ params }: { params: { category: string; slug: string } }) => {
-  const { category, slug } = params
+const Blog = async ({ params }: ParamsProps) => {
+  const { category, slug } = await params
   const fullSlug = `${category}/${slug}`
 
   if (!fullSlug) {
