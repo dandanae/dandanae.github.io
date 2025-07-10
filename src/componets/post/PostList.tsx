@@ -35,7 +35,7 @@ const PostList = ({
   })
 
   return (
-    <div className={cn('w-full lg:col-span-3', !isPinned && '!lg:col-start-2')}>
+    <div className="w-full lg:col-span-3 lg:col-start-2">
       <h2 className="mb-8 text-3xl font-bold">{title}</h2>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">

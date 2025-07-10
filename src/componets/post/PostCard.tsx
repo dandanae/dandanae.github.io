@@ -6,7 +6,8 @@ import Link from 'next/link'
 import dayjs from '@/libs/dayjs'
 import type { PostSummary } from '@/libs/posts'
 
-import { Card, IconLabel } from '../common'
+import { Card } from '../common'
+import { PostCategoryItem, PostInfoItem, PostTagItem } from './items'
 
 const DEFAULT_IMAGE = 'https://i.pinimg.com/736x/4f/10/d6/4f10d62fec1992bc9d928876a980fb63.jpg'
 
@@ -18,12 +19,12 @@ const PostCard = ({ post }: { post: PostSummary }) => {
   const publishDate = post.metadata.publishDate
     ? dayjs.tz(post.metadata.publishDate, 'Asia/Seoul').fromNow()
     : ''
-  const readingTime = Math.ceil(post.readingTime)
+  const readingTime = Math.ceil(post.metadata.readingTime)
   const category = post.metadata.category
   const tags = post.metadata.tags
 
   return (
-    <Card classname="group hover:bg-secondary/10">
+    <Card className="group hover:bg-secondary/10">
       <Link href={route} className="flex gap-5">
         {/* 좌측 이미지 */}
         <Image
@@ -36,8 +37,8 @@ const PostCard = ({ post }: { post: PostSummary }) => {
 
         {/* 날짜 + 읽는 시간 */}
         <div className="absolute top-5 right-5 space-y-1">
-          <IconLabel icon="calendar_today" label={publishDate} />
-          <IconLabel icon="avg_pace" label={`${readingTime}분`} />
+          <PostInfoItem icon="calendar_today" label={publishDate} />
+          <PostInfoItem icon="avg_pace" label={`${readingTime}분`} />
         </div>
 
         <div className="bg-primary absolute right-5 bottom-5 flex h-8 w-8 items-center justify-center space-y-1 rounded-full opacity-0 transition-opacity duration-300 group-hover:animate-bounce group-hover:opacity-100">
@@ -48,12 +49,7 @@ const PostCard = ({ post }: { post: PostSummary }) => {
         <div className="flex w-full flex-col justify-between">
           <div className="w-full">
             {/* 카테고리 */}
-            <span
-              key={category}
-              className="bg-primary/20 text-primary rounded-full px-3 py-1 text-xs font-bold"
-            >
-              {category}
-            </span>
+            <PostCategoryItem category={category} />
 
             {/* 제목 */}
             <div className="group-hover:text-secondary mt-2 w-3/5 truncate text-xl font-bold transition-colors duration-300">
@@ -69,12 +65,7 @@ const PostCard = ({ post }: { post: PostSummary }) => {
           {/* 태그 */}
           <div className="space-x-2">
             {tags.map((tag) => (
-              <span
-                key={tag}
-                className="ring-primary/50 text-foreground/70 rounded-full px-3 py-0.5 text-xs ring"
-              >
-                {tag}
-              </span>
+              <PostTagItem key={tag} tag={tag} />
             ))}
           </div>
         </div>

@@ -6,11 +6,11 @@ import { cn } from '@/libs/utils'
 
 const Card = ({
   variant = 'secondary',
-  classname,
+  className,
   children,
 }: {
   variant?: 'primary' | 'secondary'
-  classname?: string
+  className?: string
   children: React.ReactNode
 }) => {
   const style = tv({
@@ -28,7 +28,7 @@ const Card = ({
       },
     },
   })
-  return <div className={cn(style({ variant }), classname)}>{children}</div>
+  return <div className={cn(style({ variant }), className)}>{children}</div>
 }
 
 export default Card

@@ -24,7 +24,7 @@ const withMDX = nextMDX({
 })
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // output: 'export',
 
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: true,

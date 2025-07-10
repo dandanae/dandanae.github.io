@@ -33,30 +33,30 @@ const PostToc = ({ tocs }: { tocs: Toc[] }) => {
   }, [])
 
   return (
-    <Card variant="primary" classname="ml-auto lg:w-2/3 max-h-fit">
-      <div className="flex flex-col gap-3">
-        <div className="text-primary dark:bg-primary/40 text-center text-lg font-semibold">
-          목차
+    <div className="sticky top-18 ml-auto flex flex-col gap-5 lg:w-2/3">
+      <Card variant="primary" className="max-h-fit">
+        <div className="flex flex-col gap-3">
+          <div className="text-primary text-center text-lg font-semibold">목차</div>
+          <nav className="flex flex-col space-y-2">
+            {tocs.map((item) => (
+              <Link
+                key={item.id}
+                href={`#${item.id}`}
+                className={cn(
+                  'hover:text-primary text-sm transition-all',
+                  item.depth === 1 && 'font-semibold',
+                  item.depth === 2 && 'text-foreground/70 ml-4',
+                  item.depth === 3 && 'text-foreground/70 ml-8',
+                  activeId === item.id && 'text-secondary scale-110 font-bold',
+                )}
+              >
+                {item.value}
+              </Link>
+            ))}
+          </nav>
         </div>
-        <nav className="flex flex-col space-y-2">
-          {tocs.map((item) => (
-            <Link
-              key={item.id}
-              href={`#${item.id}`}
-              className={cn(
-                'hover:text-primary text-sm transition-all',
-                item.depth === 1 && 'font-semibold',
-                item.depth === 2 && 'text-foreground/70 ml-4',
-                item.depth === 3 && 'text-foreground/70 ml-8',
-                activeId === item.id && 'text-secondary text-lg font-bold',
-              )}
-            >
-              {item.value}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </Card>
+      </Card>
+    </div>
   )
 }
 

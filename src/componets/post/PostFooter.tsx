@@ -1,0 +1,48 @@
+import React from 'react'
+
+import dayjs from 'dayjs'
+import Link from 'next/link'
+
+import type { PostSummary } from '@/libs/posts'
+
+import { Card } from '../common'
+
+const PostFooter = ({ prev, next }: { prev?: PostSummary; next?: PostSummary }) => {
+  return (
+    <div className="grid w-full grid-cols-2">
+      {prev && (
+        <Card className="group mr-auto w-72">
+          <Link href={`/blog/${prev.slug}`} className="flex items-center gap-5">
+            <span className="material-symbols-rounded text-secondary">chevron_left</span>
+            <div className="flex min-w-0 flex-1 flex-col">
+              <span className="group-hover:text-secondary w-full truncate text-sm font-semibold transition-colors duration-300">
+                {prev.metadata.title}
+              </span>
+              <span className="text-foreground/50 text-xs">
+                {dayjs(prev.metadata.publishDate).format('YYYY. MM. DD.')}
+              </span>
+            </div>
+          </Link>
+        </Card>
+      )}
+
+      {next && (
+        <Card className="group col-start-2 ml-auto w-72">
+          <Link href={`/blog/${next.slug}`} className="flex items-center gap-5">
+            <div className="flex min-w-0 flex-1 flex-col">
+              <span className="group-hover:text-secondary truncate text-sm font-semibold transition-colors duration-300">
+                {next.metadata.title}
+              </span>
+              <span className="text-foreground/50 text-xs">
+                {dayjs(next.metadata.publishDate).format('YYYY. MM. DD.')}
+              </span>
+            </div>
+            <span className="material-symbols-rounded text-secondary flex-none">chevron_right</span>
+          </Link>
+        </Card>
+      )}
+    </div>
+  )
+}
+
+export default PostFooter

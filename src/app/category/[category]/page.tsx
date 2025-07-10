@@ -17,12 +17,11 @@ export async function generateStaticParams() {
 
 const CategoryPage = async ({ params }: ParamsProps) => {
   const { category } = await params
-  const categories = await getCategories()
   const posts = await getPostsByCategory(category)
 
   return (
     <>
-      <PostCategory categories={categories} />
+      <PostCategory />
       <PostList title={category} posts={posts} />
     </>
   )

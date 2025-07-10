@@ -4,6 +4,7 @@ export interface MdxMetadata {
   description: string
   publishDate: string
   image: string
+  readingTime: number
   category: string
   tags: string[]
 }
@@ -11,15 +12,15 @@ export interface MdxMetadata {
 export interface Post {
   slug: string
   metadata: MdxMetadata
-  readingTime: number
   source: string
   Component: any
+  prev?: PostSummary
+  next?: PostSummary
 }
 
 export interface PostSummary {
   slug: string
   metadata: MdxMetadata
-  readingTime: number
 }
 
 export interface Category {

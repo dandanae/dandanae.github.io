@@ -1,21 +1,21 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 
-  --primary: #FFB6B9;
-  --secondary: #8AC6D1
+  --primary: #ffb6b9;
+  --secondary: #8ac6d1;
 }
 
 .dark {
   --color-background: #0a0a0a;
   --color-foreground: #ededed;
 
-  --color-primary: #FF6B81;
-  --color-secondary: #4DD0E1;
+  --color-primary: #ff6b81;
+  --color-secondary: #4dd0e1;
 }
 
 @theme {
@@ -26,37 +26,89 @@
   --color-foreground: var(--foreground);
 
   --font-bubble: var(--font-bubble);
+  --font-d2: var(--font-d2);
 }
 
-@custom-variant dark (&:where([class=dark], [class=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 * {
   scroll-behavior: smooth;
 }
 
-::selection{ 
-  color: #fff; 
+::selection {
+  color: #fff;
   background: var(--primary);
-  transition: all 250ms ease-in; 
-} 
-::-moz-selection{ 
-  color: #fff; 
-  background: var(--primary);
-  transition: all 250ms ease-in; 
+  transition: all 250ms ease-in;
 }
-
+::-moz-selection {
+  color: #fff;
+  background: var(--primary);
+  transition: all 250ms ease-in;
+}
 
 body {
   @apply bg-background text-foreground;
   /* background: var(--background);
   color: var(--foreground); */
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
 }
 
-.prose h1, h2, h3 {
+.prose h1,
+h2,
+h3 {
   scroll-margin-top: 100px;
 }
 
+.prose .anchor {
+  @apply no-underline text-primary hover:bg-primary px-1 mr-1 transition-colors duration-300 font-black hover:text-white;
+}
+
+.prose .anchor:after {
+  content: '#';
+}
+/* 
+
+.prose a {
+  @apply bg-amber-50
+}
+
+.prose :not(pre) > code {
+  @apply px-2 bg-gray-100  py-0.5 rounded dark:bg-gray-800 text-red-400 mx-0.5;
+}
+
+.prose :not(pre) > code::before, code::after {
+  content: none;
+}
+
+.prose pre {
+  @apply font-d2;
+}
+
+.prose .anchor {
+  @apply invisible absolute no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  cursor: pointer;
+}
+
+ */
+
 .click {
-  @apply transition-transform duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-90;
+  @apply transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-90;
 }
