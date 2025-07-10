@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={`${bubble.variable}`}>
+    <html lang="ko" className={`${bubble.variable}`} suppressHydrationWarning>
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYK5G4L4WZ"></script>
         <script

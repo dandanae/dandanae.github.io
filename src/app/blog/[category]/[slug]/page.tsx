@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PostToc, TableOfContents } from '@/componets'
+import { PostToc } from '@/componets'
 import { getPost, getSlugs, getTocBySlug } from '@/libs/posts'
 
 export async function generateStaticParams() {
@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { category: string; slug: string } }) {
-  const { category, slug } = await params
+  const { category, slug } = params
   const fullSlug = `${category}/${slug}`
   const { metadata } = await getPost(fullSlug)
 
@@ -25,10 +25,8 @@ export async function generateMetadata({ params }: { params: { category: string;
   }
 }
 
-type PageParams = Promise<{ category: string; slug: string }>
-
-const Blog = async ({ params }: { params: PageParams }) => {
-  const { category, slug } = await params
+const Blog = async ({ params }: { params: { category: string; slug: string } }) => {
+  const { category, slug } = params
   const fullSlug = `${category}/${slug}`
 
   if (!fullSlug) {
