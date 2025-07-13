@@ -27,7 +27,7 @@ const generateToc = (source: string): Toc[] => {
         .toLowerCase()
         .replace(/\./g, '')
         .replace(/[?/`\s]+/g, '-')
-        
+
       if (!baseId) baseId = 'heading'
 
       let id = baseId
