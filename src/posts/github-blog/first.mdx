@@ -1,8 +1,10 @@
+import { HoverContainer } from '../../components/mdx/code'
+import Callout from '../../components/mdx/Callout'
 
 export const metadata = {
   pinned: false,
-  title: '깃허브 블로그 만들기 (1)',
-  description: '',
+  title: '깃허브 블로그 제작 기록',
+  description: 'Next.js 15(App Router)과 Tailwind CSS v4, MDX를 이용해 GitHub Pages에 정적 블로그를 만들었어요.\n설정과 구조를 기록으로 남기기 위해 글을 작성했어요.',
   publishDate: "2025-07-10T22:09:44Z",
   image: '',
   tags: [
@@ -10,4 +12,320 @@ export const metadata = {
   ],
 };
 
-ㅋㅋ
+<Callout type="tip">
+이 글은 **가이드가 아닌 제작 기록**이에요. 참고하되, 생략된 부분이 있을 수 있어요.
+</Callout>
+
+# 1. GitHub Pages 블로그 기본 세팅
+자세한 내용은 [GitHub Pages 빠른 시작 가이드](https://docs.github.com/ko/pages/quickstart)를 확인해 주세요.
+
+## Actions 권한 설정
+저는 `GitHub Actions`를 통해 배포하기 위해 Action 권한을 설정해 줬어요.
+`Settings → Actions → General`에서 `Workflow permmisions`을 **Read and Write**로 설정해요.
+![image](https://blog.kakaocdn.net/dna/0ztSK/btsPdMEGh8y/AAAAAAAAAAAAAAAAAAAAAO06jcnticO52gSE3HdyL7lv85PBAqCkcqXMB8-xA_oL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1753973999&allow_ip=&allow_referer=&signature=kZzQd9lR6Vis1m9a2jICmeayR98%3D)
+
+
+# 2. Next.js 프로젝트 초기화
+## 프로젝트 생성
+```bash
+npx create-next-app@latest .
+```
+
+## MDX 설정
+```bash
+npm install @next/mdx @mdx-js/loader @mdx-js/react
+npm install -D @types/mdx
+```
+
+### next.config.ts 설정
+<HoverContainer>
+[withMDX](hover:one) 설정과 함께 [output: 'export' 옵션](hover:two)도 설정해요.
+
+```ts next.config.ts
+import nextMDX from '@next/mdx';
+import { NextConfig } from 'next';
+
+/** @type {import('next').NextConfig} */
+const nextConfig: NextConfig = {
+  // !hover two
+  output: 'export',
+
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  reactStrictMode: true,
+}
+
+// !hover one
+const withMDX = nextMDX({
+  // !hover one
+  extension: /\.mdx?$/,
+  // !hover one
+  options: {
+    // !hover one
+    remarkPlugins: [],
+    // !hover one
+    rehypePlugins: [],
+  // !hover one
+  },
+// !hover one
+});
+
+export default withMDX(nextConfig);
+```
+</HoverContainer>
+
+### MDX 컴포넌트 바인딩
+<Callout type="error">
+`App Router`를 사용하는 경우, `mdx.components.tsx`가 없으면 MDX가 작동하지 않아요.
+</Callout>
+
+```tsx src/mdx-components.tsx
+import type { MDXComponents } from 'mdx/types';
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+  };
+}
+```
+
+# 3. 블로그 글 작성 구조
+## 작성 위치
+모든 글은 `src/posts/카테고리/파일.mdx` 형식으로 저장해요.
+
+## 메타데이터 형식
+```mdx
+export const metadata = {
+  title: '제목',
+  description: '설명',
+  publishDate: "2025-07-12T00:00:00Z",
+  image: '이미지 주소',
+  tags: ['태그들'],
+}
+
+```
+
+### VS Code 스니펫 등록
+MDX 메타데이터 작성을 빠르게 하기 위해 스니펫을 등록해 두면 편리해요.
+`mdxmeta`만 작성해도 틀이 만들어져요.
+
+```json .vscode/mdx.code-snippets
+{
+  "MDX Metadata": {
+    "prefix": ["mdxmeta", "mdxmetadata"],
+    "description": "Insert metadata object for MDX page",
+    "body": [
+      "",
+      "export const metadata = {",
+      "  title: '$1',",
+      "  description: '$2',",
+      "  publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}Z\",",
+      "  image: '$3',",
+      "  tags: [",
+      "    '$4'",
+      "  ],",
+      "};",
+      "",
+      "$0",
+    ],
+    "scope": "mdx",
+  },
+}
+```
+
+# 4. 글 목록 불러오기
+## 모든 .mdx 파일 경로 수집
+```ts src/libs/posts.ts
+const postsPath = path.resolve(process.cwd(), 'src', 'posts')
+
+export const getAllFiles = async (dir: string): Promise<string[]> => {
+  // !callout[/withFileTypes: true/] 이 옵션으로 Dirent 객체를 받아서 파일인지 폴더인지 바로 판별할 수 있어요.
+  const dirents = await readdir(dir, { withFileTypes: true })
+  const files = await Promise.all(
+    dirents.map((dirent) => {
+      const res = path.resolve(dir, dirent.name)
+      return dirent.isDirectory() ? getAllFiles(res) : res
+    }),
+  )
+
+  return Array.prototype.concat(...files)
+}
+```
+
+## 전체 게시 글 목록
+<HoverContainer>
+파일은 [slugs](hover:one)를 만들어서 게시 글을 관리해요. 만약 `src/posts/test/first.mdx` 파일이라면 **slug**는 `test/first`가 돼요.
+```ts src/libs/posts.ts
+export const getAllPosts = async (): Promise<PostSummary[]> => {
+  const files = (await getAllFiles(postsPath)).filter((f) =>
+    f.endsWith('.mdx'),
+  )
+
+  // !mark(1:3)
+  // !hover one
+  const slugs = files
+    // !hover one
+    .map((file) =>path.relative(postsPath, file).slice(0, -4),)
+    // !hover one
+    .map((slug) => slug.replace(/\\/g, '/'))
+
+  const posts = await Promise.all(
+    // !callout[/getPost/] 이 함수는 `📖 4. 게시 글 불러오기`에 있어요
+    slugs.map((slug) => getPost(slug, true)),
+  )
+
+  return (posts as PostSummary[]).sort(sortByDateDesc)
+}
+```
+</HoverContainer>
+![image](https://blog.kakaocdn.net/dna/nmPmz/btsPfJIxMtl/AAAAAAAAAAAAAAAAAAAAAGl32oZFMR590YLmvW86cCrvEEoXQpg6er2i17_K3Sxy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1753973999&allow_ip=&allow_referer=&signature=wColNktC9lkvihXC%2B3YIGk6JwRE%3D)
+
+## 카테고리별 게시 글 목록
+```ts src/libs/posts/posts.ts
+const filterPosts = async (predicate: (post: PostSummary) => boolean): Promise<PostSummary[]> => {
+  const posts = await getAllPosts()
+  return posts.filter(predicate).sort(sortByDateDesc)
+}
+
+export const getPostsByCategory = (category: string) =>
+  filterPosts((post) => post.metadata.category === category)
+```
+![image](https://blog.kakaocdn.net/dna/bswvJ3/btsPfZEpfmx/AAAAAAAAAAAAAAAAAAAAABkmUbrZzDy9SFpaKKYQdu657SGbozbJYZVMk_Mz7eLG/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1753973999&allow_ip=&allow_referer=&signature=3bndIXzgAszg8MWycvSsTmAOGJQ%3D)
+
+# 5. 게시 글 불러오기
+## Tailwind Typography 설정
+MDX가 html로 파싱되니, [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography)를 통해 보여 줄 거예요.
+```bash
+npm install -D @tailwindcss/typography
+```
+```css src/app/globals.css
+  @import "tailwindcss";
+  /* !diff + */
+  @plugin "@tailwindcss/typography";
+```
+
+## 게시 글 페이지
+<HoverContainer>
+- [generateStaticParams](hover:one)
+
+  `generateStaticParams` 함수는 빌드 시점에 어떤 동적 경로를 미리 생성할지 **Next.js**에 알려 주는 역할을 해요.
+
+  예를 들어 `app/blog/[slug]/page.tsx` 같은 동적 세그먼트가 있을 때, 이 함수가 반환한 params 목록대로 각각의 HTML을 정적으로 생성해 두므로 **페이지 로딩 속도가 빨라지고 서버 요청 없이도 콘텐츠를 제공**할 수 있어요.
+
+- [generateMetadata](hover:two)
+
+  `generateMetadata` 함수는 각 동적 경로에 맞춘 `<head>` 메타데이터를 서버 컴포넌트 차원에서 동적으로 생성하기 위해 사용돼요.
+
+  빌드 시 고정된 `export const metadata` 대신, 이 함수 내에서 `params`를 통해 슬러그를 받고 외부 API나 파일에서 제목·설명 등을 가져와 반환함으로써, **SEO 최적화 및 소셜 공유 태그를 페이지별로 맞춤 설정**할 수 있어요.
+
+```tsx src/app/category/[category]/page.tsx
+import React from 'react'
+
+import { getPost, getSlugs } from '@/libs/posts'
+
+interface ParamsProps {
+  params: Promise<{ category: string; slug: string }>
+}
+
+// !collapse(1:7)
+// !hover one
+export async function generateStaticParams() {
+  // !hover one
+  const categories = await getCategories()
+
+  // !hover one
+  return rawSlugs.map((fullSlug) => {
+    // !hover one
+    const [category, slug] = fullSlug.split(/[\\/]/)
+    // !hover one
+    return { category, slug }
+  // !hover one
+  }))
+// !hover one
+}
+
+// !collapse(1:13)
+// !hover two
+export async function generateMetadata({ params }: ParamsProps) {
+  // !hover two
+  const { category, slug } = await params
+  // !hover two
+  const fullSlug = `${category}/${slug}`
+  // !hover two
+  const { metadata } = await getPost(fullSlug)
+
+  // !hover two
+  if (!metadata) {
+    // !hover two
+    return { title: 'Post Not Found' }
+  // !hover two
+  }
+
+  // !hover two
+  return {
+    // !hover two
+    title: metadata.title,
+    // !hover two
+    description: metadata.description,
+  // !hover two
+  }
+// !hover two
+}
+
+const BlogPage = async ({ params }: ParamsProps) => {
+  const { category, slug } = await params
+  const fullSlug = `${category}/${slug}`
+  const post = await getPost(fullSlug)
+
+  if (!('Component' in post)) {
+    return <div>포스트를 찾을 수 없습니다.</div>
+  }
+
+  const { Component } = post
+
+  return (
+    // !mark(1:3)
+    <div className="prose dark:prose-invert my-24 max-w-none">
+      <Component />
+    </div>
+  )
+}
+
+export default BlogPage
+```
+</HoverContainer>
+
+# 6. Github Actions로 배포하기
+아래 파일을 추가한 후 커밋하면 돼요.
+```yml .github/workflows/main.yml
+name: GitHub Pages Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run build && touch ./out/.nojekyll
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: out
+```
+
+# 7. 마무리
+여기까지 설정을 마치면
+- `.mdx` 파일을 기반으로 글을 작성할 수 있어요
+- 전체 글을 불러올 수 있어요.
+- 카테고리별로 글을 분리해서 볼 수 있어요.
+- Github Page에 정적 블로그를 배포할 수 있어요.

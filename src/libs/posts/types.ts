@@ -38,3 +38,8 @@ export interface Toc {
   value: string
   id: string
 }
+
+export const displayNames: Record<string, string> = {
+  'github-blog': '깃허브 블로그 제작',
+  react: '리액트',
+}

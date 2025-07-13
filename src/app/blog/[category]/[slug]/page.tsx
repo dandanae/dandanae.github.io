@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { PostFooter, PostHeader, PostToc } from '@/componets'
+import { PostFooter, PostHeader, PostToc } from '@/components'
+import { Code, HoverContainer, Link } from '@/components/mdx/code'
 import { getPost, getSlugs, getTocBySlug } from '@/libs/posts'
 
 interface ParamsProps {
@@ -35,11 +36,6 @@ const BlogPage = async ({ params }: ParamsProps) => {
   const { category, slug } = await params
   const fullSlug = `${category}/${slug}`
   const post = await getPost(fullSlug)
-
-  if (!post) {
-    return <div>포스트를 찾을 수 없습니다.</div>
-  }
-
   const tocs = await getTocBySlug(fullSlug)
 
   if (!('Component' in post)) {
@@ -57,7 +53,7 @@ const BlogPage = async ({ params }: ParamsProps) => {
         <PostHeader metadata={metadata} />
 
         <div className="prose dark:prose-invert my-24 max-w-none">
-          <Component />
+          <Component components={{ HoverContainer, a: Link, Code }} />
         </div>
 
         <PostFooter prev={prev} next={next} />

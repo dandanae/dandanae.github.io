@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PostCategory, PostList } from '@/componets'
+import { PostCategory, PostList } from '@/components'
 import { getCategories, getPostsByCategory } from '@/libs/posts'
 import type { Category } from '@/libs/posts'
 

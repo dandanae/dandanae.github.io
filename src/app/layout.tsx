@@ -2,7 +2,7 @@ import React from 'react'
 
 import type { Metadata } from 'next'
 
-import './globals.css'
+import '@/styles/globals.css'
 import { Header } from '@/layouts'
 import { bubble, d2 } from '@/libs/fonts'
 

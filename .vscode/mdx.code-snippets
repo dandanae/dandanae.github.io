@@ -1,7 +1,7 @@
 {
   "MDX Metadata + MdxTitle": {
     "prefix": ["mdxmeta", "mdxmetadata"],
-    "description": "Insert metadata object + MdxTitle component for MDX page",
+    "description": "Insert metadata object for MDX page",
     "body": [
       "",
       "export const metadata = {",

@@ -3,15 +3,12 @@ import React, { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import type { Toc } from '@/libs/posts'
 import { cn } from '@/libs/utils'
 
-interface TocItem {
-  id: string
-  value: string
-  depth: number
-}
+import { Card } from '../common'
 
-export default function TableOfContents({ tocs }: { tocs: TocItem[] }) {
+const PostToc = ({ tocs }: { tocs: Toc[] }) => {
   const [activeId, setActiveId] = useState<string | null>(null)
 
   useEffect(() => {
@@ -36,20 +33,23 @@ export default function TableOfContents({ tocs }: { tocs: TocItem[] }) {
   }, [])
 
   return (
-    <div className="ring-primary bg-primary/10 dark:ring-primary/50 dark:bg-primary/5 sticky top-24 space-y-6 rounded-xl p-4 ring transition-all duration-300 hover:ring-2">
-      <div>
-        <div className="text-lg font-extrabold">목차</div>
+    <Card
+      variant="primary"
+      className="sticky top-18 ml-auto flex max-h-fit flex-col gap-5 lg:w-4/5"
+    >
+      <div className="flex flex-col gap-3">
+        <div className="text-primary text-center text-lg font-semibold">목차</div>
         <nav className="flex flex-col space-y-2">
           {tocs.map((item) => (
             <Link
               key={item.id}
               href={`#${item.id}`}
               className={cn(
-                'hover:text-primary text-sm transition-all',
+                'hover:text-primary origin-left text-sm transition-all',
                 item.depth === 1 && 'font-semibold',
                 item.depth === 2 && 'text-foreground/70 ml-4',
                 item.depth === 3 && 'text-foreground/70 ml-8',
-                activeId === item.id && 'text-secondary text-lg font-bold',
+                activeId === item.id && 'text-secondary scale-110 font-bold',
               )}
             >
               {item.value}
@@ -57,6 +57,8 @@ export default function TableOfContents({ tocs }: { tocs: TocItem[] }) {
           ))}
         </nav>
       </div>
-    </div>
+    </Card>
   )
 }
+
+export default PostToc

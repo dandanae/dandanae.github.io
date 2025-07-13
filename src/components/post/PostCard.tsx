@@ -41,7 +41,7 @@ const PostCard = ({ post }: { post: PostSummary }) => {
           <PostInfoItem icon="avg_pace" label={`${readingTime}분`} />
         </div>
 
-        <div className="bg-primary absolute right-5 bottom-5 flex h-8 w-8 items-center justify-center space-y-1 rounded-full opacity-0 transition-opacity duration-300 group-hover:animate-bounce group-hover:opacity-100">
+        <div className="bg-primary absolute right-5 bottom-5 flex h-8 w-8 items-center justify-center space-y-1 rounded-full text-white opacity-0 transition-opacity duration-300 group-hover:animate-bounce group-hover:opacity-100">
           <span className="material-symbols-rounded">arrow_right</span>
         </div>
 
@@ -49,7 +49,7 @@ const PostCard = ({ post }: { post: PostSummary }) => {
         <div className="flex w-full flex-col justify-between">
           <div className="w-full">
             {/* 카테고리 */}
-            <PostCategoryItem category={category} />
+            <PostCategoryItem category={category} viewOnly />
 
             {/* 제목 */}
             <div className="group-hover:text-secondary mt-2 w-3/5 truncate text-xl font-bold transition-colors duration-300">

@@ -1,0 +1,43 @@
+.prose h1,
+h2,
+h3 {
+  scroll-margin-top: 100px;
+}
+
+.prose p {
+  @apply my-3;
+}
+
+.prose a:not(.anchor) {
+  @apply relative px-1 no-underline;
+}
+
+.prose a:not(.anchor)::before {
+  content: '';
+  @apply bg-primary absolute inset-x-0 bottom-0 -z-10 h-1.5 hover:h-full transition-all duration-300;
+}
+
+.prose a:not(.anchor):hover::before {
+  @apply h-full;
+}
+
+.prose .anchor {
+  @apply text-primary hover:bg-primary mr-1 px-1 font-black no-underline transition-colors duration-300 hover:text-white;
+}
+
+.prose .anchor:after {
+  content: '#';
+}
+
+.prose :not(pre) > code {
+  @apply mx-0.5 rounded bg-gray-100 px-2 py-0.5 text-red-400 dark:bg-gray-800;
+}
+
+.prose :not(pre) > code::before,
+code::after {
+  content: none;
+}
+
+.prose pre {
+  @apply font-d2;
+}

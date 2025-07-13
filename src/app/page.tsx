@@ -1,9 +1,8 @@
-import { PostCategory, PostList } from '@/componets'
+import { PostCategory, PostList } from '@/components'
 import { getAllPosts } from '@/libs/posts'
 
 const Home = async () => {
   const posts = await getAllPosts()
-
   // const pinned = await getPinnedPosts()
 
   return (

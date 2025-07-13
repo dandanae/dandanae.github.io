@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 
 import { useMotionValueEvent, useScroll } from 'framer-motion'
 
-import type { PostSummary } from '@/libs/posts'
-import { cn } from '@/libs/utils'
+import { displayNames, type PostSummary } from '@/libs/posts/types'
 
 import PostCard from './PostCard'
 
@@ -24,6 +23,8 @@ const PostList = ({
 
   const { scrollYProgress } = useScroll()
 
+  const listTitle = displayNames[title] ?? title
+
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (latest > 0.9 && !loading && visibleCount < posts.length) {
       setLoading(true)
@@ -36,7 +37,7 @@ const PostList = ({
 
   return (
     <div className="w-full lg:col-span-3 lg:col-start-2">
-      <h2 className="mb-8 text-3xl font-bold">{title}</h2>
+      <h2 className="mb-8 text-3xl font-bold">{listTitle}</h2>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {posts.slice(0, visibleCount).map((post: any) => {
