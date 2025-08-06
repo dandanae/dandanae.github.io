@@ -1,48 +1,22 @@
 'use client'
-import React, { useMemo, useState } from 'react'
+import React from 'react'
+
+import Select from '@/components/common/Select'
+import { cn } from '@/libs/utils'
 
 import { ProjectCard } from './projectCard'
-import { allProjects } from '../projects'
-import { ProjectTag } from '../projects/types'
+import { useProject } from '../hooks'
 
 const AboutProject = () => {
-  const [selectedTags, setSelectedTags] = useState<ProjectTag[]>([])
-  const [isLatestFirst, setIsLatestFirst] = useState(true)
-
-  // 태그 목록 (한 번만 계산)
-  const allTags = useMemo(
-    () => Array.from(new Set(allProjects.flatMap((p) => p.tags || []))).sort(),
-    [],
-  )
-
-  // 토글 함수
-  const toggleTag = (tag: ProjectTag) => {
-    setSelectedTags((prev) => {
-      const next = prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-      window.console.log('🔖 selectedTags →', next)
-      return next
-    })
-  }
-
-  // 전체 초기화
-  const clearTags = () => {
-    window.console.log('🔖 clearTags')
-    setSelectedTags([])
-  }
-
-  // 필터 + 정렬
-  const filteredProjects = useMemo(() => {
-    const tagged = selectedTags.length
-      ? allProjects.filter((p) =>
-          // 모든 선택 태그를 프로젝트가 포함해야 표시
-          selectedTags.every((tag) => p.tags.includes(tag)),
-        )
-      : allProjects
-
-    const sorted = isLatestFirst ? [...tagged].reverse() : tagged
-    window.console.log('↕️ isLatestFirst →', isLatestFirst, '; 결과 개수 →', sorted.length)
-    return sorted
-  }, [selectedTags, isLatestFirst])
+  const {
+    selectedTags,
+    isLatestFirst,
+    setIsLatestFirst,
+    allTags,
+    toggleTag,
+    clearTags,
+    filteredProjects,
+  } = useProject()
 
   return (
     <div className="flex w-full flex-col gap-5 pb-10">
@@ -51,27 +25,27 @@ const AboutProject = () => {
       {/* 필터/정렬 UI */}
       <div className="flex flex-wrap items-center gap-3">
         {/* 정렬 셀렉트 */}
-        <select
-          className="rounded-md border px-2 py-1"
-          value={isLatestFirst ? '최신순' : '오래된순'}
-          onChange={(e) => {
-            const next = e.target.value === '최신순'
-            window.console.log('↕️ setIsLatestFirst →', next)
+        <Select
+          options={[
+            { value: true, label: '최신순', emoji: '📅' },
+            { value: false, label: '오래된순', emoji: '⏰' },
+          ]}
+          value={isLatestFirst}
+          onChange={(value) => {
+            const next = value as boolean
             setIsLatestFirst(next)
           }}
-        >
-          <option value="최신순">최신순</option>
-          <option value="오래된순">오래된순</option>
-        </select>
+        />
 
         {/* 태그 버튼 */}
         <div className="flex flex-wrap gap-2">
           <button
-            className={`rounded-full border px-3 py-1 transition-all ${
+            className={cn(
+              'border-secondary/30 min-h-9 cursor-pointer rounded-lg border-2 px-4 py-1 text-sm transition-colors',
               selectedTags.length === 0
-                ? 'bg-primary border-primary text-white'
-                : 'hover:bg-gray-100'
-            }`}
+                ? 'bg-secondary border-secondary text-white'
+                : 'hover:bg-secondary/30',
+            )}
             onClick={clearTags}
           >
             전체
@@ -79,11 +53,12 @@ const AboutProject = () => {
           {allTags.map((tag) => (
             <button
               key={tag}
-              className={`rounded-full border px-3 py-1 transition-all ${
+              className={cn(
+                'border-secondary/30 min-h-9 cursor-pointer rounded-lg border-2 px-4 py-1 text-sm transition-colors',
                 selectedTags.includes(tag)
-                  ? 'bg-primary border-primary text-white'
-                  : 'hover:bg-gray-100'
-              }`}
+                  ? 'bg-secondary border-secondary text-white'
+                  : 'hover:bg-secondary/30',
+              )}
               onClick={() => toggleTag(tag)}
             >
               {tag}
@@ -94,7 +69,7 @@ const AboutProject = () => {
 
       {/* 카드 영역 */}
       {filteredProjects.length === 0 ? (
-        <p className="text-muted-foreground">조건에 맞는 프로젝트가 없습니다.</p>
+        <p className="text-foreground/70">조건에 맞는 프로젝트가 없어요.</p>
       ) : (
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {filteredProjects.map((project) => (

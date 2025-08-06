@@ -15,6 +15,11 @@ export type ProjectTag =
   | 'AWS(EC2)'
   | 'AWS(ECR-ECS)'
 
+interface Links {
+  title: string
+  href: string
+  icon?: string
+}
 export interface Project {
   id: string
   tags: ProjectTag[]
@@ -26,8 +31,8 @@ export interface Project {
   content: React.ReactNode
 
   image?: string
-  links?: string[]
-  libraries?: string[]
+  links?: Links[]
+  libraries?: Links[]
 }
 
 export const projectTags: Record<ProjectTag, { color: string }> = {

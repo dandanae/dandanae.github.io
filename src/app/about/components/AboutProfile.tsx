@@ -1,14 +1,6 @@
 import React from 'react'
 
 import Link from 'next/link'
-import { tv } from 'tailwind-variants'
-
-const style = tv({
-  slots: {
-    info: 'click flex cursor-pointer items-center gap-1 rounded-lg',
-    icon: 'material-symbols-rounded text-primary !text-lg select-none',
-  },
-})
 
 const AboutProfile = () => {
   return (

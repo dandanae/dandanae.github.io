@@ -5,7 +5,7 @@ export const Project002: Project = {
   tags: ['C++', '사이드 프로젝트'],
   title: 'DVD 관리 프로그램',
   subtitle: 'C++의 사용 경험과 숙련도를 높이기 위해 교육 과정 중 만든 3 인 프로젝트예요.',
-  challenge: '처음으로 C++',
+  challenge: 'C++',
   date: '2022. 08. 24. - 2022. 08. 25.',
   image: 'https://i.pinimg.com/736x/57/46/02/574602e6380306026f105ef0f587681f.jpg',
   links: [],
