@@ -1,9 +1,8 @@
 {
-  "MDX Metadata + MdxTitle": {
+  "MDX Metadata": {
     "prefix": ["mdxmeta", "mdxmetadata"],
     "description": "Insert metadata object for MDX page",
     "body": [
-      "",
       "export const metadata = {",
       "  pinned: false,",
       "  title: '$1',",

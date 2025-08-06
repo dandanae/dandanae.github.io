@@ -17,10 +17,10 @@ const PostHeader = ({ metadata }: { metadata: MdxMetadata }) => {
   const tags = metadata.tags
 
   return (
-    <>
+    <header>
       <Link href="/" className="group no-underline">
         <div className="group-hover:text-primary click flex w-fit items-center rounded-xl">
-          <span className="material-symbols-rounded !text-[14px]">arrow_back_ios</span>
+          <span className="material-symbols-rounded !text-[14px] select-none">arrow_back_ios</span>
           <span className="text-sm">홈으로 돌아가기</span>
         </div>
       </Link>
@@ -34,7 +34,7 @@ const PostHeader = ({ metadata }: { metadata: MdxMetadata }) => {
       </div>
       <h1 className="mb-4 text-4xl leading-tight font-semibold md:text-5xl">{title}</h1>
 
-      <div className="bg-secondary/20 mb-6 rounded-xl p-5 leading-relaxed">
+      <div className="bg-secondary/20 rounded-xl p-5 leading-relaxed">
         <b className="text-secondary text-sm">이 글에 대하여</b>
 
         <p className="whitespace-pre-wrap">{description}</p>
@@ -44,7 +44,7 @@ const PostHeader = ({ metadata }: { metadata: MdxMetadata }) => {
           ))}
         </div>
       </div>
-    </>
+    </header>
   )
 }
 

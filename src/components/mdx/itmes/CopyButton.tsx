@@ -16,9 +16,9 @@ export const CopyButton = ({ text }: { text: string }) => {
       }}
     >
       {copied ? (
-        <span className="material-symbols-rounded !text-[20px]">check</span>
+        <span className="material-symbols-rounded !text-[20px] select-none">check</span>
       ) : (
-        <span className="material-symbols-rounded !text-[20px]">content_copy</span>
+        <span className="material-symbols-rounded !text-[20px] select-none">content_copy</span>
       )}
     </button>
   )

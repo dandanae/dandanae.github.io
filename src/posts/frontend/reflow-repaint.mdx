@@ -1,0 +1,53 @@
+export const metadata = {
+  pinned: false,
+  title: 'Reflow와 Repaint',
+  description: '언제 Reflow, Repaint가 일어나는지 알면, 피하거나 묶어 처리해 레이아웃,페인트 비용과 상호작용 지연을 줄이고 매끄러운 UX를 유지할 수 있어요.',
+  publishDate: "2025-07-22T17:27:45Z",
+  image: '',
+  tags: [
+    '1'
+  ],
+};
+
+#  Reflow란?
+생성된 DOM 노드의 레이아웃 수치(너비, 높이, 위치 등) 변경 시 영향받은 모든 노드의 수치를 다시 계산하여, 렌더 트리를 재생성하는 과정이에요.
+
+# Repaint란?
+Reflow 과정이 끝난 후, 재생성된 렌더 트리를 다시 그리는 과정이에요.
+
+# Reflow(=Layout)가 실행되는 시점
+- DOM 트리 변경
+  요소 추가/삭제, innerHTML 변경, 노드 이동 등
+- CSS 스타일 변경
+- CSS3 애니메이션과 트랜지션
+  애니메이션의 모든 프레임에서 Reflow가 발생해요.
+- 브라우저 창 크기 변경(리사이즈)
+- `offsetWidth`와 `offsetHeight`의 사용
+- 폰트 로드 완료(FOIT/FOUT 시점)
+- 스크롤 위치 변경
+  특히 `position: fixed` 요소와의 상호작용
+- 레이아웃을 읽는 API 호출
+
+# Repaint가 실행되는 시점
+- geometry에 영향 없는 속성의 변경
+  `color`, `background`, `box-shadow`, `outline`, `visibility`, `opacity` 등
+- Reflow가 실행된 다음
+
+# 성능 최적화 (실행 시점 제어)
+1. **읽기와 쓰기를 분리(“read → write” or “write → read”)**
+    - 계산에 필요한 레이아웃 값은 먼저 모두 읽고, 이후 한 번에 스타일을 적용해요.
+    - FastDom(라이브러리)처럼 읽기/쓰기 큐를 분리해 주는 유틸을 쓸 수 있어요.
+
+2. **`requestAnimationFrame`을 활용**
+    - 브라우저가 그릴 타이밍에 맞춰 DOM 조작을 모아요.
+
+3. **`will-change`, `transform`, `opacity` 활용**
+    - 레이아웃/페인트 대신 합성만으로 애니메이션하도록 유도해요.
+    - 남용하면 레이어가 너무 많아져 오히려 느려질 수 있으니 주의!
+
+4. **시각적으로 숨기기 vs 레이아웃 흐름에서 제거하기**
+    - `visibility: hidden`은 레이아웃에 영향 없음 → Paint만
+    - `display: none`은 레이아웃 전체를 바꿈 → Reflow 발생
+
+5. **큰 DOM 변경은 off-DOM에서**
+    - DocumentFragment에 먼저 구성 후 DOM에 한 번에 붙이기.

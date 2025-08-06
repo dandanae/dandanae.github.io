@@ -2,6 +2,8 @@ import React from 'react'
 
 import Link from 'next/link'
 
+import { displayNames } from '@/libs/posts/types'
+
 interface Props {
   category: string
   href?: string
@@ -19,12 +21,12 @@ const PostCategoryItem = ({
   if (!viewOnly) {
     return (
       <Link href={href} className={className}>
-        {category}
+        {displayNames[category]}
       </Link>
     )
   }
 
-  return <span className={className}>{category}</span>
+  return <span className={className}>{displayNames[category]}</span>
 }
 
 export default PostCategoryItem

@@ -17,7 +17,7 @@ const PostInfoItem: React.FC<PostInfoItemProps> = ({ icon, label, reverse = fals
       )}
     >
       <span>{label}</span>
-      <span className="material-symbols-rounded !text-[16px]">{icon}</span>
+      <span className="material-symbols-rounded !text-[16px] select-none">{icon}</span>
     </span>
   )
 }

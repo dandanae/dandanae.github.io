@@ -1,6 +1,7 @@
 import { readFile } from 'fs/promises'
 import path from 'path'
 
+import GithubSlugger from 'github-slugger'
 import type { Root, RootContent } from 'mdast'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
@@ -12,30 +13,19 @@ const postsPath = path.resolve(process.cwd(), 'src', 'posts')
 
 const generateToc = (source: string): Toc[] => {
   const ast = unified().use(remarkParse).use(remarkMdx).parse(source) as Root
+  const slugger = new GithubSlugger()
   const toc: Toc[] = []
-  const usedIds = new Set<string>()
 
   const visit = (node: RootContent) => {
     if (node.type === 'heading' && node.depth) {
+      // mdast 노드의 텍스트만 뽑아서
       const text = node.children
         .filter((c) => c.type === 'text')
         .map((c) => (c as any).value)
         .join('')
 
-      let baseId = text
-        .trim()
-        .toLowerCase()
-        .replace(/\./g, '')
-        .replace(/[?/`\s]+/g, '-')
+      const id = slugger.slug(text)
 
-      if (!baseId) baseId = 'heading'
-
-      let id = baseId
-      let i = 1
-      while (usedIds.has(id)) {
-        id = `${baseId}-${i++}`
-      }
-      usedIds.add(id)
       toc.push({ depth: node.depth, value: text, id })
     }
     if ('children' in node) node.children.forEach(visit)

@@ -36,10 +36,10 @@ const PostList = ({
   })
 
   return (
-    <div className="w-full lg:col-span-3 lg:col-start-2">
-      <h2 className="mb-8 text-3xl font-bold">{listTitle}</h2>
+    <div className="lg:col-start-2">
+      <h2 className="!mb-6 text-3xl font-bold">{listTitle}</h2>
 
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {posts.slice(0, visibleCount).map((post: any) => {
           return <PostCard key={post.slug} post={post} />
         })}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PostCategory, PostList } from '@/components'
+import { PostList } from '@/components'
 import { getCategories, getPostsByCategory } from '@/libs/posts'
 import type { Category } from '@/libs/posts'
 
@@ -11,7 +11,7 @@ interface ParamsProps {
 export async function generateStaticParams() {
   const categories = await getCategories()
   return categories.map((categoryObj: Category) => ({
-    category: categoryObj.name,
+    category: categoryObj.key,
   }))
 }
 
@@ -20,10 +20,9 @@ const CategoryPage = async ({ params }: ParamsProps) => {
   const posts = await getPostsByCategory(category)
 
   return (
-    <>
-      <PostCategory />
+    <div className="w-full p-8 lg:col-start-2 lg:px-0">
       <PostList title={category} posts={posts} />
-    </>
+    </div>
   )
 }
 

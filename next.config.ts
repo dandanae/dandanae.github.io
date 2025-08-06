@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm'
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  output: 'export',
+  // output: 'export',
 
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: true,
@@ -39,8 +39,8 @@ const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
     jsx: true,
-    remarkPlugins: [[remarkCodeHike, chConfig]],
-    recmaPlugins: [remarkGfm, remarkBreaks, [recmaCodeHike, chConfig]],
+    remarkPlugins: [remarkGfm, remarkBreaks, [remarkCodeHike, chConfig]],
+    recmaPlugins: [[recmaCodeHike, chConfig]],
     rehypePlugins: [
       rehypeSlug,
       [

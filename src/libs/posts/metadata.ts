@@ -1,5 +1,5 @@
 import { getAllPosts } from './posts'
-import type { Category, Tag } from './types'
+import { displayNames, type Category, type Tag } from './types'
 import { sortByCountDesc } from './utils'
 
 const countOccurrences = <T>(
@@ -26,9 +26,14 @@ const countOccurrences = <T>(
 export const getCategories = async (): Promise<Category[]> => {
   const posts = await getAllPosts()
   const counts = countOccurrences(posts, (post) => post.metadata.category)
+
   return Object.entries(counts)
-    .map(([name, count]) => ({ name, count }))
-    .sort(sortByCountDesc)
+    .map(([key, count]) => ({
+      key,
+      count,
+      name: displayNames[key] ?? key,
+    }))
+    .sort((a, b) => b.count - a.count)
 }
 
 export const getTags = async (): Promise<Tag[]> => {

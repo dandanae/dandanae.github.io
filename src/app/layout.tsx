@@ -3,8 +3,9 @@ import React from 'react'
 import type { Metadata } from 'next'
 
 import '@/styles/globals.css'
-import { Header } from '@/layouts'
+import { Header, Navigation } from '@/layouts'
 import { bubble, d2 } from '@/libs/fonts'
+import { getCategories } from '@/libs/posts'
 
 import Providers from './providers'
 
@@ -52,8 +53,13 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <Header />
-          <main className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-5">{children}</main>
+          <div className="grid-rows-[1fr auto] grid min-h-screen">
+            <Header />
+            <main className="mx-8 lg:m-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-[16rem_1fr_16rem] lg:gap-8">
+              <Navigation />
+              {children}
+            </main>
+          </div>
         </Providers>
       </body>
     </html>

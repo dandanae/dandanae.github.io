@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useLayoutEffect, useRef } from 'react'
 
 import { AnnotationHandler, InnerPre, getPreRef } from 'codehike/code'

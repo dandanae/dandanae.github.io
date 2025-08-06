@@ -1,0 +1,255 @@
+import { HoverContainer, CodeWithTooltips } from '../../components/mdx/code'
+import { Callout } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '깃허브 블로그 제작 기록 (2)',
+  description: 'Next.js 15(App Router)과 Tailwind CSS v4, MDX를 이용해 GitHub Pages에 정적 블로그를 만들었어요.\n설정과 구조를 기록으로 남기기 위해 글을 작성했어요.',
+  publishDate: "2025-07-13T20:28:01Z",
+  image: '',
+  tags: [
+    'React', 'Next.js', "Github"
+  ],
+};
+
+---
+<Callout type="tip">
+이 글은 **가이드가 아닌 제작 기록**이에요. 참고하되, 생략된 부분이 있을 수 있어요.
+</Callout>
+
+[→ 이전 글 보기](https://dandanae.github.io/blog/github-blog/first)
+
+---
+# 1. MDX 플러그인
+## 플러그인 설치
+```bash
+npm install remark-breaks
+npm i  -D remark-gfm rehype-slug rehype-autolink-headings
+```
+
+## next.config.ts 설정
+<HoverContainer>
+|제목|내용|
+|------|---|
+|[remarkGfm](hover:one)|`GitHub 스타일 마크다운(GFM)` 확장 문법(자동 링크, 각주, 취소선, 표, 체크리스트)을 지원해 줘요.|
+|[remarkBreaks](hover:two)|엔터를 한 번만 입력해도 `<br>` 태그로 변환해 줘요.|
+|[rehype-slug](hover:three)|Github 스타일 기반의 슬러그를 만들어 제목(`<h1>~<h6>`)에 id를 추가해요.|
+|[rehype-autolink-headings](hover:four)|id가 붙은 모든 제목(`<h1>~<h6>`)에 해당 id로 이동할 수 있는 **링크(`<a>`)** 를 자동으로 삽입해요.|
+
+`rehype-slug`와 `rehype-autolink-headings` 두 개를 같이 쓰면 제목마다 고유 id가 생기고 그 제목들을 바로 가리키는 링크 아이콘이 붙어 문서 탐색성과 공유가 훨씬 쉬워져요.
+
+```ts next.config.ts
+import nextMDX from '@next/mdx'
+import { NextConfig } from 'next'
+// !mark(1:4)
+// !hover four
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+// !hover three
+import rehypeSlug from 'rehype-slug'
+// !hover two
+import remarkBreaks from 'remark-breaks'
+// !hover one
+import remarkGfm from 'remark-gfm'
+
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
+
+  options: {
+    // !mark(1:15)
+    remarkPlugins: [
+      // !hover one
+      remarkGfm,
+      // !hover two
+      remarkBreaks
+    ],
+    rehypePlugins: [
+      // !hover three
+      rehypeSlug,
+      // !hover four
+      [
+        // !hover four
+        rehypeAutolinkHeadings,
+        // !hover four
+        {
+          // !hover four
+          properties: {
+            // !hover four
+            className: ['anchor'],
+          // !hover four
+          },
+        // !hover four
+        },
+      // !hover four
+      ],
+    ],
+  },
+})
+
+// !collapse(1:9) collapsed
+const nextConfig: NextConfig = {
+  output: 'export',
+
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  reactStrictMode: true,
+
+  images: {
+    unoptimized: true,
+  },
+}
+
+export default withMDX(nextConfig)
+```
+</HoverContainer>
+
+---
+# 2. 읽은 시간 / 날짜 포맷 설정
+## 라이브러리 설치
+```bash
+npm install dayjs
+npm install -D reading-time
+```
+## 읽기 시간 계산 (reading-time)
+<HoverContainer>
+- [reading time](hover:one) [자세히](https://github.com/ngryman/reading-time#readme) 
+   텍스트의 예상 읽기 시간을 계산해 주는 라이브러리예요.
+
+```ts src/libs/posts.ts
+export const getPost = async (slug: string, summaryOnly = false): Promise<Post | PostSummary> => {
+  const [category, postName] = slug.split('/')
+  const mdxModule = await import(`../../posts/${category}/${postName}.mdx`)
+  // !mark(1:2)
+  // !hover one
+  const source = await readFile(path.join(postsPath, `${slug}.mdx`), 'utf-8')
+  // !hover one
+  const readingStats = readingTime(source)
+  const metadataWithOthers = {
+    ...mdxModule.metadata,
+    category,
+    // !mark(1:1)
+    // !hover one
+    readingTime: readingStats.minutes,
+  }
+
+  if (summaryOnly) {
+    return {
+      slug,
+      metadata: metadataWithOthers,
+    }
+  }
+
+  return {
+    slug,
+    metadata: metadataWithOthers,
+    source,
+    Component: mdxModule.default,
+  }
+}
+```
+</HoverContainer>
+
+## 날짜 포맷팅 (dayjs)
+- **dayjs** [자세히](https://day.js.org/) 
+  날짜와 시간을 손쉽게 다룰 수 있게 해 주는 경량 라이브러리예요.
+
+```ts src/libs/dayjs.ts
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
+import 'dayjs/locale/ko'
+
+// 플러그인 등록
+dayjs.extend(relativeTime)
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+// 한국어 로케일 설정
+dayjs.locale('ko')
+
+// 기본 타임존을 한국 시간으로 설정
+dayjs.tz.setDefault('Asia/Seoul')
+
+export default dayjs
+```
+
+### 사용 예
+```ts
+// 게시 날짜 포맷 (2025. 01. 01.)
+const publishDate = dayjs(metadata.publishDate).format('YYYY. MM. DD.')
+
+// 상대 시간 (n일 전, n달 전...)
+const publishDate = post.metadata.publishDate
+  ? dayjs.tz(post.metadata.publishDate, 'Asia/Seoul').fromNow()
+  : ''
+```
+
+---
+# 3. 목차(TOC) 자동 생성
+## 설치
+```bash
+npm install github-slugger unified remark-parse remark-mdx
+```
+
+## 구현 코드
+```ts 
+import { readFile } from 'fs/promises'
+import path from 'path'
+
+import GithubSlugger from 'github-slugger'
+import type { Root, RootContent } from 'mdast'
+import remarkMdx from 'remark-mdx'
+import remarkParse from 'remark-parse'
+import { unified } from 'unified'
+
+import type { Toc } from './types'
+
+const postsPath = path.resolve(process.cwd(), 'src', 'posts')
+
+const generateToc = (source: string): Toc[] => {
+  const ast = unified().use(remarkParse).use(remarkMdx).parse(source) as Root
+  const slugger = new GithubSlugger()
+  const toc: Toc[] = []
+
+  const visit = (node: RootContent) => {
+    if (node.type === 'heading' && node.depth) {
+      // mdast 노드의 텍스트만 뽑아서
+      const text = node.children
+        .filter((c) => c.type === 'text')
+        .map((c) => (c as any).value)
+        .join('')
+
+      const id = slugger.slug(text)
+
+      toc.push({ depth: node.depth, value: text, id })
+    }
+    if ('children' in node) node.children.forEach(visit)
+  }
+
+  ast.children.forEach(visit)
+  return toc
+}
+
+export const getTocBySlug = async (slug: string): Promise<Toc[] | null> => {
+  try {
+    const source = await readFile(path.join(postsPath, `${slug}.mdx`), 'utf-8')
+    return generateToc(source)
+  } catch {
+    return null
+  }
+}
+
+export const getTocBySource = async (source: string): Promise<Toc[] | null> => {
+  try {
+    return generateToc(source)
+  } catch {
+    return null
+  }
+}
+```
+---
+# 4. 마무리
+여기까지 마치면
+- MDX 확장 플러그인이 적용되어 있어요.
+- 읽기 시간 및 날짜 포맷 계산이 되어 있어요.
+- 제목 기반 TOC를 자동 생성할 수 있어요.
+

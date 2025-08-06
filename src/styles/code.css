@@ -2,29 +2,29 @@
   @apply transition-opacity duration-300 ease-in-out;
 }
 
-.hover-container:has([data-hover="one"]:hover)
-  [data-line]:not([data-line="one"]),
-.hover-container:has([data-hover="two"]:hover)
-  [data-line]:not([data-line="two"]) {
+.hover-container:has([data-hover='one']:hover) [data-line]:not([data-line='one']),
+.hover-container:has([data-hover='two']:hover) [data-line]:not([data-line='two']),
+.hover-container:has([data-hover='three']:hover) [data-line]:not([data-line='three']),
+.hover-container:has([data-hover='four']:hover) [data-line]:not([data-line='four']) {
   opacity: 0.2;
 }
 
 .code-hover-link {
-  @apply relative px-1 no-underline font-bold cursor-pointer;
+  @apply relative cursor-pointer px-1 font-bold no-underline;
 }
 
 .code-hover-link::before {
   content: '';
-  @apply bg-secondary absolute inset-x-0 bottom-0 -z-10 h-1.5 hover:h-full transition-all duration-300;
+  @apply bg-secondary absolute inset-x-0 bottom-0 -z-10 h-1.5 transition-all duration-300 hover:h-full;
 }
 
 .code-hover-link:hover::before {
   @apply h-full;
 }
 
-.collapsible-content[data-state="closed"] .placeholder {
+.collapsible-content[data-state='closed'] .placeholder {
   display: block;
 }
-.collapsible-content[data-state="open"]   .placeholder {
+.collapsible-content[data-state='open'] .placeholder {
   display: none;
 }

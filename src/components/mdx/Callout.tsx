@@ -11,7 +11,7 @@ interface CalloutProps {
 }
 
 const style = tv({
-  base: 'relative mb-12 flex items-start gap-2 rounded-2xl border px-4',
+  base: 'relative my-6 flex items-center gap-2 rounded-2xl border px-4 py-2',
   variants: {
     type: {
       note: 'border-sky-300 bg-sky-50/50 dark:bg-sky-700/10',
@@ -27,10 +27,10 @@ const style = tv({
 })
 
 const defaultIcons: Record<string, React.ReactNode> = {
-  note: <span className="material-symbols-rounded">info</span>,
-  warning: <span className="material-symbols-rounded">warning</span>,
-  tip: <span className="material-symbols-rounded">lightbulb</span>,
-  error: <span className="material-symbols-rounded">error</span>,
+  note: <span className="material-symbols-rounded select-none">info</span>,
+  warning: <span className="material-symbols-rounded select-none">warning</span>,
+  tip: <span className="material-symbols-rounded select-none">lightbulb</span>,
+  error: <span className="material-symbols-rounded select-none">error</span>,
 }
 
 const Callout = ({ type = 'none', children, customIcon }: CalloutProps) => {
@@ -45,8 +45,8 @@ const Callout = ({ type = 'none', children, customIcon }: CalloutProps) => {
 
   return (
     <div className={style({ type })}>
-      <div className={cn('mt-5.5 select-none', iconClass)}>{icon}</div>
-      <span>{children}</span>
+      <div className={cn('absolute top-2 select-none', iconClass)}>{icon}</div>
+      <div className="ml-8">{children}</div>
     </div>
   )
 }

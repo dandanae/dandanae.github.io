@@ -1,9 +1,9 @@
-import { HoverContainer } from '../../components/mdx/code'
-import Callout from '../../components/mdx/Callout'
+import { HoverContainer,CodeWithTooltips } from '../../components/mdx/code'
+import { Callout } from '../../components/mdx'
 
 export const metadata = {
   pinned: false,
-  title: '깃허브 블로그 제작 기록',
+  title: '깃허브 블로그 제작 기록 (1)',
   description: 'Next.js 15(App Router)과 Tailwind CSS v4, MDX를 이용해 GitHub Pages에 정적 블로그를 만들었어요.\n설정과 구조를 기록으로 남기기 위해 글을 작성했어요.',
   publishDate: "2025-07-10T22:09:44Z",
   image: '',
@@ -12,10 +12,20 @@ export const metadata = {
   ],
 };
 
+---
 <Callout type="tip">
 이 글은 **가이드가 아닌 제작 기록**이에요. 참고하되, 생략된 부분이 있을 수 있어요.
 </Callout>
 
+---
+# 0. 참고한 블로그
+- [@next/mdx로 블로그 만들기 (App router)](https://www.leehyeonjun.com/blog/next_mdx_blog)
+- [Next.js로 블로그 만들기](https://bepyan.github.io/blog/nextjs-blog)
+- [NextJS로 블로그를 만들어보자](https://velog.io/@minsang9735/NextJS%EB%A1%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90#%EC%99%9C-%EB%A7%8C%EB%93%AC)
+- [Next.js 블로그 만들기 (14.1 최신 버전 + tailwind)](https://d5br5.dev/blog/nextjs_blog/setup)
+- [Next.js로 나만의 블로그 만들기 with 정적 생성](https://miryang.dev/blog/build-blog-with-nextjs)
+
+---
 # 1. GitHub Pages 블로그 기본 세팅
 자세한 내용은 [GitHub Pages 빠른 시작 가이드](https://docs.github.com/ko/pages/quickstart)를 확인해 주세요.
 
@@ -24,7 +34,7 @@ export const metadata = {
 `Settings → Actions → General`에서 `Workflow permmisions`을 **Read and Write**로 설정해요.
 ![image](https://blog.kakaocdn.net/dna/0ztSK/btsPdMEGh8y/AAAAAAAAAAAAAAAAAAAAAO06jcnticO52gSE3HdyL7lv85PBAqCkcqXMB8-xA_oL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1753973999&allow_ip=&allow_referer=&signature=kZzQd9lR6Vis1m9a2jICmeayR98%3D)
 
-
+---
 # 2. Next.js 프로젝트 초기화
 ## 프로젝트 생성
 ```bash
@@ -88,6 +98,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 }
 ```
 
+---
 # 3. 블로그 글 작성 구조
 ## 작성 위치
 모든 글은 `src/posts/카테고리/파일.mdx` 형식으로 저장해요.
@@ -132,9 +143,11 @@ MDX 메타데이터 작성을 빠르게 하기 위해 스니펫을 등록해 두
 }
 ```
 
+---
 # 4. 글 목록 불러오기
 ## 모든 .mdx 파일 경로 수집
 ```ts src/libs/posts.ts
+// !link[/process.cwd\(\)/] https://r2.nodejs.org/docs/v8.5.0/api/process.html#process_process_cwd
 const postsPath = path.resolve(process.cwd(), 'src', 'posts')
 
 export const getAllFiles = async (dir: string): Promise<string[]> => {
@@ -154,7 +167,11 @@ export const getAllFiles = async (dir: string): Promise<string[]> => {
 ## 전체 게시 글 목록
 <HoverContainer>
 파일은 [slugs](hover:one)를 만들어서 게시 글을 관리해요. 만약 `src/posts/test/first.mdx` 파일이라면 **slug**는 `test/first`가 돼요.
+
 ```ts src/libs/posts.ts
+export const sortByDateDesc = <T extends { metadata: { publishDate?: string } }>(a: T, b: T) =>
+  new Date(b.metadata.publishDate ?? 0).getTime() - new Date(a.metadata.publishDate ?? 0).getTime()
+
 export const getAllPosts = async (): Promise<PostSummary[]> => {
   const files = (await getAllFiles(postsPath)).filter((f) =>
     f.endsWith('.mdx'),
@@ -169,7 +186,7 @@ export const getAllPosts = async (): Promise<PostSummary[]> => {
     .map((slug) => slug.replace(/\\/g, '/'))
 
   const posts = await Promise.all(
-    // !callout[/getPost/] 이 함수는 `📖 4. 게시 글 불러오기`에 있어요
+    // !callout[/getPost/] 이 함수는 `4. 게시 글 불러오기`에 있어요
     slugs.map((slug) => getPost(slug, true)),
   )
 
@@ -180,7 +197,7 @@ export const getAllPosts = async (): Promise<PostSummary[]> => {
 ![image](https://blog.kakaocdn.net/dna/nmPmz/btsPfJIxMtl/AAAAAAAAAAAAAAAAAAAAAGl32oZFMR590YLmvW86cCrvEEoXQpg6er2i17_K3Sxy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1753973999&allow_ip=&allow_referer=&signature=wColNktC9lkvihXC%2B3YIGk6JwRE%3D)
 
 ## 카테고리별 게시 글 목록
-```ts src/libs/posts/posts.ts
+```ts src/libs/posts.ts
 const filterPosts = async (predicate: (post: PostSummary) => boolean): Promise<PostSummary[]> => {
   const posts = await getAllPosts()
   return posts.filter(predicate).sort(sortByDateDesc)
@@ -191,30 +208,37 @@ export const getPostsByCategory = (category: string) =>
 ```
 ![image](https://blog.kakaocdn.net/dna/bswvJ3/btsPfZEpfmx/AAAAAAAAAAAAAAAAAAAAABkmUbrZzDy9SFpaKKYQdu657SGbozbJYZVMk_Mz7eLG/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1753973999&allow_ip=&allow_referer=&signature=3bndIXzgAszg8MWycvSsTmAOGJQ%3D)
 
+---
 # 5. 게시 글 불러오기
 ## Tailwind Typography 설정
 MDX가 html로 파싱되니, [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography)를 통해 보여 줄 거예요.
+
 ```bash
 npm install -D @tailwindcss/typography
 ```
+
+설치한 뒤에는 css에 플러그인을 추가해야 해요.
 ```css src/app/globals.css
   @import "tailwindcss";
   /* !diff + */
   @plugin "@tailwindcss/typography";
 ```
 
+사용은 className에 `prose`를 추가하면 돼요.
+```tsx
+<div className="prose">
+  <Component />
+</div>
+```
+
 ## 게시 글 페이지
 <HoverContainer>
-- [generateStaticParams](hover:one)
-
-  `generateStaticParams` 함수는 빌드 시점에 어떤 동적 경로를 미리 생성할지 **Next.js**에 알려 주는 역할을 해요.
-
+- [generateStaticParams](hover:one) [자세히](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 
+  빌드 시점에 어떤 동적 경로를 미리 생성할지 **Next.js**에 알려 주는 역할을 해요.
   예를 들어 `app/blog/[slug]/page.tsx` 같은 동적 세그먼트가 있을 때, 이 함수가 반환한 params 목록대로 각각의 HTML을 정적으로 생성해 두므로 **페이지 로딩 속도가 빨라지고 서버 요청 없이도 콘텐츠를 제공**할 수 있어요.
 
-- [generateMetadata](hover:two)
-
-  `generateMetadata` 함수는 각 동적 경로에 맞춘 `<head>` 메타데이터를 서버 컴포넌트 차원에서 동적으로 생성하기 위해 사용돼요.
-
+- [generateMetadata](hover:two) [자세히](https://nextjs.org/docs/app/api-reference/functions/generate-metadata)
+  동적 경로에 맞춘 `<head>` 메타데이터를 서버 컴포넌트 차원에서 동적으로 생성하기 위해 사용돼요.
   빌드 시 고정된 `export const metadata` 대신, 이 함수 내에서 `params`를 통해 슬러그를 받고 외부 API나 파일에서 제목·설명 등을 가져와 반환함으로써, **SEO 최적화 및 소셜 공유 태그를 페이지별로 맞춤 설정**할 수 있어요.
 
 ```tsx src/app/category/[category]/page.tsx
@@ -226,7 +250,7 @@ interface ParamsProps {
   params: Promise<{ category: string; slug: string }>
 }
 
-// !collapse(1:7)
+// !collapse(1:7) collapsed
 // !hover one
 export async function generateStaticParams() {
   // !hover one
@@ -243,7 +267,7 @@ export async function generateStaticParams() {
 // !hover one
 }
 
-// !collapse(1:13)
+// !collapse(1:13) collapsed
 // !hover two
 export async function generateMetadata({ params }: ParamsProps) {
   // !hover two
@@ -294,6 +318,7 @@ export default BlogPage
 ```
 </HoverContainer>
 
+---
 # 6. Github Actions로 배포하기
 아래 파일을 추가한 후 커밋하면 돼요.
 ```yml .github/workflows/main.yml
@@ -323,6 +348,7 @@ jobs:
           folder: out
 ```
 
+---
 # 7. 마무리
 여기까지 설정을 마치면
 - `.mdx` 파일을 기반으로 글을 작성할 수 있어요

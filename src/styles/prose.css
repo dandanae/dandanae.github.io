@@ -1,6 +1,7 @@
 .prose h1,
 h2,
 h3 {
+  @apply mt-8 mb-2;
   scroll-margin-top: 100px;
 }
 
@@ -38,6 +39,6 @@ code::after {
   content: none;
 }
 
-.prose pre {
+.prose pre, code {
   @apply font-d2;
 }

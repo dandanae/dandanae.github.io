@@ -33,23 +33,22 @@ const PostToc = ({ tocs }: { tocs: Toc[] }) => {
   }, [])
 
   return (
-    <Card
-      variant="primary"
-      className="sticky top-18 ml-auto flex max-h-fit flex-col gap-5 lg:w-4/5"
-    >
-      <div className="flex flex-col gap-3">
-        <div className="text-primary text-center text-lg font-semibold">목차</div>
+    <div className="hidden lg:col-start-3 lg:flex lg:h-dvh">
+      <div className="bg-background border-primary/20 fixed z-50 h-dvh min-h-dvh w-64 overflow-y-scroll border-l px-8 py-12">
+        <div className="mb-2 text-xs font-black">Table Of Contents</div>
         <nav className="flex flex-col space-y-2">
           {tocs.map((item) => (
             <Link
               key={item.id}
               href={`#${item.id}`}
               className={cn(
-                'hover:text-primary origin-left text-sm transition-all',
+                'origin-left text-sm transition-all',
                 item.depth === 1 && 'font-semibold',
                 item.depth === 2 && 'text-foreground/70 ml-4',
                 item.depth === 3 && 'text-foreground/70 ml-8',
-                activeId === item.id && 'text-secondary scale-110 font-bold',
+                activeId === item.id
+                  ? 'text-secondary scale-110 font-bold'
+                  : 'hover:text-primary hover:scale-110',
               )}
             >
               {item.value}
@@ -57,7 +56,7 @@ const PostToc = ({ tocs }: { tocs: Toc[] }) => {
           ))}
         </nav>
       </div>
-    </Card>
+    </div>
   )
 }
 

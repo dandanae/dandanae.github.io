@@ -24,8 +24,9 @@ export interface PostSummary {
 }
 
 export interface Category {
-  name: string
+  key: string
   count: number
+  name?: string
 }
 
 export interface Tag {
@@ -41,5 +42,7 @@ export interface Toc {
 
 export const displayNames: Record<string, string> = {
   'github-blog': '깃허브 블로그 제작',
+  'html-css': 'HTML/CSS',
+  frontend: '프론트엔드',
   react: '리액트',
 }

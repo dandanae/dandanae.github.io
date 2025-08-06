@@ -18,8 +18,8 @@ const Card = ({
     variants: {
       variant: {
         primary: [
-          'ring-primary/50 hover:ring-primary/70',
-          'dark:ring-primary/30 dark:hover:ring-primary/50',
+          'ring-primary/20 hover:ring-primary/40',
+          'dark:ring-primary/20 dark:hover:ring-primary/40',
         ],
         secondary: [
           'ring-secondary/50 hover:ring-secondary/70',

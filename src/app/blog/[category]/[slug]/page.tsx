@@ -46,18 +46,17 @@ const BlogPage = async ({ params }: ParamsProps) => {
 
   return (
     <>
-      <div className="lg:col-span-1">
-        <PostToc tocs={tocs || []} />
-      </div>
-      <div className="lg:col-span-3 lg:col-start-2">
+      <div className="w-full p-8 lg:col-start-2 lg:px-0">
         <PostHeader metadata={metadata} />
 
-        <div className="prose dark:prose-invert my-24 max-w-none">
+        <article className="prose dark:prose-invert mt-6 mb-24 w-full max-w-2xl">
           <Component components={{ HoverContainer, a: Link, Code }} />
-        </div>
+        </article>
 
         <PostFooter prev={prev} next={next} />
       </div>
+
+      <PostToc tocs={tocs || []} />
     </>
   )
 }

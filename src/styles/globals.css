@@ -9,16 +9,19 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  --primary: #FFB6B9;
-  --secondary: #8AC6D1
+  --primary: #e66684;
+  --secondary: #8ad0bb;
 }
 
 .dark {
-  --color-background: #0a0a0a;
+  --color-background: #121212;
   --color-foreground: #ededed;
 
-  --color-primary: #FF6B81;
-  --color-secondary: #4DD0E1;
+  /* --color-primary: #ff6b81;
+  --color-secondary: #4dd0e1; */
+
+  --color-primary: #e66684;
+  --color-secondary: #8ad0bb;
 }
 
 @theme {
@@ -34,7 +37,30 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  h1 {
+    font-size: var(--text-3xl); /* 28px */
+    font-weight: var(--font-weight-semibold);
+  }
+
+  h2 {
+    font-size: var(--text-2xl); /* 22px */
+    font-weight: var(--font-weight-regular);
+  }
+
+  h3 {
+    font-size: var(--text-xl); /* 18px */
+    font-weight: var(--font-weight-regular);
+  }
+
+  h4 {
+    font-size: var(--text-lg); /* 16px */
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
 * {
+  /* cursor: url(https://cur.cursors-4u.net/nature/nat-10/nat997.cur), auto; */
   scroll-behavior: smooth;
 }
 

@@ -7,7 +7,7 @@ const Home = async () => {
 
   return (
     <>
-      <PostCategory />
+      {/* <PostCategory /> */}
       {/* <PostList title="고정 게시 글" posts={pinned} isPinned /> */}
       <PostList title="최근 게시 글" posts={posts} />
     </>

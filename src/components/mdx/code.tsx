@@ -17,6 +17,7 @@ import {
   borderHandler,
   hover,
   lineNumbers,
+  link,
   mark,
   tooltip,
   Number,
@@ -60,6 +61,7 @@ export async function Code({ codeblock }: { codeblock: RawCode }) {
           hover,
           lineNumbers,
           mark,
+          link,
         ]}
         className="font-d2 !m-0 !rounded-t-none bg-zinc-800 px-2 py-4 whitespace-pre-wrap"
       />
@@ -89,7 +91,18 @@ export async function CodeWithTooltips(props: unknown) {
     }
   })
 
-  return <Pre code={highlighted} handlers={[tooltip]} />
+  return (
+    <div className="relative mb-12 overflow-clip rounded-lg">
+      <div className="bg-primary/50 flex h-8 items-center justify-center text-center font-bold">
+        {highlighted.meta}
+      </div>
+      <Pre
+        code={highlighted}
+        handlers={[lineNumbers, tooltip]}
+        className="font-d2 !m-0 !rounded-t-none bg-zinc-800 px-2 py-4 whitespace-pre-wrap"
+      />
+    </div>
+  )
 }
 
 export function HoverContainer(props: { children: React.ReactNode }) {

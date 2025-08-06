@@ -37,7 +37,9 @@ export const collapse: AnnotationHandler = {
   },
 }
 
-const icon = <span className="material-symbols-rounded !text-[15px]">keyboard_arrow_down</span>
+const icon = (
+  <span className="material-symbols-rounded !text-[15px] select-none">keyboard_arrow_down</span>
+)
 
 export const collapseTrigger: AnnotationHandler = {
   name: 'CollapseTrigger',
@@ -50,12 +52,12 @@ export const collapseTrigger: AnnotationHandler = {
   Line: (props) => {
     const icon = props.data?.icon as React.ReactNode
     return (
-      <>
+      <div className="cursor-pointer">
         <div className="absolute top-1 left-6.5">{icon}</div>
         <div>
           <InnerLine merge={props} />
         </div>
-      </>
+      </div>
     )
   },
 }
