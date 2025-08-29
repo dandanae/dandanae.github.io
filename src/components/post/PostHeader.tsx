@@ -18,7 +18,7 @@ const PostHeader = ({ metadata }: { metadata: MdxMetadata }) => {
 
   return (
     <header>
-      <Link href="/" className="group no-underline">
+      <Link href="/" rel="noopener noreferrer" className="group no-underline">
         <div className="group-hover:text-primary click flex w-fit items-center rounded-xl">
           <span className="material-symbols-rounded !text-[14px] select-none">arrow_back_ios</span>
           <span className="text-sm">홈으로 돌아가기</span>

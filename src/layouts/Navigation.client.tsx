@@ -10,13 +10,6 @@ import { cn } from '@/libs/utils'
 
 import { useIsVisibleNav } from './atoms'
 
-export const displayNames: Record<string, string> = {
-  'github-blog': '깃허브 블로그 제작',
-  'html-css': 'HTML/CSS',
-  frontend: '프론트엔드',
-  react: '리액트',
-}
-
 export const NavigationClient = ({ categories }: { categories: Category[] }) => {
   const { isVisibleNav, setIsVisibleNav } = useIsVisibleNav()
 
@@ -64,7 +57,7 @@ const Nav = ({ categories }: { categories: Category[] }) => {
   const pathname = usePathname()
 
   return (
-    <div className="bg-background border-primary/20 fixed z-50 h-dvh min-h-dvh w-64 overflow-y-scroll border-r px-8 py-12">
+    <div className="bg-background border-primary/20 noscroll fixed z-50 h-dvh min-h-dvh w-64 overflow-y-scroll border-r px-8 py-12">
       {/* <div className="mb-12 flex w-full flex-col items-center">
         <div className="text-lg font-black">김단해</div>
         <div className="text-foreground/50 text-center text-sm">
@@ -83,6 +76,7 @@ const Nav = ({ categories }: { categories: Category[] }) => {
             <Link
               href={`/category/${category.key}`}
               key={category.key}
+              rel="noopener noreferrer"
               className="group flex cursor-pointer items-center justify-between"
             >
               <div
@@ -104,7 +98,11 @@ const Nav = ({ categories }: { categories: Category[] }) => {
 
       <div className="mt-4 mb-2 text-xs font-black">About</div>
       <div className="mb-6 flex flex-col gap-4">
-        <Link href="/about" className="group flex cursor-pointer items-center justify-between">
+        <Link
+          href="/about"
+          rel="noopener noreferrer"
+          className="group flex cursor-pointer items-center justify-between"
+        >
           <div
             className={cn(
               'origin-left text-sm duration-300',

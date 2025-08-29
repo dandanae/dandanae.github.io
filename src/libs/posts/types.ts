@@ -45,4 +45,5 @@ export const displayNames: Record<string, string> = {
   'html-css': 'HTML/CSS',
   frontend: '프론트엔드',
   react: '리액트',
+  travel: '여행',
 }

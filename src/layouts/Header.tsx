@@ -36,6 +36,7 @@ const Header = () => {
         {/* title */}
         <Link
           href="/"
+          rel="noopener noreferrer"
           className="font-bubble text-primary hover:text-secondary click flex cursor-pointer items-center text-3xl"
         >
           DANAE
@@ -44,6 +45,7 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <Link
             href="/about"
+            rel="noopener noreferrer"
             className="bg-primary hover:bg-secondary click flex h-8 cursor-pointer items-center justify-center rounded-lg px-4 text-xs font-semibold text-white transition-colors duration-300"
           >
             제가 궁금하신가요?

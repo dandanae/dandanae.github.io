@@ -1,0 +1,187 @@
+import { Project } from './types'
+
+export const Project011: Project = {
+  id: 'project-011',
+  tags: ['React', 'AWS(ECR-ECS)', '회사 프로젝트'],
+  title: 'DATA CLOUD',
+  subtitle: '윈도우 프로그램에서 제공하는 서비스를 웹에서도 제공하는 사이트를 개발했어요.',
+  challenge: 'AWS(ECR-ECS)',
+  date: '2024. 08 - 2025. 02',
+  image: 'https://dev-datacloud.pie.co.kr/static/media/datacloud.34b65b9b18e2c2229b60.png',
+  links: [{ title: 'Data Cloud', href: 'https://dev-datacloud.pie.co.kr/' }],
+  libraries: [
+    { title: '@tanstack/react-query', href: 'https://www.npmjs.com/package/@tanstack/react-query' },
+    { title: 'jotai', href: 'https://www.npmjs.com/package/jotai' },
+    { title: 'react-hook-form', href: 'https://www.npmjs.com/package/react-hook-form' },
+    { title: 'yup', href: 'https://www.npmjs.com/package/yup' },
+    {
+      title: 'tosspayments-sdk',
+      href: 'https://www.npmjs.com/package/@tosspayments/tosspayments-sdk',
+    },
+    { title: 'tailwindcss', href: 'https://www.npmjs.com/package/tailwindcss' },
+    { title: 'framer-motion', href: 'https://www.npmjs.com/package/framer-motion' },
+    { title: 'canvas', href: 'https://www.npmjs.com/package/canvas' },
+    { title: 'google-spreadsheet', href: 'https://www.npmjs.com/package/google-spreadsheet' },
+    { title: 'Google Sheets API', href: 'https://developers.google.com/sheets/api/reference/rest' },
+  ],
+  role: '프론트엔드 개발 및 UI/UX를 총괄했어요.',
+
+  content: (
+    <>
+      <h1>📌 주요 업무</h1>
+      <h2>고객 및 이미지 데이터의 통합 관리</h2>
+      <ul>
+        <li>
+          기존 윈도우 프로그램에서만 관리할 수 있던 데이터를 OS에 구애받지 않고 웹 기반으로 관리할
+          수 있는 시스템을 구현했어요.
+        </li>
+      </ul>
+      <h2>이미지 뷰어</h2>
+      <ul>
+        <li>
+          <code>Canvas API</code>를 이용해 촬영 이미지의 확대/축소, 드로잉, 텍스트 삽입 등 다양한
+          이미지 편집 기능을 지원해요.
+        </li>
+      </ul>
+      <h2>인사이트 중심의 대시보드</h2>
+      <ul>
+        <li>
+          고객 증가 추이, 데이터 사용량 등의 데이터를 월간/연간 통계 리포트로 시각화하여 제공해요.
+        </li>
+      </ul>
+      <h2>파트너 사이트 통합</h2>
+      <ul>
+        <li>분리되어 있던 파트너 사이트 기능을 하나의 플랫폼으로 통합했어요.</li>
+      </ul>
+      <h2>멤버십 결제 및 관리</h2>
+      <ul>
+        <li>
+          <code>토스 페이먼츠</code>를 통해 안정적이고 편리한 멤버십 결제와 멤버십 관리 기능을
+          제공해요.
+        </li>
+      </ul>
+      <h2>하위 고객 관리</h2>
+      <ul>
+        <li>본사에서 직접 가맹점 및 하위 고객을 관리할 수 있도록 하는 기능을 제공해요.</li>
+      </ul>
+      <h2>구글 시트를 통한 다국어 지원 자동화 기능</h2>
+      <ul>
+        <li>
+          <code>Google Sheet API</code>를 이용해 다국어 지원 자동화하여 손쉽게 관리할 수 있도록
+          했어요.
+        </li>
+      </ul>
+      <h1>💡 제작 중 어려웠던 점</h1>
+      <h2>이미지 뷰어 구현 과정</h2>
+      <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+      <ul>
+        <li>
+          다중 캔버스를 실시간 동기화해야 해서 기존 이미지 뷰어/드로잉 라이브러리를 그대로 사용할 수
+          없었어요.
+        </li>
+        <li>드로잉 도형 크기를 조절할 때 도형이 반복해서 그려지는 문제가 발생했어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">✅ 문제 해결 방법</h3>
+      <ul>
+        <li>
+          요구사항: 확대/축소, 드로잉, 분할 화면 간 실시간 동기화, 태블릿 호환성을 모두 만족해야
+          했어요.
+        </li>
+        <li>
+          <code>Konva</code>는 좌표 처리 복잡성 때문에 제외하고, <code>zoom-and-pinch</code> 기반
+          커스텀 드로잉 기능을 구현했어요.
+        </li>
+        <li>
+          <code>jotai</code>로 상태를 원자화해 각 캔버스가 필요한 atom만 구독하도록 하여 불필요한
+          리렌더를 최소화했어요.
+        </li>
+        <li>
+          도형 크기 조절은 임시 캔버스를 활용해 미리보기 후 <code>mouseup</code> 이벤트에서 본
+          캔버스로 확정하는 방식으로 해결했어요.
+        </li>
+      </ul>
+      <h3 className="bg-secondary/20">🌱 배운 점</h3>
+      <ul>
+        <li>
+          유명한 라이브러리라도 요구사항에 맞지 않으면 복잡성이 오히려 커질 수 있음을 배웠어요.
+        </li>
+        <li>
+          임시 캔버스로 미리보기 → 확정 구조를 적용하며 <b>UX와 성능을 동시에 고려하는 패턴</b>을
+          익혔어요.
+        </li>
+      </ul>
+      <h2>디자이너와의 소통</h2>
+      <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+      <ul>
+        <li>디자이너님이 UI/UX 분야에 처음 도전해 디자인 틀과 환경에 익숙하지 않았어요.</li>
+        <li>
+          UIUX 분야에 처음 도전하는 디자이너님과의 협업은 단순한 작업 분담을 넘어서 상호 성장의
+          기회라고 생각했어요.
+        </li>
+      </ul>
+      <h3 className="bg-secondary/20">✅ 문제 해결 방법</h3>
+      <ul>
+        <li>
+          <code>Tailwind CSS</code>를 도입해 일관된 디자인 시스템을 빠르게 적용했어요.
+        </li>
+        <li>
+          그리드, 여백, 컴포넌트 명명 규칙 등을 정리해 <b>디자인 가이드 문서</b>로 공유했어요.
+        </li>
+        <li>디자인 요청 시 구체적인 예시와 설명을 함께 전달해 협업 효율을 높였어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">🌱 배운 점</h3>
+      <ul>
+        <li>
+          디자이너와 함께 성장하며 상호 이해를 바탕으로 한 협업이 결과물 완성도에 직접적으로
+          기여한다는 걸 경험했어요.
+        </li>
+        <li>
+          UI/UX 가이드라인을 명확히 공유하면 디자인–개발 간 커뮤니케이션 비용을 크게 줄일 수 있음을
+          배웠어요.
+        </li>
+      </ul>
+      <h2>ECS 환경에서 CSR 방식의 환경 변수 관리 이슈</h2>
+      <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+      <ul>
+        <li>CSR 환경에서는 서버 환경 변수(.env)를 직접 사용할 수 없었어요.</li>
+        <li>AWS CodePipeline 빌드 과정에서 Secret Key를 안전하게 주입하는 방법이 필요했어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">✅ 문제 해결 방법</h3>
+      <ul>
+        <li>
+          <code>Toss Payment API</code>의 <code>Client Key</code>는 클라이언트 코드에 노출해도 되는
+          구조라는 점을 확인했어요.
+        </li>
+        <li>
+          <code>Secret Key</code>는 백엔드 API를 통해 호출하도록 설계해 보안 문제를 해결했어요.
+        </li>
+      </ul>
+      <h3 className="bg-secondary/20">🌱 배운 점</h3>
+      <ul>
+        <li>
+          CSR 환경에서 보안을 유지하면서도 기능을 제공하기 위해,{' '}
+          <b>보안과 사용자 경험을 균형 있게 고려</b>해야 한다는 걸 배웠어요.
+        </li>
+      </ul>
+      <h1>🚀 주요 성과 및 효과</h1>
+      <h2>새로운 캐시 카우 창출</h2>
+      <ul>
+        <li>
+          기존에는 디바이스 판매에만 집중하고, 프로그램은 평생 업데이트를 지원함으로써 추가적인 수익
+          창출이 어려웠어요.
+        </li>
+        <li>
+          평소 고객들이 하드웨어 용량이 부족하다는 니즈를 고려해, 클라우드를 활용한 월정액 시스템을
+          도입함으로써 새로운 캐시 카우를 창출하였어요.
+        </li>
+      </ul>
+      <h2>OS의 제한을 일부 해소</h2>
+      <ul>
+        <li>기존에는 윈도우 프로그램으로 개발되어 다른 플랫폼에서는 이용이 어려웠어요.</li>
+        <li>
+          일부 기능을 웹 기반으로 전환하여 타 플랫폼에서도 촬영한 사진을 확인할 수 있도록 하였어요.
+        </li>
+      </ul>
+    </>
+  ),
+}

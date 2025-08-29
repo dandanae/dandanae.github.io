@@ -20,7 +20,7 @@ const PostCategoryItem = ({
 
   if (!viewOnly) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} rel="noopener noreferrer" className={className}>
         {displayNames[category]}
       </Link>
     )

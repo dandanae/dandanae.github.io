@@ -9,11 +9,9 @@ import type { PostSummary } from '@/libs/posts'
 import { Card } from '../common'
 import { PostCategoryItem, PostInfoItem, PostTagItem } from './items'
 
-const DEFAULT_IMAGE = 'https://i.pinimg.com/736x/4f/10/d6/4f10d62fec1992bc9d928876a980fb63.jpg'
-
 const PostCard = ({ post }: { post: PostSummary }) => {
   const route = '/blog/' + post.slug
-  const imageSrc = post.metadata.image || DEFAULT_IMAGE
+  const imageSrc = post.metadata.image
   const title = post.metadata.title || 'No Title'
   const description = post.metadata.description || ''
   const publishDate = post.metadata.publishDate
@@ -25,19 +23,23 @@ const PostCard = ({ post }: { post: PostSummary }) => {
 
   return (
     <Card className="group hover:bg-secondary/10">
-      <Link href={route} className="flex flex-col gap-5">
+      <Link href={route} rel="noopener noreferrer" className="flex flex-col gap-5">
         <div className="absolute top-4 right-4 flex flex-col gap-1">
           <PostCategoryItem category={category} viewOnly />
           <PostInfoItem icon="avg_pace" label={`${readingTime}분`} />
         </div>
 
-        <Image
-          src={imageSrc || DEFAULT_IMAGE}
-          alt={title}
-          width={500}
-          height={500}
-          className="h-18 w-18 rounded-lg object-cover object-center transition-all duration-300 group-hover:scale-110"
-        />
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={title}
+            width={500}
+            height={500}
+            className="h-18 w-18 rounded-lg object-cover object-center transition-all duration-300 group-hover:scale-110"
+          />
+        ) : (
+          <div className="bg-primary/20 h-18 w-18 rounded-lg transition-all duration-300 group-hover:scale-110" />
+        )}
 
         <div className="flex flex-col">
           <div className="text-foreground/30 text-xs">{publishDate}</div>

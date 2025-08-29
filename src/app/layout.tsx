@@ -5,7 +5,6 @@ import type { Metadata } from 'next'
 import '@/styles/globals.css'
 import { Header, Navigation } from '@/layouts'
 import { bubble, d2 } from '@/libs/fonts'
-import { getCategories } from '@/libs/posts'
 
 import Providers from './providers'
 

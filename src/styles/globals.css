@@ -60,7 +60,7 @@
 }
 
 * {
-  /* cursor: url(https://cur.cursors-4u.net/nature/nat-10/nat997.cur), auto; */
+  cursor: url(https://cur.cursors-4u.net/nature/nat-10/nat997.cur), auto;
   scroll-behavior: smooth;
 }
 
@@ -98,4 +98,13 @@ body {
 
 .click {
   @apply transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-90;
+}
+
+
+.noscroll {
+  -ms-overflow-style: none;
+}
+
+.noscroll::-webkit-scrollbar {
+  display: none;
 }

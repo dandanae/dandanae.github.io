@@ -15,7 +15,7 @@ h3 {
 
 .prose a:not(.anchor)::before {
   content: '';
-  @apply bg-primary absolute inset-x-0 bottom-0 -z-10 h-1.5 hover:h-full transition-all duration-300;
+  @apply bg-secondary absolute inset-x-0 bottom-0 -z-10 h-1.5 hover:h-full transition-all duration-300;
 }
 
 .prose a:not(.anchor):hover::before {

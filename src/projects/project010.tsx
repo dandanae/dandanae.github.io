@@ -1,0 +1,118 @@
+import { Project } from './types'
+
+export const Project010: Project = {
+  id: 'project-010',
+  tags: ['C#', '개발', '회사 프로젝트'],
+  title: 'PIEDB',
+  subtitle: '고객 및 이미지 데이터 병합 프로그램을 개발했어요.',
+  challenge: 'MVVM 패턴',
+  date: '2023. 11 - 2025. 07',
+  image:
+    'https://blog.kakaocdn.net/dna/xH7U7/btsPVak56Vq/AAAAAAAAAAAAAAAAAAAAANBzjyovbPu2IxWhOMnU2HEnvjPU58u-6QhlwSHE-Hao/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=KmZo9Ve3zH65Ra6q47ZITdEnEHc%3D',
+  links: [
+    {
+      title: 'PIEDB 매뉴얼',
+      href: 'https://iced-mantis-e62.notion.site/PIE-DB-Manual-a6307abd7b6949d4b22153e96b242033',
+    },
+  ],
+  libraries: [],
+  role: '전체 기획부터 구현까지 단독으로 진행했어요.',
+
+  content: (
+    <>
+      <h1>📌 주요 기능</h1>
+      <h2>사진 정보 수정</h2>
+      <ul>
+        <li>잘못 저장된 사진 정보를 사용자가 직접 수정할 수 있어요.</li>
+        <li>DB 수정과 함께 파일명도 자동으로 변경되고 재배치돼요.</li>
+      </ul>
+      <h2>데이터베이스 병합</h2>
+      <ul>
+        <li>PC 변경 등으로 분리된 DB를 하나로 합칠 수 있어요.</li>
+        <li>기존 DB와 새 DB를 병합하면서 이미지 파일도 같이 정리돼요.</li>
+        <li>중복된 이미지는 자동으로 제외돼요.</li>
+        <li>이름, 성별, 생년월일이 같으면 동일 인물로 인식해서 사진과 정보를 합쳐요.</li>
+      </ul>
+      <h2>상위 제품 업그레이드 시 데이터 이전</h2>
+      <ul>
+        <li>상위 모델로 기기를 바꿀 때 기존 데이터를 새 제품으로 옮길 수 있어요.</li>
+        <li>DB와 이미지 파일이 자동으로 정리돼서 옮겨져요.</li>
+      </ul>
+      <h2>타사 제품 데이터 이전</h2>
+      <ul>
+        <li>타사 제품 데이터를 자사 포맷에 맞게 변환해서 이전할 수 있어요.</li>
+        <li>DB와 이미지 파일이 자사 시스템에 맞게 자동 정리돼요.</li>
+      </ul>
+
+      <h1>💡 제작 중 어려웠던 점</h1>
+      <h2>MVVM 패턴 적용</h2>
+      <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+      <ul>
+        <li>비하인드 코드를 쓰지 않고 MVVM 패턴으로 화면을 제어해야 했어요.</li>
+        <li>데이터 바인딩과 명령 처리 방식이 익숙하지 않아서 어려웠어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">✅ 해결 방법</h3>
+      <ul>
+        <li>
+          <code>RelayCommand</code>를 직접 구현해서 명령 바인딩을 적용했어요.
+        </li>
+        <li>
+          <code>CommunityToolkit.Mvvm</code> 라이브러리를 활용해서 구조를 단순화했어요.
+        </li>
+      </ul>
+      <h3 className="bg-secondary/20">🌱 배운 점</h3>
+      <ul>
+        <li>비하인드 코드에 의존하지 않는 구조가 유지보수와 확장에 유리하다는 걸 배웠어요.</li>
+        <li>적절한 라이브러리를 쓰면 생산성이 많이 올라간다는 걸 느꼈어요.</li>
+      </ul>
+
+      <h2>데이터 이동 오류 처리</h2>
+      <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+      <ul>
+        <li>데이터 이동 중 예외가 발생해도 프로세스가 계속 실행되는 문제가 있었어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">✅ 해결 방법</h3>
+      <ul>
+        <li>
+          함수 반환 타입을 <code>void</code>에서 <code>bool</code>로 바꿨어요.
+        </li>
+        <li>성공 여부를 반환해서 메인 함수에서 실패 시 전체 프로세스를 중단하도록 했어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">🌱 배운 점</h3>
+      <ul>
+        <li>예외 처리는 단순히 오류 표시가 아니라 흐름 제어까지 고려해야 한다는 걸 배웠어요.</li>
+        <li>반환값을 통한 상태 관리가 안정적인 흐름에 중요하다는 걸 알게 됐어요.</li>
+      </ul>
+
+      <h2>주석 활용</h2>
+      <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+      <ul>
+        <li>코드를 분기마다 수정하다 보니 시간이 지나면 로직을 다시 이해하기 힘들었어요.</li>
+      </ul>
+      <h3 className="bg-secondary/20">✅ 해결 방법</h3>
+      <ul>
+        <li>주요 로직과 조건 분기에 주석을 달아서 이해하기 쉽게 했어요.</li>
+        <img src="https://blog.kakaocdn.net/dna/FN6ZX/btsP4g5UjiM/AAAAAAAAAAAAAAAAAAAAAOBDYuZ1qthEEBvOZ0-Vu4BnXIpbEn6HFYFuxnpSN2bs/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=kYWyhlLN5MTPdOk34pafKuzgbM8%3D" />
+      </ul>
+      <h3 className="bg-secondary/20">🌱 배운 점</h3>
+      <ul>
+        <li>잘 작성된 주석이 협업과 유지보수에 큰 도움이 된다는 걸 느꼈어요.</li>
+      </ul>
+
+      <h1>🚀 성과</h1>
+      <h2>DB 문제 처리 효율성 증가</h2>
+      <ul>
+        <li>예전에는 DB 오류가 나면 엔지니어가 원격 접속해서 직접 DB 파일을 수정해야 했어요.</li>
+        <li>
+          자동화한 프로그램을 배포한 뒤, 담당자가 병렬 업무를 수행할 수 있어 전반적인 업무 효율성과
+          자원 활용도 또한 크게 향상했어요.
+        </li>
+      </ul>
+      <h2>타사 제품 사용자 전환 지원</h2>
+      <ul>
+        <li>타사 제품 데이터를 쉽게 옮길 수 있는 기능으로 고객 전환 장벽을 줄였어요.</li>
+        <li>자동 변환과 정리를 통해 영업 측면에서도 도움이 됐어요.</li>
+      </ul>
+    </>
+  ),
+}

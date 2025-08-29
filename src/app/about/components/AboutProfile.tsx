@@ -15,7 +15,9 @@ const AboutProfile = () => {
           <InfoContainer>
             <Github />
             <Link
-              href="https://mail.google.com/mail/u/0/?fs=1&to=lleeve@naver.com&tf=cm"
+              href="https://github.com/dandanae"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-foreground/60 text-sm"
             >
               Github
@@ -36,6 +38,7 @@ const AboutProfile = () => {
             <Icon icon="email" />
             <Link
               href="https://mail.google.com/mail/u/0/?fs=1&to=lleeve@naver.com&tf=cm"
+              rel="noopener noreferrer"
               className="text-foreground/60 text-sm"
             >
               lleeve@naver.com

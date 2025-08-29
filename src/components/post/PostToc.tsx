@@ -41,6 +41,7 @@ const PostToc = ({ tocs }: { tocs: Toc[] }) => {
             <Link
               key={item.id}
               href={`#${item.id}`}
+              rel="noopener noreferrer"
               className={cn(
                 'origin-left text-sm transition-all',
                 item.depth === 1 && 'font-semibold',

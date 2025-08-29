@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 
 import { atom, useAtom } from 'jotai'
 
-import { allProjects } from '../projects'
-import { ProjectTag } from '../projects/types'
+import { allProjects } from '@/projects'
+import { ProjectTag } from '@/projects/types'
 
 export const openedIdAtom = atom<string | null>(null)
 

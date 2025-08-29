@@ -9,13 +9,13 @@ export type ProjectTag =
   | 'C++'
   | 'C#'
   | 'PHP'
-  | 'React(typescript)'
+  | 'React'
   | 'Flutter'
   | 'AWS(RDS)'
   | 'AWS(EC2)'
   | 'AWS(ECR-ECS)'
 
-interface Links {
+export interface Links {
   title: string
   href: string
   icon?: string
@@ -60,7 +60,7 @@ export const projectTags: Record<ProjectTag, { color: string }> = {
   PHP: {
     color: 'bg-teal-100 text-teal-800',
   },
-  'React(typescript)': {
+  'React': {
     color: 'bg-cyan-100 text-cyan-800',
   },
   Flutter: {

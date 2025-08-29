@@ -22,7 +22,7 @@ const Tooltip: React.FC<TooltipProps> = ({ word, children, position = 'top' }) =
   }
 
   return (
-    <div
+    <span
       className="hover:text-primary bg-primary/30 dark:bg-primary/20 relative mx-1 inline-block cursor-pointer rounded-md px-2 font-semibold transition-colors duration-300"
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
@@ -35,10 +35,13 @@ const Tooltip: React.FC<TooltipProps> = ({ word, children, position = 'top' }) =
       {word} <span className="text-red-500">*</span>
       <AnimatePresence>
         {visible && (
-          <motion.div
+          <motion.span
+            id="tt"
+            role="tooltip"
             className={cn(
-              'bg-secondary/30 !text-foreground absolute z-50 max-w-xl min-w-xs rounded-lg px-3 py-2 text-sm font-normal break-keep shadow-lg backdrop-blur-2xl',
+              'bg-secondary/30 !text-foreground absolute z-50 max-w-lg rounded-lg px-3 py-2 text-sm font-normal shadow-lg backdrop-blur-2xl',
               tooltipPosition[position],
+              'w-max max-w-[min(80vw,40rem)] break-keep whitespace-pre-wrap',
             )}
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,10 +49,10 @@ const Tooltip: React.FC<TooltipProps> = ({ word, children, position = 'top' }) =
             transition={{ duration: 0.3 }}
           >
             {children}
-          </motion.div>
+          </motion.span>
         )}
       </AnimatePresence>
-    </div>
+    </span>
   )
 }
 
