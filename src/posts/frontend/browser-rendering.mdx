@@ -7,35 +7,29 @@ export const metadata = {
   publishDate: "2025-07-14T19:24:06Z",
   image: '',
   tags: [
-    'Frontend', 'HTML', 'CSS', 'JavaScript'
+    'Frontend', 'Rendering', 'Browser'
   ],
 };
 
 # 렌더링이란?
- 쉽게 말해, 우리가 웹사이트를 열었을 때 그 안에 있는 내용이 어떻게 화면에 나타나는지를 결정하는 과정이라고 할 수 있어요.
+쉽게 말해, 우리가 **웹사이트를 열었을 때 그 안에 있는 내용이 어떻게 화면에 나타나는지를 결정하는 과정**이라고 할 수 있어요.
 
-브라우저마다 다르지만, 브라우저는 렌더링을 수행하는 `렌더링 엔진`을 가지고 있어요.
-크롬은 블링크(Blink), 사파리는 웹킷(Webkit) 그리고 파이어폭스는 게코(Gecko)라는 렌더링 엔진을 사용해요.
+브라우저마다 다르지만, 브라우저는 렌더링을 수행하는 **렌더링 엔진**을 가지고 있어요.
+크롬은 블링크*Blink*, 사파리는 웹킷*Webkit* 그리고 파이어폭스는 게코*Gecko*라는 렌더링 엔진을 사용해요.
 
-렌더링 엔진이 HTML, CSS, Javascript로 렌더링할 때 <Tooltip word="CRP(Critical Rendering Path)">**중요 렌더링 경로**
-브라우저가 HTML, CSS, Javascipt를 화면에 픽셀로 전환되는 일련의 단계를 뜻해요.</Tooltip>라는 프로세스를 사용하며 다음 단계들을 거쳐요.
+렌더링 엔진이 HTML, CSS, Javascript로 렌더링할 때<Tooltip word="CRP(Critical Rendering Path)" title="중요 렌더링 경로">브라우저가 HTML, CSS, Javascipt를 화면에 픽셀로 전환되는 일련의 단계를 뜻해요.</Tooltip>라는 프로세스를 사용하며 다음 단계들을 거쳐요.
 
 ---
 # 렌더링 단계
 ## 1. HTML 파싱
-HTML <Tooltip word="파싱">문서의 내용을 **토큰(token)으로 분석**하고, 문법적 의미와 구조를 반영한 **파스 트리(parse tree)를 생성**하는 과정을 말해요.</Tooltip>은, **브라우저가 HTML 문서를 읽고 이해하는 과정**이에요.
-이 단계에서 브라우저는 HTML을 <Tooltip word="DOM(Document Object Model)">**문서 객체 모델**
-**웹페이지의 구조(HTML 문서)를 트리 형태의 객체로 표현**한 것이에요.
-DOM은 HTML과 스크립팅 언어(JavaScript)를 서로 이어 주는 역할을 해서 HTML 요소를 추가하거나, 수정하거나, 삭제할 수 있어요.</Tooltip> 트리로 변환해요.
+HTML <Tooltip word="파싱" title="파싱">문서의 내용을 **토큰(token)으로 분석**하고, 문법적 의미와 구조를 반영한 **파스 트리(parse tree)를 생성**하는 과정을 말해요.</Tooltip>은, **브라우저가 HTML 문서를 읽고 이해하는 과정**이에요. 이 단계에서 브라우저는 HTML을 <Tooltip word="DOM(Document Object Model)" title="문서 객체 모델">**웹페이지의 구조(HTML 문서)를 트리 형태의 객체로 표현**한 것이에요. DOM은 HTML과 스크립팅 언어(JavaScript)를 서로 이어 주는 역할을 해서 HTML 요소를 추가하거나, 수정하거나, 삭제할 수 있어요.</Tooltip> 트리로 변환해요.
 
 ## 2. CSS 파싱
 CSS 파싱은 **CSS 파일을 읽고 해석하는 과정**이에요.
-이 단계에서 브라우저는 CSS 규칙을 분석하여 <Tooltip word="CSSOM(CSS Object Model)">**CSS Object Model**
-CSS 내용을 파싱하여 자료를 구조화 한 것이에요.
-즉, DOM처럼 **CSS의 내용을 해석하고 노드를 만들어 트리 구조로 만든 것**을 CSSOM이라 해요.</Tooltip> 트리를 생성해요.
+이 단계에서 브라우저는 CSS 규칙을 분석하여 <Tooltip word="CSSOM(CSS Object Model)" title="CSS 객체 모델">CSS 내용을 파싱하여 자료를 구조화 한 것이에요. 즉, DOM처럼 **CSS의 내용을 해석하고 노드를 만들어 트리 구조로 만든 것**을 CSSOM이라 해요.</Tooltip> 트리를 생성해요.
 
 ## 3. 렌더 트리 생성
-DOM과 CSSOM을 결합하여 <Tooltip word="렌더 트리">**CSSOM과 DOM 트리의 결합**으로 만들어져요. 웹 페이지에 나타낼 각 요소들의 **위치(Layout)을 계산**하는데 사용되고 픽셀을 화면에 렌더링하는 페인트(Paint), **화면에 요소들을 표현하는 프로세스를 위해 존재**해요.</Tooltip>를 생성해요. 이 렌더 트리는 실제로 화면에 표시될 요소들만 포함하고 있어, `display: none` 속성과 같이 화면에서 보이지도 않고 공간을 차지하지 않는 것은 렌더트리로 구축되지 않아요.
+DOM과 CSSOM을 결합하여 <Tooltip word="렌더 트리" title="렌더 트리">**CSSOM과 DOM 트리의 결합**으로 만들어져요. 웹 페이지에 나타낼 각 요소들의 **위치(Layout)을 계산**하는데 사용되고 픽셀을 화면에 렌더링하는 페인트(Paint), **화면에 요소들을 표현하는 프로세스를 위해 존재**해요.</Tooltip>를 생성해요. 이 렌더 트리는 실제로 화면에 표시될 요소들만 포함하고 있어, `display: none` 속성과 같이 화면에서 보이지도 않고 공간을 차지하지 않는 것은 렌더트리로 구축되지 않아요.
 
 ## 4. 레이아웃 (리플로우)
 렌더 트리를 기반으로 각 요소의 위치와 크기를 계산해요.

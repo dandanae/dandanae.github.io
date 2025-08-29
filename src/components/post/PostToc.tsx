@@ -34,7 +34,7 @@ const PostToc = ({ tocs }: { tocs: Toc[] }) => {
 
   return (
     <div className="hidden lg:col-start-3 lg:flex lg:h-dvh">
-      <div className="bg-background border-primary/20 fixed z-50 h-dvh min-h-dvh w-64 overflow-y-scroll border-l px-8 py-12">
+      <div className="bg-background border-primary/20 fixed z-40 h-dvh min-h-dvh w-64 overflow-y-scroll border-l px-8 py-12">
         <div className="mb-2 text-xs font-black">Table Of Contents</div>
         <nav className="flex flex-col space-y-2">
           {tocs.map((item) => (

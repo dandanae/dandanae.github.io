@@ -1,4 +1,4 @@
-import { PostCategory, PostList } from '@/components'
+import { PostList } from '@/components'
 import { getAllPosts } from '@/libs/posts'
 
 const Home = async () => {
@@ -7,7 +7,6 @@ const Home = async () => {
 
   return (
     <>
-      {/* <PostCategory /> */}
       {/* <PostList title="고정 게시 글" posts={pinned} isPinned /> */}
       <PostList title="최근 게시 글" posts={posts} />
     </>

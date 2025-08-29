@@ -1,0 +1,34 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '주소창에 google.com을 입력하면 일어나는 일',
+  description: '브라우저가 URL 입력을 처리하고, 네트워크를 거쳐 화면에 그려지는 핵심 과정',
+  publishDate: "2025-08-29T19:41:22Z",
+  image: '',
+  tags: [
+    'Frontend', 'Browser', 'Network', 'Rendering'
+  ],
+};
+
+# 1. URL 해석
+- 검색어인지, <Tooltip word="URL" title="Uniform Resource Locator">웹에서 특정 자원(웹페이지, 이미지, 동영상 등)의 위치를 나타내는 주소예요. 보통 `https://도메인/경로` 형태로, 프로토콜(`https`) + 도메인명(`google.com`) + 경로(`/search?q=naver`) 로 구성돼요.</Tooltip> 인지 판단해요.
+- `google.com`은 기본적으로 HTTPS로만 접속해요. (<Tooltip word="HSTS" title="HTTP Strict Transport Security">어떤 사이트(예: google.com)는 "나를 무조건 HTTPS로만 접속해라"라는 정책을 서버가 응답 헤더에 담아 브라우저에 알려줄 수 있어요. Google 계열 서비스(google.com, youtube.com 등)는 이 HSTS Preload에 등록돼 있어서, 브라우저는 애초에 HTTP 시도를 하지 않아요.</Tooltip> 때문에 http는 차단돼요.)
+
+# 2. DNS 조회
+- 도메인 네임 부분을 <Tooltip word="DNS" title="Domain Name System">사람이 기억하기 쉬운 도메인 이름(`google.com`)을 실제 서버와 통신할 때 필요한 IP 주소(`142.250.196.14`)로 변환해 주는 시스템이에요.</Tooltip> 서버에서 검색해요.
+- `google.com` 도메인의 IP 주소를 확인해요.
+
+# 3. 서버 연결
+- <Tooltip word="QUIC(HTTP/3)" title="Quick UDP Internet Connections">구글이 만든 **UDP 기반 전송 프로토콜**이에요. TCP보다 연결 설정이 빠르고, **HTTP/3의 기반**이 돼요.</Tooltip> 또는 <Tooltip word="TCP(HTTP/2,1.1)" title="Transmission Control Protocol">신뢰성 있는 데이터 전송을 보장하는 전송 프로토콜로, **HTTP/1.1**과 **HTTP/2**가 이 위에서 동작해요.</Tooltip>로 연결해요.
+- <Tooltip word="TLS 핸드셰이크" title="Transport Layer Security 핸드셰이크">브라우저와 서버가 통신을 시작할 때 **암호화 방식·세션 키를 합의**하고, **서버의 인증서를 검증**하는 과정이에요. 성공하면 안전한 HTTPS 연결이 열려요.</Tooltip>로 암호화 및 인증서 검증
+
+# 4. HTTP 요청/응답
+- 브라우저가 GET / 요청해요.
+- 서버가 HTML 응답을 전송해요.
+
+# 5. 렌더링
+[브라우저 렌더링 원리](/blog/frontend/browser-rendering)
+
+# 참고
+- [Blog, google.com을 입력하면 일어나는 일](https://bohyeon-n.github.io/deploy/network/internet-2.html)

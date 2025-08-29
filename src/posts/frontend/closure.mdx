@@ -1,0 +1,42 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '클로저(Closure)란?',
+  description: '함수가 선언될 당시의 외부 스코프(변수 환경)를 기억하고, 그 함수가 외부 스코프 밖에서 실행되더라도 그 환경에 접근할 수 있는 기능을 말해요.',
+  publishDate: "2025-08-29T20:54:57Z",
+  image: '',
+  tags: [
+    ''
+  ],
+};
+
+# 클로저(Closure)란?
+- `inner` 함수는 `outer`의 실행이 끝났음에도 불구하고 **외부 변수 `count`를 기억**하고 계속 접근할 수 있어요.
+```js example.js
+function outer() {
+  let count = 0; // 외부 스코프 변수
+
+  function inner() {
+    count++;
+    console.log(count);
+  }
+
+  return inner;
+}
+
+const fn = outer(); // outer 실행 → inner 반환
+fn(); // 1
+fn(); // 2
+fn(); // 3
+```
+
+- `outer()`가 실행되면 변수 `count`와 함수 `inner()`가 생성돼요.
+- 일반적으로 함수 실행이 끝나면 <Tooltip word="GC(Garbage Collector)" title="Garbage Collector">더 이상 사용되지 않는 메모리를 자동으로 해제하는 기능이에요. 자바스크립트 엔진(V8 등)이 주기적으로 실행해 메모리 누수를 방지해요.</Tooltip>가 실행 컨텍스트를 메모리에서 지우지만, `inner()`가 `count`를 참조하고 있기 때문에 `outer()`의 스코프는 제거되지 않아요.
+- 자바스크립트에서는 함수도 **객체(값)** 이므로, `inner` 함수 객체가 `fn` 변수에 저장되어 메모리에서 제거되지 않아요. 따라서, `outer` **스코프 바깥**(전역)에서도 `fn()`을 실행할 수 있고 여전히 `count`에 접근할 수 있어요.
+- 이처럼 **함수 객체가 외부 스코프 변수를 참조하면서 스코프가 유지되고, 바깥에서도 그 변수를 계속 다룰 수 있는 것**을 **클로저(Closure)** 라고 해요.
+- 이것은 자바스크립트가 <Tooltip word="렉시컬 스코프(Lexical Scope)" title="렉시컬 스코프">함수를 어디에서 호출하는지가 아니라 **어디에 선언하였는지에 따라 결정**돼요. 함수를 어디에서 호출하였는지는 스코프 결정에 아무런 의미를 주지 않아요.</Tooltip> 규칙을 따르기 때문에 가능한데, 함수의 스코프는 **호출된 위치가 아니라 선언된 위치로 결정되기 때문**이에요.
+
+# 참고
+[Github, 클로저(Closure)](https://github.com/baeharam/Must-Know-About-Frontend/blob/main/Notes/javascript/closure.md)
+[Blog, 클로저(Closure)](https://dkje.github.io/2020/09/18/Closure/)

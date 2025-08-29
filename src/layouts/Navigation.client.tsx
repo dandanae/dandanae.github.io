@@ -57,16 +57,7 @@ const Nav = ({ categories }: { categories: Category[] }) => {
   const pathname = usePathname()
 
   return (
-    <div className="bg-background border-primary/20 noscroll fixed z-50 h-dvh min-h-dvh w-64 overflow-y-scroll border-r px-8 py-12">
-      {/* <div className="mb-12 flex w-full flex-col items-center">
-        <div className="text-lg font-black">김단해</div>
-        <div className="text-foreground/50 text-center text-sm">
-          도전하는 것을 두려워하지 않는
-          <br />
-          프론트엔드 개발자입니다.
-        </div>
-      </div> */}
-
+    <div className="bg-background border-primary/20 noscroll fixed z-40 h-dvh min-h-dvh w-64 overflow-y-scroll border-r px-8 py-12">
       <div className="mb-2 text-xs font-black">Category</div>
       <div className="flex flex-col gap-4">
         {categories.map((category) => {
