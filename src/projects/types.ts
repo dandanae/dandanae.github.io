@@ -20,6 +20,24 @@ export interface Links {
   href: string
   icon?: string
 }
+
+export interface Task {
+  title: string
+  lists: React.ReactNode[]
+}
+
+export interface HardTask {
+  title: string
+  problems: React.ReactNode[]
+  solutions: React.ReactNode[]
+  learningPoints: React.ReactNode[]
+}
+
+export interface Result {
+  title: string
+  lists: React.ReactNode[]
+}
+
 export interface Project {
   id: string
   tags: ProjectTag[]
@@ -28,8 +46,11 @@ export interface Project {
   challenge: string
   date: string
   role: string
-  content: React.ReactNode
+  tasks: Task[]
+  hardTasks: HardTask[]
+  results: Result[]
 
+  content?: React.ReactNode
   image?: string
   links?: Links[]
   libraries?: Links[]
@@ -60,7 +81,7 @@ export const projectTags: Record<ProjectTag, { color: string }> = {
   PHP: {
     color: 'bg-teal-100 text-teal-800',
   },
-  'React': {
+  React: {
     color: 'bg-cyan-100 text-cyan-800',
   },
   Flutter: {

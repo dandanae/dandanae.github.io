@@ -39,18 +39,18 @@
 
 @layer base {
   h1 {
-    font-size: var(--text-3xl); /* 28px */
+    font-size: var(--text-3xl); /* 30px */
     font-weight: var(--font-weight-semibold);
   }
 
   h2 {
-    font-size: var(--text-2xl); /* 22px */
-    font-weight: var(--font-weight-regular);
+    font-size: var(--text-2xl); /* 24px */
+    font-weight: var(--font-weight-medium);
   }
 
   h3 {
     font-size: var(--text-xl); /* 18px */
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-medium);
   }
 
   h4 {

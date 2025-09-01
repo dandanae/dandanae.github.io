@@ -1,0 +1,64 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'JavaScript 비동기 처리 방법',
+  description: '자바스크립트는 싱글 스레드 언어이지만, 비동기 처리를 통해 동시에 여러 작업을 처리하는 것처럼 동작해요. 대표적인 방식은 콜백, 프로미스(Promise), async/await이에요.',
+  publishDate: "2025-08-21T18:16:36Z",
+  image: '',
+  tags: [
+    'Frontend', 'JavaScript', 'Promise', 'async/await'
+  ],
+};
+
+# 콜백 (Callback)
+- 특정 작업이 끝난 뒤 실행할 함수를 **인자로 전달**하는 방식이에요.
+- 콜백 중첩이 심해지면 가독성이 떨어져요. (콜백 지옥)
+
+```js
+function fetchData(callback) {
+  setTimeout(() => {
+    callback("서버에서 받은 데이터");
+  }, 1000);
+}
+
+fetchData((data) => {
+  console.log(data);
+});
+```
+
+# 프로미스 (Promise)
+- 비동기 작업의 **성공/실패 상태**를 다루는 객체예요.
+- `then` / `catch` 체이닝으로 흐름을 깔끔하게 표현할 수 있어요.
+
+```js
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve("데이터 도착"), 1000);
+  });
+};
+
+fetchData()
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+```
+
+# async / await
+- 프로미스를 더 직관적으로 사용할 수 있게 만든 문법이에요.
+- `await` 키워드로 **동기 코드처럼 작성**할 수 있어요.
+- 오늘날에는 대부분 **async/await**이 표준처럼 쓰이고 있어요.
+
+```js
+const fetchData = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("데이터 도착"), 1000);
+  });
+};
+
+async function getData() {
+  const result = await fetchData();
+  console.log(result);
+}
+
+getData();
+```

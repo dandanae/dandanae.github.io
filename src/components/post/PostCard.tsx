@@ -49,42 +49,16 @@ const PostCard = ({ post }: { post: PostSummary }) => {
           <div className="text-foreground/50 w-full truncate text-sm leading-relaxed">
             {description}
           </div>
-          <div className="mt-2 space-x-2">
-            {tags.map((tag) => (
+          <div className="mt-2 flex items-center space-x-2">
+            {tags.slice(0, 3).map((tag) => (
               <PostTagItem key={tag} tag={tag} />
             ))}
+
+            {tags.length > 3 && (
+              <span className="text-foreground/50 text-xs font-medium">+ {tags.length - 3}</span>
+            )}
           </div>
         </div>
-
-        {/* 좌측 이미지
-
-
-        날짜 + 읽는 시간
-
-        <div className="bg-primary absolute right-5 bottom-5 flex h-8 w-8 items-center justify-center space-y-1 rounded-full text-white opacity-0 transition-opacity duration-300 group-hover:animate-bounce group-hover:opacity-100">
-          <span className="material-symbols-rounded select-none">arrow_right</span>
-        </div>
-
-        글 정보
-        <div className="flex w-full flex-col justify-between">
-          <div className="w-full">
-            카테고리
-            
-
-            제목
-            
-
-            설명
-           
-           
-           
-          </div>
-
-          태그
-          <div className="space-x-2">
-           
-          </div>
-        </div> */}
       </Link>
     </Card>
   )

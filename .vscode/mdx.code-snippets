@@ -3,6 +3,8 @@
     "prefix": ["mdxmeta", "mdxmetadata"],
     "description": "Insert metadata object for MDX page",
     "body": [
+      "import { Tooltip } from '../../components/mdx'",
+      "",
       "export const metadata = {",
       "  pinned: false,",
       "  title: '$1',",

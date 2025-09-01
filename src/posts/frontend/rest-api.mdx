@@ -1,0 +1,68 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'REST API란?',
+  description: '리소스를 URI로 식별하고, HTTP 메서드의 의미를 활용해 그 리소스의 표현을 주고받는 API를 말해요.',
+  publishDate: "2025-07-31T01:15:37Z",
+  image: '',
+  tags: [
+     'Frontend', 'REST API', 'HTTP',
+  ],
+};
+
+# API란?
+**Application Programming Interface**
+소프트웨어 간에 **서로 상호작용할 수 있도록 정의된 명세(규칙과 도구)** 를 말해요. 즉, **서로 다른 소프트웨어가 소통할 수 있도록 정해 놓은 인터페이스**예요.
+
+# REST란?
+**Representational State Transfer**
+REST는 웹을 위한 **아키텍처 스타일**이에요. 쉽게 말하면, **웹을 효율적으로 설계하기 위한 제약 조건들의 집합**이라고 할 수 있어요.
+
+- 웹은 **리소스(Resource)** 중심이에요.  
+- 각 리소스는 <Tooltip word="URI" title="Uniform Resource Identifier">인터넷에서 **리소스를 고유하게 식별하기 위한 문자열 규칙**이에요. 흔히 **URL(리소스 위치)** 과 **URN(리소스 이름)** 을 포함하는 상위 개념이에요.</Tooltip>로 고유하게 식별돼요.  
+- 리소스는 여러 **표현(Representation)** (JSON, XML, HTML 등)으로 나타날 수 있어요.  
+- 클라이언트와 서버는 보통 **HTTP 위에서 이 표현을 교환**하면서 상태를 주고받아요.
+
+# REST의 주요 제약 조건
+## 클라이언트-서버 구조
+- UI(클라이언트)와 데이터 처리(서버)를 명확히 분리해요.
+
+## 무상태성(Stateless)
+- 각 요청은 필요한 모든 정보를 스스로 담아야 해요.
+- 서버는 세션 상태를 유지하지 않아서 확장성이 높아져요.
+
+## 캐시 가능(Cacheable)
+- 응답은 캐싱 가능 여부를 명시해 네트워크 효율을 높여요.
+
+## 계층화(Layered System)
+- 중간 프록시/로드 밸런서 등을 허용해 시스템 유연성 확보할 수 있어요.
+
+## 균일한 인터페이스(Uniform Interface)
+- 리소스 식별(URI), 표현을 통한 조작, 자기 서술적 메시지, HATEOAS(하이퍼미디어로 상태 전이 안내)
+
+# REST와 HTTP
+REST는 특정 프로토콜이 아니라 *스타일*이지만, 현대 웹에서는 거의 항상 **HTTP 위에서 구현**해요.
+
+- `GET`
+  리소스 조회 (안전·<Tooltip word="멱등" title="Idempotent">같은 요청을 여러 번 보내도 결과가 달라지지 않는 성질을 말해요.</Tooltip>)
+- `POST`
+  리소스 생성 / 행위 요청 (<Tooltip word="비멱등" title="Non-Idempotent">같은 요청을 여러 번 보내면 결과가 달라지는 성질을 말해요.</Tooltip>)
+- `PUT`
+  리소스 전체 수정 (멱등)
+- `PATCH`
+  리소스 부분 수정 (보통 비멱등)
+- `DELETE`
+  리소스 삭제 (멱등)
+- `HEAD`
+  본문 없이 헤더만 확인
+- `OPTIONS`
+  지원 메서드/옵션 확인 (CORS 예비 요청)
+- `CONNECT`
+  프록시 통한 SSL/TLS 터널링
+- `TRACE`
+  요청 경로 추적
+
+# 참고
+[Representational State Transfer (REST)](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm?utm_source=chatgpt.com)
+[Blog, URI, URL 이란?](https://grape-blog.tistory.com/10)

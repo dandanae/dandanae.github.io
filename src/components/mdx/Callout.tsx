@@ -45,7 +45,7 @@ const Callout = ({ type = 'none', children, customIcon }: CalloutProps) => {
 
   return (
     <div className={style({ type })}>
-      <div className={cn('absolute top-2 select-none', iconClass)}>{icon}</div>
+      <div className={cn('absolute top-5.5 select-none', iconClass)}>{icon}</div>
       <div className="ml-8">{children}</div>
     </div>
   )

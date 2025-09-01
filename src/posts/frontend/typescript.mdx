@@ -1,0 +1,44 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '타입스크립트란?',
+  description: '타입스크립트(TypeScript)는 자바스크립트에 정적 타입 검사를 추가한 프로그래밍 언어예요. 코드를 실행하기 전에 에러를 잡을 수 있어서, 규모가 큰 프로젝트에서 안정성을 높여줘요.',
+  publishDate: "2025-08-27T20:17:35Z",
+  image: '',
+  tags: [
+    'Frontend','JavaScript', 'TypeScript'
+  ],
+};
+
+# 타입스크립트란?
+자바스크립트의 **상위 집합(Superset)** 이에요. 모든 자바스크립트 문법을 그대로 쓸 수 있고 타입 시스템이 추가된 언어예요.
+작성된 TypeScript 코드는 브라우저에서 직접 실행되지 않고, **컴파일(Transpile)** 과정을 거쳐 **순수 JavaScript로 변환**돼요.
+
+# 특징
+## 정적 타입(Static Typing)
+- 변수, 함수 매개변수, 반환값 등에 타입을 명시할 수 있어요.
+
+```js
+let country: string = "대한민국";
+let year: number = 2025;
+```
+
+## 컴파일 단계에서 에러 확인
+- 자바스크립트는 **런타임(실행 시점)** 에만 에러가 발생하지만,
+- 타입스크립트는 **코드 작성/빌드 단계**에서 에러를 잡을 수 있어요.
+
+```js
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+console.log(add(2, 3));   // ✅ 정상 실행
+console.log(add("2", 3)); // ❌ 컴파일 에러 (타입 불일치)
+```
+
+## 강력한 개발자 경험
+- 자동 완성, 타입 추론, 리팩터링 지원이 뛰어나 IDE 지원이 훨씬 좋아져요.
+
+## 점진적 도입 가능
+- 기존 자바스크립트 프로젝트에 `.ts` 파일을 추가하는 방식으로 조금씩 적용할 수 있어요.

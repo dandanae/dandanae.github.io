@@ -4,15 +4,15 @@ export const metadata = {
   pinned: false,
   title: '클로저(Closure)란?',
   description: '함수가 선언될 당시의 외부 스코프(변수 환경)를 기억하고, 그 함수가 외부 스코프 밖에서 실행되더라도 그 환경에 접근할 수 있는 기능을 말해요.',
-  publishDate: "2025-08-29T20:54:57Z",
+  publishDate: "2025-07-24T20:54:57Z",
   image: '',
   tags: [
-    ''
+    'Frontend', 'Closure'
   ],
 };
 
 # 클로저(Closure)란?
-- `inner` 함수는 `outer`의 실행이 끝났음에도 불구하고 **외부 변수 `count`를 기억**하고 계속 접근할 수 있어요.
+`inner` 함수는 `outer`의 실행이 끝났음에도 불구하고 **외부 변수 `count`를 기억**하고 계속 접근할 수 있어요.
 ```js example.js
 function outer() {
   let count = 0; // 외부 스코프 변수
@@ -25,7 +25,8 @@ function outer() {
   return inner;
 }
 
-const fn = outer(); // outer 실행 → inner 반환
+// !callout[/outer/] outer 실행 → inner 반환
+const fn = outer();
 fn(); // 1
 fn(); // 2
 fn(); // 3

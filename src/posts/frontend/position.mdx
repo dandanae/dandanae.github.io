@@ -1,0 +1,35 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'CSS에서 position이란?',
+  description: '요소가 어떤 기준으로 배치될지를 정하는 CSS 속성이에요.',
+  publishDate: "2025-07-29T00:47:19Z",
+  image: '',
+  tags: [
+    'Frontend', 'CSS', 'Position',
+  ],
+};
+
+# static (기본값)
+- 문서의 일반적인 흐름에 따라 배치해요.
+-  `top`/`right`/`bottom`/`left` 속성은 무시돼요.
+
+# relative (상대 위치)
+- 원래 자리(static 위치)를 기준으로 `top`/`right`/`bottom`/`left` 만큼 이동해요.
+- 레이아웃에 공간을 차지해요.
+
+# absolute (절대 위치)
+- 가장 가까운 `position`이 설정된 조상을 기준으로 배치해요.
+- 원래 자리에서는 빠져나오고, 레이아웃에 공간을 차지하지 않아요.
+
+# fixed (고정 위치)
+- 브라우저 <Tooltip word="뷰포트(화면)" title="뷰포트">화면에서 실제 내용이 표시되는 영역을 말해요. 데스크톱은 사용자가 설정한 해상도가 뷰포트 영역이 되고, 스마트 기기는 기본으로 설정되어 있는 값이 뷰포트 영역이 돼요.</Tooltip>을 기준으로 고정해요.
+- 스크롤해도 움직이지 않아요.
+
+# sticky (스크롤에 따라 붙었다 떨어졌다)
+- 기본은 `relative`처럼 동작하다가, 스크롤이 특정 지점에 오면 `fixed`처럼 동작해요.
+
+# 참고
+[Blog, CSS Position (static, relative, absolute, fixed)](https://mingeesuh.tistory.com/3)
+[Blog, 뷰포트 (viewport)](https://masssal.tistory.com/34)

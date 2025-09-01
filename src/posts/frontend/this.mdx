@@ -1,0 +1,91 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'this 용법',
+  description: '함수가 어떻게 호출되었는지에 따라 참조하는 객체가 달라지는 값이에요.',
+  publishDate: "2025-08-05T15:47:49Z",
+  image: '',
+  tags: [
+    'Frontend', 'JavaScript', 'this'
+  ],
+};
+
+# this란?
+자바스크립트에서 `this`는 **함수가 어떻게 호출되었는지에 따라 참조하는 객체가 달라지는 값**이에요.
+[EC](/blog/frontend/execution-context)(<Tooltip word="실행 컨텍스트" title="EC, Execution Context">자바스크립트 코드가 실행되는 **환경**을 의미해요. 여기에는 **변수 스코프, this 바인딩, 실행 흐름 정보 등**이 포함돼요. 코드가 실행될 때마다 새로운 EC가 만들어지고, **콜 스택**에 쌓여 실행 순서를 관리해요. **자바스크립트가 코드를 실행하기 위해 필요한 모든 정보(스코프, this, 변수 등)를 담는 박스**라고 생각하면 편해요.</Tooltip>)가 생성될 때마다 **this 바인딩**이 일어나며, <Tooltip word="우선순위 규칙" title="우선순위 규칙">`new` > `명시적 바인딩(call/apply/bind)` > `객체 메서드 호출` > `그 외`</Tooltip>에 따라 결정됩니다.
+
+# new 호출 (생성자 함수 / 클래스)
+`new` 키워드로 호출하면, `this`는 새로 생성된 인스턴스를 가리켜요.
+
+```js
+function Greet(msg) {
+  this.msg = msg;
+}
+const p = new Greet('hello');
+console.log(p.msg); // 'hello'
+```
+
+# 명시적 바인딩 (call, apply, bind)
+`call`, `apply`, `bind`를 사용하면 `this`를 강제로 지정할 수 있어요.
+
+```js
+function greet() {
+  console.log(this.msg);
+}
+const message = { msg: 'hello' };
+greet.call(message); // 'hello'
+```
+
+# 객체 메서드 호출
+객체의 메서드로 호출하면, 그 **객체 자체**가 `this`가 돼요.
+
+```js
+const obj = {
+  greet: 'hello',
+  say() {
+    console.log(this.greet);
+  }
+};
+
+obj.say(); // 'hello'
+```
+
+# 전역 컨텍스트(Global Context)
+- **브라우저**
+  전역에서 `this`는 `window` 객체예요.
+- **Node.js**
+  전역에서 `this`는 `module.exports`예요.
+
+```js
+console.log(this); // 브라우저: window, Node.js: {}
+```
+
+# 함수 호출 (일반 함수)
+일반 함수에서 `this`는 엄격 모드 여부에 따라 달라져요.
+
+- **비엄격 모드**
+  전역 객체 (`window`)
+- **엄격 모드(`'use strict'`)**
+  `undefined`
+
+```js
+function foo() {
+  console.log(this);
+}
+foo(); // window (비엄격), undefined (엄격)
+```
+---
+# 화살표 함수 (Lexical this)
+화살표 함수는 **자신만의 `this`를 가지지 않고, 선언 당시의 상위 스코프의 `this`(Lexical this)를 그대로 사용**합니다.
+
+```js
+const obj = {
+  greet: 'hello',
+  arrow: () => console.log(this.greet),
+  normal() { console.log(this.greet); }
+};
+
+obj.arrow();  // undefined (상위 스코프: 전역)
+obj.normal(); // hello
+```

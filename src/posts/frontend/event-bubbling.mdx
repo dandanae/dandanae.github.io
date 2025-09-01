@@ -1,0 +1,100 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '이벤트 전파란?',
+  description: '브라우저에서 발생한 이벤트는 단순히 해당 요소에서만 동작하지 않고, 트리 구조를 따라 부모/자식 요소로 전파돼요.',
+  publishDate: "2025-08-25T20:04:22Z",
+  image: '',
+  tags: [
+    'Frontend', 'JavaScript', 'bubbling'
+  ],
+};
+
+# 이벤트 전파란?
+HTML 문서는 **트리 구조(DOM)** 로 이루어져 있어요.
+어떤 요소에서 이벤트가 발생하면, 그 이벤트는 단일 요소에만 머무르지 않고 **상위/하위 노드로 전달**돼요.
+이 과정을 **이벤트 전파(Event Propagation)** 라고 해요.
+
+# 이벤트 전파 단계
+## 1. 캡처링 단계 (Capturing Phase)
+- 이벤트가 최상위 객체(`window` → `document` → `html` → `body` …)에서 시작해서 **타깃 요소까지 내려와요**.
+
+## 2. 타깃 단계 (Target Phase)
+- 이벤트가 실제 **타깃 요소에 도착**해서 실행돼요.
+
+## 3. 버블링 단계 (Bubbling Phase)
+- 타깃 요소에서 이벤트가 실행된 뒤, 다시 **부모 방향으로 전파**돼요.
+- **기본 이벤트 리스너(addEventListener)** 는 버블링 단계에서 동작하도록 설계돼 있기 때문이에요.
+
+## 예시
+```js
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+<script>
+  const parent = document.getElementById("parent");
+  const child = document.getElementById("child");
+
+  parent.addEventListener("click", () => {
+    console.log("Parent clicked");
+  });
+
+  child.addEventListener("click", () => {
+    console.log("Child clicked");
+  });
+</script>
+```
+
+**버튼 클릭 시 출력 결과**
+```plainText
+Child clicked
+Parent clicked
+```
+
+# 이벤트 전파 제어
+1. `event.stopPropagation()`
+  더 이상 상위/하위로 전파되지 않도록 중단해요.
+
+2.  `event.stopImmediatePropagation()`
+  같은 요소에 걸린 다른 핸들러 실행까지 막아요.
+
+3. `addEventListener`의 세 번째 인자에 `true`
+  캡처링 단계에서 실행해요.
+
+# 이벤트 위임
+원래는 버튼 여러 개가 있으면 각각에 이벤트 리스너를 달아야 해요.
+하지만 DOM 이벤트는 **버블링**으로 부모까지 올라오기 때문에, 부모에만 이벤트를 걸어두고 `event.target`을 활용해서 어떤 자식이 클릭됐는지 구분할 수 있어요.
+이렇게 하면 코드가 훨씬 간결해지고 성능적으로도 유리해요.
+
+```js
+<ul id="list">
+  <li>사과</li>
+  <li>바나나</li>
+  <li>딸기</li>
+</ul>
+
+<script>
+  const list = document.getElementById("list");
+
+  list.addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+      console.log(`${e.target.textContent} 클릭됨`);
+    }
+  });
+</script>
+```
+
+1. `li` 클릭되면 이벤트가 버블링되어 `ul#list`로 올라와요.
+2. `e.target`으로 실제 클릭된 자식(`li`)을 확인하고, 그에 맞는 동작 실행해요.
+
+## 장점
+1. **효율적**
+  수백 개 자식 요소마다 이벤트를 다는 대신, 부모 하나에만 달면 돼요.
+
+2. **동적 요소 처리**
+  나중에 추가된 자식 요소도 자동으로 이벤트 처리가 가능해요.
+
+3. **메모리 절약**
+  불필요하게 많은 이벤트 리스너를 만들지 않아 성능에 유리해요.
