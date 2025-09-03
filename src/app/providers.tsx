@@ -37,19 +37,19 @@ const Providers: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
       <HeartCursor />
       <ClickSplosion />
       <ThemeProvider attribute="class" defaultTheme="system" {...props} enableSystem>
-        {/* <OverlayProvider> */}
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={pathname}
-            variants={pageVariants}
-            initial="hidden"
-            animate="enter"
-            exit="exit"
-            transition={{ type: 'tween', ease: 'easeInOut', duration: 1.5 }}
-            className="h-full w-full"
-          >
-            {children}
-            {/* 
+        <OverlayProvider>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={pathname}
+              variants={pageVariants}
+              initial="hidden"
+              animate="enter"
+              exit="exit"
+              transition={{ type: 'tween', ease: 'easeInOut', duration: 1.5 }}
+              className="h-full w-full"
+            >
+              {children}
+              {/* 
               <button
                 type="button"
                 onClick={scrollToTop}
@@ -57,9 +57,9 @@ const Providers: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
               >
                 <span className="material-symbols-rounded select-none">vertical_align_top</span>
               </button> */}
-          </motion.div>
-        </AnimatePresence>
-        {/* </OverlayProvider> */}
+            </motion.div>
+          </AnimatePresence>
+        </OverlayProvider>
       </ThemeProvider>
     </>
   )
