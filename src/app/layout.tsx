@@ -9,11 +9,13 @@ import { bubble, d2 } from '@/libs/fonts'
 import Providers from './providers'
 
 export const metadata: Metadata = {
-  title: "DANAE's Blog",
-  description: "DANAE's Blog",
-  authors: [{ name: 'DANAE' }],
-  creator: 'DANAE',
-  icons: 'https://example.com/icon.png',
+  title: "DASOM's Blog",
+  description: "DASOM's Blog",
+  authors: [{ name: 'DASOM' }],
+  creator: 'DASOM',
+  icons: {
+    icon: '/ds-blog.png',
+  },
 }
 
 export default function RootLayout({

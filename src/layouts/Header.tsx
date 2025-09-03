@@ -39,7 +39,7 @@ const Header = () => {
           rel="noopener noreferrer"
           className="font-bubble text-primary hover:text-secondary click flex cursor-pointer items-center text-3xl"
         >
-          DANAE
+          DS BLOG
         </Link>
 
         <div className="flex items-center gap-4">

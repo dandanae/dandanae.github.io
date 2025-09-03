@@ -6,7 +6,7 @@ const AboutProfile = () => {
   return (
     <div className="flex w-full items-center justify-between gap-5 pb-10">
       <div className="relative flex flex-col">
-        <span className="text-4xl font-bold">김단해</span>
+        <span className="text-4xl font-bold">이다솜</span>
         <span className="text-foreground/70">
           저는 새로운 기술에 도전하는 것을 두려워하지 않아요!
         </span>
@@ -27,7 +27,9 @@ const AboutProfile = () => {
           <InfoContainer>
             <Icon icon="article_person" />
             <Link
-              href="https://mail.google.com/mail/u/0/?fs=1&to=lleeve@naver.com&tf=cm"
+              href="https://www.rallit.com/resumes/1604118@lleeve/%EC%9D%B4%EB%8B%A4%EC%86%9C"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-foreground/60 text-sm"
             >
               이력서
@@ -38,6 +40,7 @@ const AboutProfile = () => {
             <Icon icon="email" />
             <Link
               href="https://mail.google.com/mail/u/0/?fs=1&to=lleeve@naver.com&tf=cm"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-foreground/60 text-sm"
             >
