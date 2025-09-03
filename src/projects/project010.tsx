@@ -7,7 +7,7 @@ export const Project010: Project = {
   subtitle: '고객 및 이미지 데이터 병합 프로그램을 개발했어요.',
   challenge: 'MVVM 패턴',
   date: '2023. 11 - 2025. 07',
-  image: 'https://github.com/dandanae/dandanae.github.io/src/projects/images/piedb-icon.png',
+  image: 'https://github.com/dandanae/dandanae.github.io/public/images/piedb-icon.png',
   links: [
     {
       title: 'PIEDB 매뉴얼',
