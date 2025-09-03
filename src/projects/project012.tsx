@@ -9,7 +9,7 @@ export const Project012: Project = {
   challenge: 'Flutter',
   date: '2024. 12 - 2025. 04',
   image:
-    'https://blog.kakaocdn.net/dna/navrQ/btsP3yTPcAn/AAAAAAAAAAAAAAAAAAAAAMVbJHU9EFDc1mmGYTA7ncwaaMoMPbDRqNz88TkNh0XO/img.webp?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=prEpow7ZY9ZTp61aSJfhzaxIKmo%3D',
+    'https://play-lh.googleusercontent.com/pM6292ZwuVFYR1ovMjqHK2Pp404OQginGy056Cck6lU8lf2L42NNWoiYyocUZ4GAsHE=w240-h480-rw',
   links: [
     {
       title: 'ARTISTIC&CO - Google Play 앱',
@@ -165,16 +165,16 @@ export const Project012: Project = {
   content: (
     <>
       <div className="grid grid-cols-5 gap-2">
-        <img src="https://blog.kakaocdn.net/dna/nvnHk/btsP43ru8vg/AAAAAAAAAAAAAAAAAAAAAG5RhdD1q_qLwKhPPsD2-JUPhXxF4FFGaF5Ad3rsaIqa/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=bgEv2CwckhVD4MFbQZLa7SLK65U%3D" />
-        <img src="https://blog.kakaocdn.net/dna/xZQfC/btsP2FMsyyk/AAAAAAAAAAAAAAAAAAAAAEs4-ZoTDUeQHWWNS6A941m-O_gP93Dv_GxyeGduX335/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=yqg4AnUKE8engMIG3maV9U1PTps%3D" />
-        <img src="https://blog.kakaocdn.net/dna/kyexU/btsP4mLTXDs/AAAAAAAAAAAAAAAAAAAAAOKiMr-bRkxiremUSrk4XbA-AQCEXg0rJvNVnV_RlJ38/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=WgE80CFevJBEfZz4ZTSkN%2BzfYJM%3D" />
-        <img src="https://blog.kakaocdn.net/dna/bRPeB2/btsP2xubUJg/AAAAAAAAAAAAAAAAAAAAAPhj7QFwikol6qKT_X7J3nabyaVuVWjtTUU25gsiDDjO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=LoacoV0RyY5c3BYmG%2Fb2ukVnpcI%3D" />
-        <img src="https://blog.kakaocdn.net/dna/UrnZR/btsP3f0NNOd/AAAAAAAAAAAAAAAAAAAAAJdeyGwjUU0GXxO18W1EkWm277ARoM7Cyo7IX1hjIJ9D/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=N5NUGa9x5k0oBA85cJfIoSqV6M4%3D" />
-        <img src="https://blog.kakaocdn.net/dna/cssaRx/btsP2AYCN5F/AAAAAAAAAAAAAAAAAAAAAF8WtB1sDHRsll5mCXossQurR1l58_aL-tMuvM4QZd_9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=gNRe1qfvhP6ZkO21HTP5MpJZ1%2Bo%3D" />
-        <img src="https://blog.kakaocdn.net/dna/cssaRx/btsP2AYCN5F/AAAAAAAAAAAAAAAAAAAAAF8WtB1sDHRsll5mCXossQurR1l58_aL-tMuvM4QZd_9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=gNRe1qfvhP6ZkO21HTP5MpJZ1%2Bo%3D" />
-        <img src="https://blog.kakaocdn.net/dna/chgQte/btsP24LNHni/AAAAAAAAAAAAAAAAAAAAAEw9rN4ZmieoN7rFPX6GzIf2YbVNtpj-Fh_pyx77w0GD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=c5Yx29K64OS7UTQwWnH7bL4HlhI%3D" />
-        <img src="https://blog.kakaocdn.net/dna/b2pBvt/btsP3zSjUXu/AAAAAAAAAAAAAAAAAAAAAF1-9pvPYJw3yzLkaslBSIUuQb_uMlGZY_Sn6lb_DbkR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=N%2BB8ot8kvvTfpEH7yB0ifpZYDfU%3D" />
-        <img src="https://blog.kakaocdn.net/dna/bgXLhh/btsP4feZcy1/AAAAAAAAAAAAAAAAAAAAAERubUpLup9LkrzQcL0G1hX_uhRv7XGk9x7vx2MuSY8t/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=crHuWFUh8jEiGRaVMwZrO3vdtDo%3D" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-01.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-02.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-03.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-04.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-05.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-06.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-07.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-08.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-09.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/src/projects/images/012-10.png" />
       </div>
     </>
   ),

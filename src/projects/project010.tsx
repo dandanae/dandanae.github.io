@@ -7,8 +7,7 @@ export const Project010: Project = {
   subtitle: '고객 및 이미지 데이터 병합 프로그램을 개발했어요.',
   challenge: 'MVVM 패턴',
   date: '2023. 11 - 2025. 07',
-  image:
-    'https://blog.kakaocdn.net/dna/xH7U7/btsPVak56Vq/AAAAAAAAAAAAAAAAAAAAANBzjyovbPu2IxWhOMnU2HEnvjPU58u-6QhlwSHE-Hao/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=KmZo9Ve3zH65Ra6q47ZITdEnEHc%3D',
+  image: 'https://github.com/dandanae/dandanae.github.io/src/projects/images/piedb-icon.png',
   links: [
     {
       title: 'PIEDB 매뉴얼',
@@ -87,10 +86,7 @@ export const Project010: Project = {
     {
       title: '주석 활용',
       problems: ['코드를 분기마다 수정하다 보니 시간이 지나면 로직을 다시 이해하기 힘들었어요.'],
-      solutions: [
-        '주요 로직과 조건 분기에 주석을 달아서 이해하기 쉽게 했어요.',
-        <img src="https://blog.kakaocdn.net/dna/FN6ZX/btsP4g5UjiM/AAAAAAAAAAAAAAAAAAAAAOBDYuZ1qthEEBvOZ0-Vu4BnXIpbEn6HFYFuxnpSN2bs/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=kYWyhlLN5MTPdOk34pafKuzgbM8%3D" />,
-      ],
+      solutions: ['주요 로직과 조건 분기에 주석을 달아서 이해하기 쉽게 했어요.'],
       learningPoints: ['잘 작성된 주석이 협업과 유지보수에 큰 도움이 된다는 걸 느꼈어요.'],
     },
   ],

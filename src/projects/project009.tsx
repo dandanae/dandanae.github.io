@@ -8,7 +8,7 @@ export const Project009: Project = {
   challenge: '플레이스토어, 앱스토어 업로드',
   date: '2023. 09 ~ 2025. 07',
   image:
-    'https://blog.kakaocdn.net/dna/r0dv4/btsP46hT9e4/AAAAAAAAAAAAAAAAAAAAABcQ8Fx9JjOpaYAu1trQVuJC2cY9gv2sy9dmYBsxFZhQ/img.webp?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=Y9LUfi0XSCk9wRtUEcvYm3bwFFM%3D',
+    'https://play-lh.googleusercontent.com/4W6KFicvsxUKKW54x_e_VTC2o-HNdDplvua4UGGsUAq1aGh5qbnshpypAaGzTqt6TGBI=w240-h480-rw',
   links: [
     {
       title: 'Beauty Place - Google Play 앱',
