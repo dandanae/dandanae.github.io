@@ -165,16 +165,16 @@ export const Project012: Project = {
   content: (
     <>
       <div className="grid grid-cols-5 gap-2">
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-01.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-02.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-03.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-04.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-05.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-06.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-07.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-08.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-09.png" />
-        <img src="https://github.com/dandanae/dandanae.github.io/public/images/012-10.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-01.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-02.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-03.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-04.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-05.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-06.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-07.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-08.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-09.png" />
+        <img src="https://github.com/dandanae/dandanae.github.io/images/012-10.png" />
       </div>
     </>
   ),
