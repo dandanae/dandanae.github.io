@@ -56,8 +56,8 @@ export const Project013: Project = {
       ],
       solutions: [
         <div className="grid grid-cols-2 gap-2">
-          <img src="https://github.com/dandanae/dandanae.github.io/images/013-01.png" />
-          <img src="https://github.com/dandanae/dandanae.github.io/images/013-02.png" />
+          <img src="https://dandanae.github.io/images/013-01.png" />
+          <img src="https://dandanae.github.io/images/013-02.png" />
         </div>,
         '단계별 입력 프로세스를 도입하여 이전 단계를 완료해야 다음 입력칸이 열리도록 했어요.',
         '화면 상단에 단계 진행 표시(progress indicator)를 두어 남은 과정을 직관적으로 확인 가능하게 했어요.',
@@ -125,7 +125,7 @@ export const Project013: Project = {
           <code>next-intl</code>과 <code>i18n-ally</code>를 도입해 다국어 지원과 번역 검증 과정을
           효율화했어요.
         </>,
-        <img src="https://github.com/dandanae/dandanae.github.io/images/013-03.png" />,
+        <img src="https://dandanae.github.io/images/013-03.png" />,
       ],
       learningPoints: [
         '알림 문구의 작은 차이가 UX 인식에 큰 영향을 준다는 걸 배웠어요.',
