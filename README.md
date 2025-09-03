@@ -17,7 +17,7 @@
   - Markdown 문법 + JSX 조합으로 포스트 작성 가능  
 - **카테고리 구분**  
   - 폴더 단위로 카테고리를 관리해요.  
-  - 파일명은 해당 글의 **slug**가 되고, 폴더 구조와 합쳐져 최종적으로 **페이지 경로(URL path)**가 돼요.
+  - 파일명은 해당 글의 **slug**가 되고, 폴더 구조와 합쳐져 최종적으로 **페이지 경로(URL path)** 가 돼요.
     > `posts/frontend/react.mdx` → slug = `react` → 경로 = `/blog/frontend/react`
 
 - **포스트 자동 수집**  
@@ -44,17 +44,17 @@
 
 ## 🛠️ 기술 스택
 
-### 🚀 Next.js
+### Next.js
 - **Next.js v15**
   - `App Router`, `next export` 기반 정적 사이트
 
-### 📄 MDX
+### MDX
 - **라이브러리**: `@mdx-js/react`, `next-mdx-remote`  
 - **플러그인**:  
   - remark: `remark-gfm`, `remark-breaks`  
   - rehype: `rehype-highlight`, `rehype-slug`, `rehype-autolink-headings`
 
-### 🎨 스타일링 & UI
+### 스타일링 & UI
 - **TailwindCSS v4**  
   - 플러그인: `tw-animate-css`, `tailwind-variants`, `class-variance-authority`
 - **Framer Motion** – 애니메이션
