@@ -1,6 +1,6 @@
 import React from 'react'
 
-export type ProjectTag =
+export type ProjTag =
   | '개발'
   | '유지보수'
   | '사이드 프로젝트'
@@ -15,48 +15,48 @@ export type ProjectTag =
   | 'AWS(EC2)'
   | 'AWS(ECR-ECS)'
 
-export interface Links {
+export interface ProjLink {
   title: string
   href: string
   icon?: string
 }
 
-export interface Task {
+export interface ProjTask {
   title: string
   lists: React.ReactNode[]
 }
 
-export interface HardTask {
+export interface ProjHardTask {
   title: string
   problems: React.ReactNode[]
   solutions: React.ReactNode[]
   learningPoints: React.ReactNode[]
 }
 
-export interface Result {
+export interface ProjResult {
   title: string
   lists: React.ReactNode[]
 }
 
 export interface Project {
   id: string
-  tags: ProjectTag[]
+  tags: ProjTag[]
   title: string
   subtitle: string
   challenge: string
   date: string
   role: string
-  tasks: Task[]
-  hardTasks: HardTask[]
-  results: Result[]
+  tasks: ProjTask[]
+  hardTasks: ProjHardTask[]
+  results: ProjResult[]
 
   content?: React.ReactNode
   image?: string
-  links?: Links[]
-  libraries?: Links[]
+  links?: ProjLink[]
+  libraries?: ProjLink[]
 }
 
-export const projectTags: Record<ProjectTag, { color: string }> = {
+export const projectTags: Record<ProjTag, { color: string }> = {
   개발: {
     color: 'bg-blue-100 text-blue-800',
   },

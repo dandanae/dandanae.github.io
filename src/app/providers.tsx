@@ -16,9 +16,9 @@ const pageVariants = {
 }
 
 const Providers: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  // const scrollToTop = () => {
+  //   window.scrollTo({ top: 0, behavior: 'smooth' })
+  // }
 
   const pathname = usePathname()
 

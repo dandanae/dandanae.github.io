@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import { atom, useAtom } from 'jotai'
 
 import { allProjects } from '@/projects'
-import { ProjectTag } from '@/projects/types'
+import { ProjTag } from '@/projects/types'
 
 export const openedIdAtom = atom<string | null>(null)
 
@@ -17,7 +17,7 @@ export const useProject = () => {
   const onExpand = (id: string) => setOpenedId(id)
   const onCollapse = () => setOpenedId(null)
 
-  const [selectedTags, setSelectedTags] = useState<ProjectTag[]>([])
+  const [selectedTags, setSelectedTags] = useState<ProjTag[]>([])
   const [isLatestFirst, setIsLatestFirst] = useState<boolean>(true)
 
   const allTags = useMemo(
@@ -25,7 +25,7 @@ export const useProject = () => {
     [],
   )
 
-  const toggleTag = (tag: ProjectTag) => {
+  const toggleTag = (tag: ProjTag) => {
     setSelectedTags((prev) => {
       const next = prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
       return next

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { cn } from '@/libs/utils'
-import { Links } from '@/projects/types'
+import { ProjLink } from '@/projects/types'
 
 import { ContentHeader } from './ProjectItems'
 import { useProject } from '../../hooks'
@@ -17,7 +17,7 @@ const ProjectContent = ({ id, expanded }: { id: string; expanded: boolean }) => 
     <div
       className={cn('bg-primary/20 flex w-full items-center justify-center', height)}
       role="img"
-      aria-label={`${label} 이미지가 없습니다`}
+      aria-label={`${label} 이미지를 불러오는데 실패했어요.`}
     />
   )
 
@@ -97,7 +97,7 @@ const ProjectContent = ({ id, expanded }: { id: string; expanded: boolean }) => 
             <section aria-labelledby="links-heading" className="space-y-2">
               <h3 id="links-heading">✨ 아래 링크를 통해 결과물을 확인해 볼 수 있어요!</h3>
               <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-                {project.links.map((link: Links) => (
+                {project.links.map((link: ProjLink) => (
                   <li key={link.href || link.title}>
                     <Link
                       href={link.href}
@@ -138,7 +138,7 @@ const ProjectContent = ({ id, expanded }: { id: string; expanded: boolean }) => 
             <section aria-labelledby="libs-heading" className="space-y-2">
               <h3 id="libs-heading">✨ 사용한 라이브러리들이에요!</h3>
               <ul className="grid grid-cols-2 sm:grid-cols-3">
-                {project.libraries.map((library: Links) => (
+                {project.libraries.map((library: ProjLink) => (
                   <li key={library.href || library.title}>
                     <Link
                       href={library.href}

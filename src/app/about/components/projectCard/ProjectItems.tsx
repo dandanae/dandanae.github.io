@@ -1,8 +1,8 @@
 import { cn } from '@/libs/utils'
-import { ProjectTag, projectTags } from '@/projects/types'
+import { projectTags, ProjTag } from '@/projects/types'
 
 type ContentHeaderProps = {
-  tags: ProjectTag[]
+  tags: ProjTag[]
   title: string
   date: string
   subtitle: string
@@ -65,7 +65,7 @@ const TagList = ({ tags = [], expanded }: { tags?: string[]; expanded?: boolean 
   return (
     <div className={cn('flex flex-wrap gap-1', expanded && 'm-auto')}>
       {visibleTags.map((tag) => {
-        const config = projectTags[tag as ProjectTag]
+        const config = projectTags[tag as ProjTag]
         const colorClass = config?.color || 'bg-gray-100 text-gray-700'
 
         return (
@@ -88,7 +88,7 @@ const TagList = ({ tags = [], expanded }: { tags?: string[]; expanded?: boolean 
           </span>
           <div className="ring-primary/30 bg-background absolute top-full mt-2 hidden w-fit max-w-xs min-w-32 flex-wrap gap-2 rounded-lg p-3 text-xs shadow ring-1 group-hover:flex">
             {hiddenTags.map((tag) => {
-              const config = projectTags[tag as ProjectTag]
+              const config = projectTags[tag as ProjTag]
               const colorClass = config?.color || 'bg-gray-100 text-gray-700'
               return (
                 <span
