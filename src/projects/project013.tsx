@@ -36,7 +36,6 @@ export const Project013: Project = {
           제조사, 현재 기기 상태, 계약 상태 등 여러 내용을 mui의 <code>x-data-grid</code>를 통해서
           보여 줬어요.
         </>,
-        <img src="https://www.notion.so/image/attachment%3A069f7f35-71ad-4505-821b-a7a48168be06%3Aimage.png?table=block&id=263a7f25-212d-80d8-8841-f12ea53c711a&spaceId=74558f67-e7f1-4878-bad0-1e0a9fac858a&width=2000&userId=c5d14657-e311-4eb8-818d-e4a6f3e097a2&cache=v2" />,
       ],
     },
     {
@@ -56,8 +55,8 @@ export const Project013: Project = {
       ],
       solutions: [
         <div className="grid grid-cols-2 gap-2">
-          <img src="https://dandanae.github.io/images/013-01.png" />
-          <img src="https://dandanae.github.io/images/013-02.png" />
+          <img src="https://dandanae.github.io/images/013-01.gif" />
+          <img src="https://dandanae.github.io/images/013-02.gif" />
         </div>,
         '단계별 입력 프로세스를 도입하여 이전 단계를 완료해야 다음 입력칸이 열리도록 했어요.',
         '화면 상단에 단계 진행 표시(progress indicator)를 두어 남은 과정을 직관적으로 확인 가능하게 했어요.',
