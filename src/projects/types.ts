@@ -33,11 +33,6 @@ export interface ProjHardTask {
   learningPoints: React.ReactNode[]
 }
 
-export interface ProjResult {
-  title: string
-  lists: React.ReactNode[]
-}
-
 export interface Project {
   id: string
   tags: ProjTag[]
@@ -48,8 +43,9 @@ export interface Project {
   role: string
   tasks: ProjTask[]
   hardTasks: ProjHardTask[]
-  results: ProjResult[]
+  results: ProjTask[]
 
+  uiPoint?: ProjTask[]
   content?: React.ReactNode
   image?: string
   links?: ProjLink[]

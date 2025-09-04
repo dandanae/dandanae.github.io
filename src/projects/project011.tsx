@@ -23,6 +23,7 @@ export const Project011: Project = {
     { title: 'canvas', href: 'https://www.npmjs.com/package/canvas' },
     { title: 'google-spreadsheet', href: 'https://www.npmjs.com/package/google-spreadsheet' },
     { title: 'Google Sheets API', href: 'https://developers.google.com/sheets/api/reference/rest' },
+    { title: 'nivo', href: 'https://nivo.rocks/' },
   ],
   role: '프론트엔드 개발 및 UI/UX를 총괄했어요.',
 
@@ -168,5 +169,48 @@ export const Project011: Project = {
     },
   ],
 
-  content: <></>,
+  uiPoint: [
+    {
+      title: '인사이트 중심 대시보드',
+      lists: [
+        <>
+          <code>nivo</code> 차트로 월간/연간 트렌드를 시각화하고, 핵심 KPI(고객 증가, 사용량)를
+          카드+차트 조합으로 한 화면에 배치했어요.
+        </>,
+      ],
+    },
+    {
+      title: '유사 기능 탭 구성',
+      lists: [
+        '회원초대/회원수락/회원관리 등 유사 흐름을 하나의 페이지에서 탭으로 분리해 페이지 난립을 방지했어요.',
+        '탭 전환 시 상태를 유지(검색/필터/정렬)하여 컨텍스트 손실 없이 작업을 이어갈 수 있도록 했어요.',
+      ],
+    },
+    {
+      title: '상태 중심 UX(로딩/빈 상태/에러)',
+      lists: [
+        <>
+          <code>react-query</code>의 로딩·에러 상태를 기반으로 스켈레톤, 비어 있음(Empty) 메시지,
+          재시도 버튼을 표준화했어요.
+        </>,
+        '서버/네트워크 에러는 요약 메시지+자세히 보기로 나눠 정보 과부하를 줄이면서도 원인 파악을 도왔어요.',
+      ],
+    },
+    {
+      title: '다국어/지역화 UX',
+      lists: [
+        'Google Sheets 연동으로 문구를 원격 관리하고, 언어 전환 시 레이아웃 깨짐을 방지하도록 길이 여유를 확보했어요.',
+        '날짜/숫자/통화 포맷을 로케일에 맞춰 자동 표기해 혼선을 줄였어요.',
+      ],
+    },
+    {
+      title: '권한 기반 인터페이스',
+      lists: [
+        '역할(본사/가맹점/하위 사용자)에 따라 메뉴와 액션을 조건부 노출해 불필요한 기능을 숨겼어요.',
+        '권한 부족 시 비활성화+이유 툴팁으로 학습 비용을 낮췄어요.',
+      ],
+    },
+  ],
+
+  // content: <></>,
 }

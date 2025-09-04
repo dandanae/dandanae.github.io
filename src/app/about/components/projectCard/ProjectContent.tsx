@@ -162,63 +162,92 @@ const ProjectContent = ({ id, expanded }: { id: string; expanded: boolean }) => 
             </h3>
             <div className="prose dark:prose-invert mx-auto max-w-none">
               {project.content}
-              <h1 className="bg-primary/10 text-primary w-fit rounded-lg p-2">📌 주요 업무</h1>
-              {project.tasks.map((task) => (
-                <div key={task.title}>
-                  <h2>{task.title}</h2>
-                  <ul>
-                    {task.lists.map((list, idx) => (
-                      <li key={`${task.title}-${idx}`}>{list}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              <h1 className="bg-primary/10 text-primary w-fit rounded-lg p-2">
-                💡 제작 중 어려웠던 점
+              <h1 className="from-primary/20 to-primary/5 text-primary flex items-center gap-2 rounded-xl bg-gradient-to-r px-4 py-2 text-lg font-bold shadow-sm">
+                📌 주요 업무
               </h1>
-
-              {project.hardTasks.map((task) => (
-                <div key={task.title}>
-                  <h2>{task.title}</h2>
-                  <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
-                  <ul>
-                    {task.problems.map((problem, idx) => (
-                      <li key={`${task.title}-problem-${idx}`}>{problem}</li>
-                    ))}
-                  </ul>
-
-                  <h3 className="bg-secondary/20">✅ 문제 해결 방법</h3>
-                  <ul>
-                    {task.solutions.map((solution, idx) => (
-                      <li key={`${task.title}-solution-${idx}`}>{solution}</li>
-                    ))}
-                  </ul>
-
-                  <h3 className="bg-secondary/20">🌱 배운 점</h3>
-                  <ul>
-                    {task.learningPoints.map((point, idx) => (
-                      <li key={`${task.title}-point-${idx}`}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              <h1 className="bg-primary/10 text-primary w-fit rounded-lg p-2">
-                🚀 주요 성과 및 효과
-              </h1>
-
-              {project.results &&
-                project.results.map((result) => (
-                  <div key={result.title}>
-                    <h2>{result.title}</h2>
+              <div className="px-4">
+                {project.tasks.map((task) => (
+                  <div key={task.title}>
+                    <h2>{task.title}</h2>
                     <ul>
-                      {result.lists.map((list, idx) => (
-                        <li key={`${result.title}-${idx}`}>{list}</li>
+                      {task.lists.map((list, idx) => (
+                        <li key={`${task.title}-${idx}`}>{list}</li>
                       ))}
                     </ul>
                   </div>
                 ))}
+              </div>
+
+              {project.uiPoint && (
+                <>
+                  <h1 className="from-primary/20 to-primary/5 text-primary flex items-center gap-2 rounded-xl bg-gradient-to-r px-4 py-2 text-lg font-bold shadow-sm">
+                    🪄 UI/UX POINT!
+                  </h1>
+                  <div className="px-4">
+                    {project.uiPoint.map((point) => (
+                      <div key={point.title}>
+                        <h2>{point.title}</h2>
+                        <ul>
+                          {point.lists.map((list, idx) => (
+                            <li key={`${point.title}-${idx}`}>{list}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              <h1 className="from-primary/20 to-primary/5 text-primary flex items-center gap-2 rounded-xl bg-gradient-to-r px-4 py-2 text-lg font-bold shadow-sm">
+                💡 제작 중 어려웠던 점
+              </h1>
+              <div className="px-4">
+                {project.hardTasks.map((task) => (
+                  <div
+                    key={task.title}
+                    className="border-secondary mb-10 border-b border-dashed pb-2"
+                  >
+                    <h2>{task.title}</h2>
+                    <h3 className="bg-secondary/20">🚫 어려웠던 점</h3>
+                    <ul>
+                      {task.problems.map((problem, idx) => (
+                        <li key={`${task.title}-problem-${idx}`}>{problem}</li>
+                      ))}
+                    </ul>
+
+                    <h3 className="bg-secondary/20">✅ 문제 해결 방법</h3>
+                    <ul>
+                      {task.solutions.map((solution, idx) => (
+                        <li key={`${task.title}-solution-${idx}`}>{solution}</li>
+                      ))}
+                    </ul>
+
+                    <h3 className="bg-secondary/20">🌱 배운 점</h3>
+                    <ul>
+                      {task.learningPoints.map((point, idx) => (
+                        <li key={`${task.title}-point-${idx}`}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <h1 className="from-primary/20 to-primary/5 text-primary flex items-center gap-2 rounded-xl bg-gradient-to-r px-4 py-2 text-lg font-bold shadow-sm">
+                🚀 주요 성과 및 효과
+              </h1>
+              <div className="px-4">
+                {project.results &&
+                  project.results.map((result) => (
+                    <div key={result.title}>
+                      <h2>{result.title}</h2>
+                      <ul>
+                        {result.lists.map((list, idx) => (
+                          <li key={`${result.title}-${idx}`}>{list}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+              </div>
             </div>
           </section>
         </div>
