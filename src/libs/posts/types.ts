@@ -35,6 +35,7 @@ export interface Tag {
 }
 
 export interface Toc {
+  numbering: string
   depth: number
   value: string
   id: string
@@ -42,8 +43,8 @@ export interface Toc {
 
 export const displayNames: Record<string, string> = {
   'github-blog': '깃허브 블로그 제작',
-  'html-css': 'HTML/CSS',
   frontend: '프론트엔드',
-  react: '리액트',
+  personal: '개인용',
+  javascript: '자바스크립트',
   travel: '여행',
 }

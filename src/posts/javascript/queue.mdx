@@ -1,0 +1,46 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '큐(Queue)와 스택(Stack)',
+  description: '큐(Queue)는 먼저 들어온 게 먼저 나가는 FIFO(선입선출), 스택(Stack)은 나중에 들어온 게 먼저 나가는 LIFO(후입선출)의 자료구조예요.',
+  publishDate: "2025-09-06T21:21:46Z",
+  image: '',
+  tags: [
+    ''
+  ],
+};
+
+# 큐(Queue)
+- 데이터를 저장하고 꺼낼 때 먼저 들어온 순서대로 처리하는 자료구조예요.
+- FIFO, First In → First Out (선입선출) 구조를 따라요.
+- 보통 `enqueue(삽입)`은 뒤에서, `dequeue(삭제)`는 앞에서 일어나요.
+- **활용**
+  프린터 작업 대기열
+  네트워크 패킷 처리
+  **BFS(너비 우선 탐색)**
+
+```js
+const queue = [];
+queue.push(1); // enqueue
+queue.push(2);
+console.log(queue.shift()); // 1 (dequeue)
+console.log(queue); // [2]
+```
+
+# 스택(Stack)
+- 데이터를 저장하고 꺼낼 때 한쪽 끝(Top)에서만 삽입·삭제가 가능한 자료구조예요.
+- LIFO, Last In → First Out (후입선출) 구조를 따라요.
+- 보통 `push(삽입)`, `pop(삭제)`는 전부 `top`에서 일어나요.
+- **활용**
+  함수 호출(콜 스택)
+  실행 취소(Undo), 브라우저 뒤로 가기
+  **DFS(깊이 우선 탐색)**
+  
+```js
+const stack = [];
+stack.push(1);
+stack.push(2);
+console.log(stack.pop()); // 2
+console.log(stack); // [1]
+```

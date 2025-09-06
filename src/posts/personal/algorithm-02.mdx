@@ -1,0 +1,146 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '알고리즘 문제',
+  description: '-',
+  publishDate: "2025-09-06T19:54:53Z",
+  image: '',
+  tags: [
+    'algorithm'
+  ],
+};
+
+# 자료구조 기초 (문자열, 배열, 해시, 스택/큐)
+- 자료구조 기본 조작에 익숙해지고, 문제를 푸는 흐름을 몸에 익히기.
+
+## 문자열 내 마음대로 정렬하기
+- [Lv.1 문자열 내 마음대로 정렬하기](https://school.programmers.co.kr/learn/courses/30/lessons/12915)
+  → [localeCompare()](/blog/javascript/array#localecompare)
+
+```js
+function solution(strings, n) {
+    var answer = [];
+    
+    // !callout[/...strings/] 배열 자체를 직접 바꾸는(제자리) 메서드이므로, 얕은 복사(shallow copy)로 원본을 보존
+    answer = [...strings].sort((a, b)=> {
+        const charA = a[n];
+        const charB = b[n];
+        
+        // 동일하면 문자열 전체 비교
+        if (charA === charB) {
+            return a.localeCompare(b);
+        }
+        
+        return charA.localeCompare(charB);
+    })
+
+    return answer;
+}
+```
+
+## 폰켓몬
+- [Lv.1 폰켓몬](https://school.programmers.co.kr/learn/courses/30/lessons/1845)
+  → [Set() → size](/blog/javascript/set#크기-확인)
+
+```js
+function solution(nums) {
+    var answer = 0;
+    
+    const max = nums.length / 2
+    // !callout[/Set\(nums\)/] 중복 값을 허용하지 않는 점을 이용
+    const s = new Set(nums);
+    
+    answer = max > s.size ? s.size : max
+    
+    return answer;
+}
+```
+## 완주하지 못한 선수
+- [Lv.1 완주하지 못한 선수](https://school.programmers.co.kr/learn/courses/30/lessons/42576) 
+  → [Map() → set()](/blog/javascript/hash-map#값-추가-1)
+
+```js
+function solution(participant, completion) {
+    const map = new Map();
+    
+    participant.forEach(name => {
+        // !callout[/\ \+\ 1/] key로 이름을 설정, 값을 불러온 뒤 없으면 0 → + 1
+        map.set(name, (map.get(name) || 0) + 1);
+    })
+    
+    completion.forEach(name => {
+        // !callout[/\ \-\ 1/] 목록에 있으면 map에서 값을 불러온 뒤 -1
+        map.set(name, (map.get(name) - 1));
+    })
+    
+    for (let [key, val] of map) {
+        if (val > 0) return key;
+    }
+}
+```
+
+## 기능 개발
+- [Lv.2 기능 개발](https://school.programmers.co.kr/learn/courses/30/lessons/42586)
+  → [map()](/blog/javascript/array#mapcallback)
+```js
+function solution(progresses, speeds) {
+  var answer = [];
+  
+  // 남은 일수를 계산하여 반환
+  const days = progresses.map((p, i) => Math.ceil((100 - p) / speeds[i])); 
+  let base = days[0];
+  let count = 1;
+  
+  for (let i = 1; i < days.length; i++) {
+    // 기준일보다 빨리 끝난 기능 → 추후에 같이 배포
+    if (days[i] <= base) {
+      count++;
+    } else {
+      // 기준일보다 늦게 끝남 → 이전 묶음 마감
+      answer.push(count);
+      base = days[i]; // 새로운 기준일 시작
+      count = 1;
+    }
+  }
+  answer.push(count);
+
+  return answer;
+}
+```
+
+# 투 포인터, 슬라이딩 윈도우
+Lv.1 [크기가 작은 부분문자열] (슬라이딩 윈도우)
+Lv.2 [연속 부분 수열 합의 개수] (투 포인터 + Set)
+Lv.2 [부분 문자열] (문자열 탐색 기본기)
+Lv.3 [보석 쇼핑] (투 포인터 + 슬라이딩 윈도우 대표 문제)
+
+# 그래프 탐색 (BFS, DFS)
+Lv.2 [타겟 넘버] (DFS/백트래킹)
+Lv.2 [게임 맵 최단거리] (BFS 최단 거리)
+Lv.3 [네트워크] (DFS/Union-Find 가능)
+Lv.3 [단어 변환] (BFS 레벨 탐색, 고전 문제)
+
+# 정렬 & 이분 탐색
+Lv.2 [H-Index] (정렬)
+Lv.2 [예산] (이분 탐색/Parametric Search 기본)
+Lv.3 [입국심사] (Parametric Search 대표 문제)
+Lv.3 [징검다리 건너기] (이분 탐색 + 매개변수 탐색)
+
+# 동적 프로그래밍 (DP)
+Lv.2 [피보나치 수] (DP 기초)
+Lv.2 [N으로 표현] (재귀+DP)
+Lv.3 [정수 삼각형] (DP 대표 문제)
+Lv.3 [등굣길] (경로 DP)
+
+# 그래프 심화 (최단경로, MST, 위상정렬)
+Lv.3 [최단경로] (Dijkstra)
+Lv.3 [순위] (플로이드 워셜)
+Lv.3 [여행경로] (DFS/백트래킹 + 정렬)
+Lv.3 [섬 연결하기] (MST - Kruskal/Prim)
+
+# 수학 & 기타
+Lv.1 [소수 만들기] (조합 + 소수 판별)
+Lv.2 [최대공약수와 최소공배수] (유클리드 호제법)
+Lv.2 [카펫] (약수/수학적 사고)
+Lv.3 [줄 서는 방법] (순열 + 수학적 인덱싱)

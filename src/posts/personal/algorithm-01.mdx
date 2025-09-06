@@ -1,0 +1,446 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: '알고리즘 개념',
+  description: '-',
+  publishDate: "2025-09-06T18:01:45Z",
+  image: '',
+  tags: [
+    'algorithm'
+  ],
+};
+
+# 기본 자료구조
+- **배열(Array)**
+  정렬, 탐색, 슬라이딩 윈도우, 투 포인터 활용
+- **문자열(String)**
+  문자열 탐색, 패턴 매칭, 부분 문자열 처리
+- **스택(Stack) / 큐(Queue)**
+  괄호 검증, BFS, DFS 구현
+- **해시(Map, Set)**
+  빠른 검색, 중복 제거, 빈도 카운팅
+- **트리(Tree), 그래프(Graph)**
+  DFS, BFS, 최단 경로 탐색(Dijkstra, BFS)
+
+# 정렬 & 탐색 알고리즘
+- **정렬**
+  기본 내장 sort 활용법 (`arr.sort((a, b) => a - b)`)
+- **이진 탐색(Binary Search)**
+  `O(log n)` 탐색, Lower/Upper Bound 응용
+- **투 포인터(Two Pointers)**
+  부분합, 합이 특정 값이 되는 쌍 찾기
+- **슬라이딩 윈도우(Sliding Window)**
+  부분 문자열, 부분 배열의 최대/최소
+
+# 탐색 알고리즘
+- **DFS(깊이 우선 탐색)**
+  재귀 또는 스택으로 구현
+- **BFS(너비 우선 탐색)**
+  큐로 구현, 최단 거리 탐색에 자주 사용
+- **백트래킹(Backtracking)**
+  모든 경우 탐색 (순열, 조합, N-Queen 등)
+
+# 동적 프로그래밍(DP)
+- **피보나치 수열**
+  Top-Down, Bottom-Up
+- **최소 비용 경로**
+  계단 오르기, 동전 교환 문제
+- **부분 수열/부분 문자열** 
+  LIS, LCS, 최대 부분합 등
+
+# 그래프 알고리즘
+- **최단 경로**
+  다익스트라(Dijkstra), 플로이드 워셜
+- **최소 신장 트리(MST)**
+  크루스칼(Kruskal), 프림(Prim)
+- **위상 정렬**
+  순서가 있는 작업 스케줄링 문제
+
+# 기타 중요한 개념
+- **그리디(Greedy)**
+  동전 교환, 회의실 배정, 활동 선택
+- **이분 탐색 + 매개변수 탐색**
+  조건을 만족하는 최소/최대값 찾기
+- **수학/조합론**
+  소수 판별, 최대공약수/최소공배수(GCD/LCM), 조합/순열
+
+---
+
+# 시간복잡도와 JS에서 자주 틀리는 부분
+- **빅오 표기(Big-O)**
+  입력 크기가 커질 때 실행 시간/메모리 사용량이 어떻게 증가하는지의 상한선을 나타내는 표기예요..
+  예: `O(1)`, `O(log N)`, `O(N)`, `O(N log N)`, `O(N^2)` 등
+- **JS 정렬 주의**
+  `Array.prototype.sort()`는 문자열 비교가 기본이라 숫자는 반드시 비교 함수를 넘겨요.
+  예: `arr.sort((a,b)=>a-b)`. (정렬은 제자리 정렬이며 안정성·복잡도는 구현 의존)
+- **큐 구현 주의**
+  `Array.shift()`는 앞 요소를 제거하면서 나머지 요소들을 당기므로 큰 입력에서 비효율적일 수 있어요(앞 요소가 왼쪽으로 이동돼요).
+  큐는 보통 헤드 인덱스를 움직이는 방식으로 구현해요.
+
+---
+
+# 투 포인터 (Two Pointers)
+## 언제 쓰나요?
+- 정렬된 배열에서 **합/차 비교, 중복 제거, 병합/교집합** 등. 한 번의 선형 스캔으로 해결해요.
+
+## 핵심 아이디어
+- 왼쪽/오른쪽(혹은 빠른/느린) 포인터 두 개로 구간을 점진적으로 좁히거나 넓혀가며 조건을 만족시키는지 체크해요.
+
+## 예시, 정렬된 배열에서 합이 target인 쌍 찾기
+```js
+function twoSumSorted(nums, target) {
+  let l = 0, r = nums.length - 1;
+  while (l < r) {
+    const s = nums[l] + nums[r];
+    if (s === target) return [l, r];
+    if (s < target) l++;
+    else r--;
+  }
+  return [-1, -1];
+}
+```
+
+---
+
+# 슬라이딩 윈도우 (Sliding Window)
+## 언제 쓰나요?
+- **연속된 구간(부분배열/부분문자열)** 에서 **최대/최소/개수/길이** 등을 묻는 문제. **고정 크기** 윈도우와 **가변 크기** 윈도우가 있어요.
+
+## 핵심 아이디어
+- 윈도우를 한 칸씩 “미끄러뜨리며” 이전 결과를 재활용해요(반복 계산 제거).
+
+## 예시, 중복 없는 가장 긴 부분문자열 길이(가변 윈도우)
+```js
+function lengthOfLongestSubstring(s) {
+  const seen = new Map();
+  let left = 0, best = 0;
+  for (let right = 0; right < s.length; right++) {
+    const ch = s[right];
+    if (seen.has(ch) && seen.get(ch) >= left) {
+      left = seen.get(ch) + 1; // 중복을 제거하도록 왼쪽을 당김
+    }
+    seen.set(ch, right);
+    best = Math.max(best, right - left + 1);
+  }
+  return best;
+}
+```
+
+---
+
+# 해시(딕셔너리) — Map/Set
+## 언제 쓰나요?
+- **빈도수 세기, 존재 여부 O(1) 평균 탐색, 중복 제거, 두 값 합 문제(해시)** 등. JS에서는 `Map`/`Set`이 권장돼요(임의 키, 삽입 순서 유지, 메서드 제공).
+
+## 예시, 문자 빈도수 세기
+```js
+function charCounts(s) {
+  const cnt = new Map();
+  for (const ch of s) cnt.set(ch, (cnt.get(ch) || 0) + 1);
+  return cnt;
+}
+```
+
+---
+
+# 스택/큐 & 모노토닉 스택
+## 언제 쓰나요?
+- **괄호 유효성 검사, 이전/다음 큰 원소(NGE/PGE), 범위 내 최댓값·최솟값 유지** 등. 모노토닉 스택은 스택을 **단조 증가/감소**로 유지하여 다음 큰(작은) 원소를 선형 시간에 찾아요.
+
+## 예시, Next Greater Element (모노토닉 감소 스택)
+```js
+function nextGreater(nums) {
+  const n = nums.length, ans = Array(n).fill(-1), st = []; // st: index stack
+  for (let i = 0; i < n; i++) {
+    while (st.length && nums[st[st.length - 1]] < nums[i]) {
+      ans[st.pop()] = nums[i];
+    }
+    st.push(i);
+  }
+  return ans;
+}
+```
+
+---
+
+# 정렬 + 이분 탐색(Binary Search)
+## 언제 쓰나요?
+- **정렬된 배열에서 값 위치/경계 찾기(lower/upper bound)**, **정답이 “판별 가능(예/아니오)”한 단조성**을 가질 때 **정답 범위를 이분**해요.
+
+## 예시, 기본 템플릿 (정확한 값 찾기)
+```js
+function binarySearch(arr, target) {
+  let lo = 0, hi = arr.length - 1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (arr[mid] === target) return mid;
+    if (arr[mid] < target) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return -1;
+}
+```
+
+## 예시, 정답 이분 - 최소 배포 용량(판별 함수로 가능/불가만 검사)
+```js
+function minCapacity(weights, days) {
+  let lo = Math.max(...weights), hi = weights.reduce((a,b)=>a+b,0);
+  const can = cap => {
+    let need = 1, cur = 0;
+    for (const w of weights) {
+      if (cur + w > cap) { need++; cur = 0; }
+      cur += w;
+    }
+    return need <= days;
+  };
+  while (lo < hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (can(mid)) hi = mid; else lo = mid + 1;
+  }
+  return lo;
+}
+```
+
+---
+
+# 그래프 기초: 표현, BFS, DFS
+## 기본 표현
+- **인접 리스트**가 일반적이에요(희소 그래프에 효율적). BFS/DFS는 `O(N+M)`
+
+## BFS
+- 무가중치 최단경로를 보장(간선 수 기준 최단)해요. 큐가 필요해요.
+
+### BFS 템플릿 (큐는 배열+헤드 인덱스)
+```js
+function bfs(adj, start) {
+  const n = adj.length;
+  const dist = Array(n).fill(Infinity);
+  const q = new Array(n); let h = 0, t = 0;
+  dist[start] = 0; q[t++] = start;
+
+  while (h < t) {
+    const v = q[h++];
+    for (const u of adj[v]) {
+      if (dist[u] === Infinity) {
+        dist[u] = dist[v] + 1;
+        q[t++] = u;
+      }
+    }
+  }
+  return dist; // 무가중치 최단 거리
+}
+```
+
+## DFS
+- 깊게 내려가며 탐색해요. 연결요소/사이클 탐지/시간 스탬프 등에 활용해요.
+### DFS 템플릿 (재귀)
+```js
+function dfs(adj, v, seen = new Set()) {
+  seen.add(v);
+  for (const u of adj[v]) if (!seen.has(u)) dfs(adj, u, seen);
+  return seen;
+}
+```
+
+---
+
+# 최단거리, 위상정렬, MST
+## Dijkstra (가중치 비음수)
+= 우선순위 큐(최소 힙)로 `O((N+M) log N)`가 표준적이에요.
+```js
+class MinHeap {
+  constructor(){ this.a=[]; }
+  push(x){ this.a.push(x); this.#up(this.a.length-1); }
+  pop(){
+    if(!this.a.length) return null;
+    const top = this.a[0], last = this.a.pop();
+    if(this.a.length){ this.a[0]=last; this.#down(0); }
+    return top;
+  }
+  #up(i){ const a=this.a;
+    while(i){ const p=(i-1)>>1; if(a[p][0]<=a[i][0]) break;
+      [a[p],a[i]]=[a[i],a[p]]; i=p; } }
+  #down(i){ const a=this.a, n=a.length;
+    while(true){ let l=i*2+1, r=l+1, m=i;
+      if(l<n && a[l][0]<a[m][0]) m=l;
+      if(r<n && a[r][0]<a[m][0]) m=r;
+      if(m===i) break; [a[m],a[i]]=[a[i],a[m]]; i=m; } }
+}
+function dijkstra(adj, s){
+  const n=adj.length, dist=Array(n).fill(Infinity), pq=new MinHeap();
+  dist[s]=0; pq.push([0,s]);
+  while(pq.a.length){
+    const [d,v]=pq.pop();
+    if(d!==dist[v]) continue;
+    for(const [u,w] of adj[v]){
+      if(dist[u]>d+w){ dist[u]=d+w; pq.push([dist[u],u]); }
+    }
+  }
+  return dist;
+}
+```
+
+## 위상정렬 (DAG) — Kahn 알고리즘(BFS)
+```js
+function topoSort(adj){
+  const n=adj.length, indeg=Array(n).fill(0);
+  for(let v=0; v<n; v++) for(const u of adj[v]) indeg[u]++;
+  const q=[], order=[];
+  for(let v=0; v<n; v++) if(indeg[v]===0) q.push(v);
+  for(let i=0; i<q.length; i++){
+    const v=q[i]; order.push(v);
+    for(const u of adj[v]) if(--indeg[u]===0) q.push(u);
+  }
+  return order.length===n ? order : null; // null => 사이클
+}
+```
+
+## 최소 신장 트리(MST) — Kruskal(DSU), Prim
+- **Kruskal**
+  간선 정렬 + DSU로 사이클 방지. `O(M log M)`.
+- **Prim**
+  한 정점에서 시작, 가장 싼 간선을 확장. 힙 사용 시 `O(M log N)`.
+
+```js
+class DSU{
+  constructor(n){ this.p=Array(n).fill(0).map((_,i)=>i); this.r=Array(n).fill(0); }
+  find(x){ return this.p[x]===x?x:(this.p[x]=this.find(this.p[x])); }
+  unite(a,b){
+    a=this.find(a); b=this.find(b); if(a===b) return false;
+    if(this.r[a]<this.r[b]) [a,b]=[b,a];
+    this.p[b]=a; if(this.r[a]===this.r[b]) this.r[a]++; return true;
+  }
+}
+function kruskal(n, edges){ // edges: [w,u,v]
+  edges.sort((e1,e2)=>e1[0]-e2[0]);
+  const dsu=new DSU(n); let cost=0, used=0;
+  for(const [w,u,v] of edges){
+    if(dsu.unite(u,v)){ cost+=w; used++; if(used===n-1) break; }
+  }
+  return used===n-1 ? cost : Infinity;
+}
+```
+
+---
+
+# 다이나믹 프로그래밍(DP) 기본
+## 언제 쓰나요?
+- **겹치는 부분문제 + 최적 부분구조**가 있을 때 점화식으로 누적 계산.
+
+## 1D 예시, Kadane (최대 부분배열 합, O(N))
+```js
+function maxSubArray(nums){
+  let best = -Infinity, cur = 0;
+  for(const x of nums){
+    cur = Math.max(x, cur + x);
+    best = Math.max(best, cur);
+  }
+  return best;
+}
+```
+
+## 표준 DP 예시, 동전 교환(최소 동전 수)
+```js
+function coinChangeMin(coins, amount){
+  const INF = 1e9, dp = Array(amount+1).fill(INF);
+  dp[0]=0;
+  for(const c of coins){
+    for(let s=c; s<=amount; s++){
+      dp[s] = Math.min(dp[s], dp[s-c]+1);
+    }
+  }
+  return dp[amount]===INF ? -1 : dp[amount];
+}
+```
+
+## 보너스, LIS O(N log N) (이분 탐색 활용)
+```js
+function lengthOfLIS(a){
+  const d=[];
+  for(const x of a){
+    let i=0, j=d.length;
+    while(i<j){
+      const m=(i+j)>>1;
+      if(d[m] < x) i=m+1; else j=m;
+    }
+    d[i]=x;
+  }
+  return d.length;
+}
+```
+
+---
+
+# 누적합, 차이배열, 구간 자료구조
+## 누적합(Prefix Sum)
+- 전처리 `O(N)` 후 구간합 질의 `O(1)`로 처리.
+```js
+class PrefixSum{
+  constructor(arr){
+    this.ps=[0];
+    for(const x of arr) this.ps.push(this.ps[this.ps.length-1]+x);
+  }
+  rangeSum(l,r){ // [l,r]
+    return this.ps[r+1]-this.ps[l];
+  }
+}
+```
+
+## 차이배열(Difference Array)
+- 다수의 구간 증가/감소 업데이트를 **O(1)** 로 표시하고, 마지막에 누적합으로 복원.
+```js
+function applyRangeAdds(n, updates){ // updates: [l,r,val]
+  const d = Array(n+1).fill(0);
+  for(const [l,r,v] of updates){
+    d[l]+=v;
+    if(r+1<n) d[r+1]-=v;
+  }
+  const a = Array(n).fill(0); a[0]=d[0];
+  for(let i=1;i<n;i++) a[i]=a[i-1]+d[i];
+  return a;
+}
+```
+
+---
+
+# 문자열
+- **KMP(부분 문자열 검색)**
+  접두사함수(π/Prefix Function)로 `O(N+M)`.
+
+# 모든 쌍 최단경로
+- **Floyd–Warshall**
+  음수 간선(사이클 제외) 허용, `O(N^3)`에 모든 쌍 최단거리. 
+
+# 수학
+## 최대공약수/최소공배수
+```js
+const gcd = (a,b)=> b===0 ? Math.abs(a) : gcd(b, a%b);
+const lcm = (a,b)=> Math.abs(a/gcd(a,b)*b);
+```
+
+## 소수 판정/에라토스테네스 체
+```js
+function sieve(n){
+  const prime = Array(n+1).fill(true);
+  prime[0]=prime[1]=false;
+  for(let p=2; p*p<=n; p++){
+    if(prime[p]) for(let x=p*p; x<=n; x+=p) prime[x]=false;
+  }
+  return prime;
+}
+```
+
+---
+
+# 마무리 체크리스트 (시험장용)
+- **입력이 큰데 Array.shift()로 큐를 만들지는 않았나요?**
+  → 헤드 인덱스 큐로 바꾸기. 
+- **숫자 정렬에 비교 함수를 빼먹지 않았나요?**
+  → arr.sort((a,b)=>a-b). 
+- **무가중치 최단경로를 다익스트라로 풀고 있지 않나요?**
+  → BFS면 충분. 
+- **정답이 “가능/불가”로 판별 가능한 단조성이 있나요?**
+  → 정답 이분 탐색. 
+- **연속 구간 문제인가요?**
+  → 슬라이딩 윈도우/누적합 먼저 검토. 

@@ -1,0 +1,55 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'null, undefined, undeclared, NaN',
+  description: '자바스크립트에서 값이 “없다/정의되지 않았다/숫자가 아니다”를 표현하는 방법은 각각 달라요.',
+  publishDate: "2025-09-02T14:50:00Z",
+  image: '',
+  tags: [
+    'Frontend', 'JavaScript', 'null', 'undefined', 'NaN'
+  ],
+};
+
+# null
+- **값이 없다**는 것을 의도적으로 표현하는 값이에요.
+- 개발자가 변수에 직접 할당해 “비어있음”을 명시할 때 사용해요.
+- 타입은 object로 나오는데, 이는 자바스크립트 초창기 버그이자 역사적 유물이에요.
+
+```js
+let value = null; 
+console.log(value); // null
+```
+
+# undefined
+- **변수는 선언됐지만 값이 할당되지 않은 상태**를 의미해요.
+- 자바스크립트 엔진이 기본으로 부여하는 값이에요.
+- `return`이 없는 함수도 자동으로 `undefined`를 반환해요.
+
+```js
+let value;
+console.log(value); // undefined
+```
+
+# undeclared
+- **아예 선언되지 않은 변수**를 접근할 때 발생해요.
+- 사용 시 ReferenceError가 발생해요.
+
+```js
+console.log(notDefined); 
+// ReferenceError: notDefined is not defined
+```
+
+# NaN (Not a Number)
+- 이름 그대로 **숫자가 아님**을 나타내는 특별한 숫자 값이에요.
+- 숫자 연산이 실패했을 때 반환돼요.
+- `typeof NaN`은 `number`예요.
+`- NaN === NaN`은 `false`라서, 확인할 땐 `Number.isNaN()`을 써야 해요.
+
+# 비교 요약
+| 값             | 의미             | 예시                | 비고                        |
+| -------------- | ---------------- | ------------------- | --------------------------- |
+| **null**       | 의도적 값 없음   | `let a = null;`     | 타입은 `object` (버그)      |
+| **undefined**  | 선언 O, 값 없음  | `let a;`            | 엔진이 자동 할당            |
+| **undeclared** | 선언 X           | `console.log(a)`    | `ReferenceError` 발생       |
+| **NaN**        | 숫자 아님        | `"a" * 3`           | `typeof NaN === "number"`   |

@@ -1,0 +1,84 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'Set()',
+  description: 'Set은 중복되지 않는 값들의 집합을 저장하는 객체예요. 배열과 비슷하지만, 중복 제거와 빠른 검색에 강점이 있어요.',
+  publishDate: "2025-09-06T20:31:12Z",
+  image: '',
+  tags: [
+    'JavaScript', 'Set'
+  ],
+};
+
+# 특징
+## 중복 값을 허용하지 않음
+```js
+const s = new Set([1, 2, 2, 3]);
+console.log(s); // Set(3) {1, 2, 3}
+```
+## 값의 유일성
+- 객체/배열도 고유 참조값 기준으로 저장돼요.
+```js
+const s = new Set();
+s.add({ a: 1 });
+s.add({ a: 1 });
+console.log(s.size); // 2 (서로 다른 객체 참조)
+```
+
+## 순서 보장 (삽입 순)
+- 배열처럼 인덱스는 없지만, 삽입한 순서대로 값을 기억해요.
+
+## 이터러블(Iterable)
+- `for...of`, 전개 연산자(`...`)를 사용할 수 있어요.
+
+# 주요 메서드
+## 생성
+```js
+const s = new Set([1, 2, 3]);
+```
+
+## 추가, 삭제, 확인
+```js
+s.add(4);               // 값 추가
+s.delete(2);            // 값 삭제
+console.log(s.has(1));  // true
+```
+
+## 전체 삭제
+```js
+s.clear();
+```
+
+## 크기 확인
+```js
+console.log(s.size);
+```
+
+## 반복
+```js
+for (let v of s) console.log(v);
+```
+
+# 활용 예시
+## 배열 중복 제거
+```js
+const arr = [1, 2, 2, 3, 3, 4];
+const unique = [...new Set(arr)];
+console.log(unique); // [1, 2, 3, 4]
+```
+
+## 교집합, 합집합, 차집합
+```js
+const a = new Set([1, 2, 3]);
+const b = new Set([2, 3, 4]);
+
+// 합집합
+const union = [...new Set([...a, ...b])]; // [1,2,3,4]
+
+// 교집합
+const intersection = [...a].filter(v => b.has(v)); // [2,3]
+
+// 차집합
+const difference = [...a].filter(v => !b.has(v)); // [1]
+```

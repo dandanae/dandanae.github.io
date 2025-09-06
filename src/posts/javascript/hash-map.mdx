@@ -1,0 +1,131 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'Hash / Map',
+  description: '해시는 “키를 만드는 원리”, 맵은 “키-값을 저장하는 구조”라고 보면 이해가 쉬워요.',
+  publishDate: "2025-09-06T20:48:18Z",
+  image: '',
+  tags: [
+    ''
+  ],
+};
+
+# 해시(Hash)란?
+- 데이터를 빠르게 검색·저장하기 위해 사용하는 **함수적 개념**이에요.
+- 입력값 → **고정된 크기의 해시 값(Hash Value)** 으로 변환해요.
+- 해시 함수(Hash Function)를 사용해서 데이터를 인덱싱해요.
+
+## 특징
+- 빠른 검색이 가능해요. (`O(1)` 기대 시간 복잡도)
+- <Tooltip word='충돌' title='Collision'>서로 다른 입력이 같은 해시값을 가지는 현상</Tooltip>이 가능해요.
+- 보통 **해시 테이블(Hash Table)** 이라는 구조로 구현해요.
+
+## 주요 함수
+### 값 추가
+```js
+const hash = {};
+
+hash["apple"] = 3;
+hash["banana"] = 5;
+```
+
+### 값 조회
+```js
+console.log(hash["apple"]); // 3
+```
+
+### 존재 여부 확인
+```js
+console.log("banana" in hash); // true
+```
+
+### 삭제
+```js
+delete hash["apple"];
+```
+
+## 예시
+```js
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash += str.charCodeAt(i);
+  }
+  return hash % 10; // 0~9 범위
+}
+
+console.log(simpleHash("apple")); // 0~9 사이의 해시값
+```
+
+# 맵(Map)
+- 데이터를 **키-값 쌍(key-value pair)** 으로 저장하는 자료구조예요.
+- 키를 기준으로 값을 저장/검색/삭제할 수 있어요.
+- 자바스크립트의 Map 객체도 이 개념을 따라요.
+- 실무에서는 **Map이 더 유연하고 강력**하기 때문에 권장돼요.
+
+## 특징
+- 키는 어떤 타입(객체, 함수 등)도 가능해요.
+- 삽입 순서를 기억해요.
+- 해시 테이블로 구현되는 경우가 많아 빠른 접근이 가능해요.
+
+## 주요 함수
+### 값 추가
+```js
+const map = new Map();
+
+map.set("name", "홍길동");
+map.set("age", 25);
+map.set({ id: 1 }, "객체도 키로 가능");
+```
+
+### 값 조회
+```js
+console.log(map.get("name")); // "홍길동"
+```
+
+### 존재 여부 확인
+```js
+console.log(map.has("age")); // true
+```
+
+### 삭제
+```js
+map.delete("age");
+
+// 전체 삭제
+map.clear();
+```
+
+### 크기 확인
+```js
+console.log(map.size); // 2
+```
+
+### 전체 순회
+```js
+for (const [key, value] of map) {
+  console.log(key, value);
+}
+```
+
+## 예시
+```js
+const map = new Map();
+
+map.set("name", "홍길동");
+map.set("age", 25);
+
+console.log(map.get("name")); // "홍길동"
+console.log(map.has("age"));  // true
+map.delete("age");
+```
+
+# 요약
+| 구분    | 해시(Hash)                   | 맵(Map)                                |
+| ------- | ---------------------------- | -------------------------------------- |
+| 개념    | 데이터를 키로 변환하는 원리  | 키-값 저장 자료구조                    |
+| 구현    | 해시 함수 + 해시 테이블      | 배열, 트리, 해시 테이블 등 다양        |
+| 키      | 해시값(숫자 등 고정된 크기)  | 어떤 자료형이든 가능 (문자열, 객체 등) |
+| 목적    | 빠른 검색, 충돌 최소화       | 데이터 저장, 조회, 관리                |
+| JS 예시 | 직접 해시 함수 구현          | `Map` 객체                             |

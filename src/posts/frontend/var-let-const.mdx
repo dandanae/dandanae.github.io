@@ -1,0 +1,54 @@
+import { Tooltip } from '../../components/mdx'
+
+export const metadata = {
+  pinned: false,
+  title: 'var, let, const의 차이점',
+  description: '세 키워드는 모두 변수를 만들지만, 스코프·재할당 여부·호이스팅 동작에서 차이가 있어요.',
+  publishDate: "2025-09-06T17:25:13Z",
+  image: '',
+  tags: [
+    'Frontend', 'JavaScript', 'var', 'let', 'const'
+  ],
+};
+
+# var
+- **함수 스코프(Function Scope)** 를 가져서, 블록 {} 안에서 선언해도 함수 전체에서 접근 가능해요.
+- **중복 선언이 가능**하지만, 실수로 변수를 덮어쓸 수 있어 위험해요.
+- **호이스팅 시 `undefined`로 초기화**돼서, 선언 이전에 접근하면 `undefined`가 출력돼요.
+
+```js
+console.log(a); // undefined
+var a = 10;
+console.log(a); // 10
+```
+
+# let
+- **블록 스코프(Block Scope)** 로, `{}` 블록 안에서만 유효해요.
+- **중복 선언이 불가능**해요.
+- **호이스팅은 되지만 `TDZ(Temporal Dead Zone)` 때문에 초기화 전 접근 시 에러**가 발생해요.
+
+```js
+console.log(b); // ReferenceError
+let b = 20;
+```
+
+# const
+- **블록 스코프(Block Scope)** 로, `{}` 블록 안에서만 유효해요.
+- **중복 선언이 불가능**해요.
+- **상수로서, 재할당이 불가능**해요.
+- 단, 객체나 배열 같은 참조형 데이터는 내부 값은 수정 가능해요.
+
+```js
+const c = 30;
+c = 40; // ❌ TypeError
+
+const obj = { name: "홍길동" };
+obj.name = "수정 가능"; // ✅ 내부 속성 수정은 가능
+```
+
+# 비교 요약
+| 키워드 | 스코프      | 중복 선언 | 재할당 | 호이스팅                      |
+| ------ | ----------- | --------- | ------ | ----------------------------- |
+| var    | 함수 스코프 | 가능      | 가능   | 선언 이전 접근 시 `undefined` |
+| let    | 블록 스코프 | 불가      | 가능   | TDZ → 에러 발생               |
+| const  | 블록 스코프 | 불가      | 불가   | TDZ → 에러 발생               |
