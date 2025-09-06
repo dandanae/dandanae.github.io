@@ -36,7 +36,7 @@ export interface Tag {
 
 export interface Toc {
   numbering: string
-  depth: number
+  depth: 1 | 2 | 4 | 3 | 5 | 6
   value: string
   id: string
 }
