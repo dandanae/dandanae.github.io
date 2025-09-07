@@ -26,7 +26,12 @@ const generateToc = (source: string): Toc[] => {
 
       const id = slugger.slug(text)
 
-      toc.push({ depth: node.depth, value: text, id })
+      toc.push({
+        depth: node.depth,
+        value: text,
+        id,
+        numbering: '',
+      })
     }
     if ('children' in node) node.children.forEach(visit)
   }
