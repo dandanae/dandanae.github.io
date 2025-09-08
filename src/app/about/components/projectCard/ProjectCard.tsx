@@ -49,7 +49,7 @@ const ProjectCard = ({ id }: { id: string }) => {
         whileHover={{ scale: 1.03 }}
         animate={{ opacity: expanded ? 0 : 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 22 }}
-        className="ring-primary/20 bg-background max-h-2xl mx-auto w-full max-w-md cursor-pointer rounded-xl ring"
+        className="ring-primary/20 bg-background max-h-2xl mx-auto w-full max-w-md cursor-pointer overflow-clip rounded-xl ring"
       >
         <ProjectContent id={id} expanded={false} />
       </motion.div>
